@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SomeFood</string>
+    <string name="button_Registration">Регистрация</string>
+    <string name="button_sign_in">Авторизация</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="e_mail">Введите e-mail</string>
+    <string name="password">Введите пароль</string>
+    <string name="sign">Войти</string>
+    <string name="Favorite">Избранное</string>
+    <string name="detail_fragment_info">Окно для детального просмотра блюда</string>
 </resources>

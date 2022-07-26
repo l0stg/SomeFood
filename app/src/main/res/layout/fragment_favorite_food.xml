@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mainActivite.MainActivity">
+    tools:context=".ui.FavoriteFood.FavoriteFoodFragment">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerScreen"
-        android:name="com.example.somefood.ui.helloScreen.HelloScreenFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoriteFoodRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
