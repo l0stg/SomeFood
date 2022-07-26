@@ -23,11 +23,18 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         val email = binding.editEmail
         val password = binding.editPassword
 
+
         binding.buttonSignInAccounts.setOnClickListener {
+
+            viewModel.checkUser(email = email.toString(), password = password.toString())
+
+
             // Логика проверки на соответствие в базе данных
             // Если соответсвует открыть фрагмент со списком
             // если нет, то открыть форму регистрации
-            viewModel.routeToProductList()
+            //viewModel.routeToProductList()
         }
     }
+
+
 }

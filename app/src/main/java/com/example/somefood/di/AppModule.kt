@@ -1,5 +1,6 @@
 package com.example.somefood.di
 
+import com.example.somefood.data.room.Repository
 import com.example.somefood.data.room.provider.UserDataBase
 import com.example.somefood.ui.Registration.RegistrationViewModel
 import com.example.somefood.ui.helloScreen.HelloScreenViewModel
@@ -21,9 +22,11 @@ import org.koin.dsl.module
         // Сингл ДАО
         single{UserDataBase.instance?.somethingDao()}
 
-        viewModel { MainViewModel(get()) }
+        single { Repository(get()) }
+
+        viewModel { MainViewModel(get(), get()) }
         viewModel { HelloScreenViewModel(get()) }
-        viewModel { SignInViewModel(get()) }
+        viewModel { SignInViewModel(get(), get()) }
         viewModel { RegistrationViewModel(get()) }
         viewModel { ProductListClientViewModel(get()) }
     }
