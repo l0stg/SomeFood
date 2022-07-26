@@ -20,12 +20,12 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Авторизация"
-        val email = binding.editEmail
-        val password = binding.editPassword
+
 
 
         binding.buttonSignInAccounts.setOnClickListener {
-
+            val email = binding.editEmail.text
+            val password = binding.editPassword.text
             viewModel.checkUser(email = email.toString(), password = password.toString())
 
 

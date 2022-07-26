@@ -8,7 +8,7 @@ import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.dao.Dao
 
 @Database(entities = [UserModel::class], version = 1)
-abstract class UserDataBase: RoomDatabase(){
+abstract class UserDataBase: RoomDatabase() {
 
         companion object {
              var instance: UserDataBase? = null

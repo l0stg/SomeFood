@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 interface Dao {
 
     // Для регистрации
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(newUser: UserModel)
 
     // Для авторизации
-   @Query("SELECT * FROM user_table WHERE email LIKE '%' || :email || '%' AND password LIKE '%' || :password || '%'")
+    @Query("SELECT * FROM user_table WHERE email LIKE :email  AND password LIKE :password ")
     fun searchUsers(email: String, password: String): Flow<List<UserModel>>
 
     // для проверки при регистрации по емэйлу

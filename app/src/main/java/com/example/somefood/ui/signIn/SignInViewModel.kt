@@ -26,7 +26,7 @@ class SignInViewModel(
     fun checkUser(email: String, password: String) {
         viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
-                if (it != null){
+                if (!it.isNullOrEmpty()){
                     routeToProductList()
                 } else println("Пользователь не найден")
             }
