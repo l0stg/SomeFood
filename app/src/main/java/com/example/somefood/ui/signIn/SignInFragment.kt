@@ -30,14 +30,23 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.userID.collect{
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.status.collect {
                     if (it) {
-                        Toast.makeText(activity, "Пользователь не найден", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Неверный логин/пароль", Toast.LENGTH_SHORT).show()
                         viewModel.status.value = false
                     }
                 }
             }
         }
+
+
 
         binding.buttonSignInAccounts.setOnClickListener {
             signInButton()

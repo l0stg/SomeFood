@@ -21,55 +21,66 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     private val viewModel: ProductListClientViewModel by viewModel()
     private var myAdapter: ProductListClientAdapter? = null
 
+    companion object{
+        private const val USERID = "USER_ID"
+        fun newInstance(userID: Int) = ProductListClientFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(USERID, userID)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
 
+        val userID = arguments?.getSerializable(USERID)
+
+        val array = init()
+        viewModel.addToFood(array)
+
         myAdapter = ProductListClientAdapter({
             viewModel.routeToDetail()
         },{
+            println(" ${it.id}  $userID ")
         })
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
             productRecyclerView.adapter = myAdapter
         }
 
-        val array: MutableList<ProductListModel> = mutableListOf()
-        var element = ProductListModel("1", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = ProductListModel("2", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = ProductListModel("3", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = ProductListModel("4", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = ProductListModel("5", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        val array1: MutableList<FoodDataBaseModel> = mutableListOf()
-
-        array.forEach{
-            val itemFavorite = FoodDataBaseModel(name = it.name, description = it.description, image = it.image)
-            array1.add(itemFavorite)
-        }
-
-        viewModel.addToFood(array1)
-
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.list.collect{
                     val array: MutableList<ProductListModel> = mutableListOf()
                     it.forEach {
-                        val itemProduct = ProductListModel(name = it.name, description = it.description, image = it.image)
+                        val itemProduct = ProductListModel(id = it.id!!, name = it.name, description = it.description, image = it.image)
                         array.add(itemProduct)
                     }
                     myAdapter?.set(array)
                 }
             }
         }
+
+
         binding.buttonRouteToFavorite.setOnClickListener {
             viewModel.routeToFavorite()
         }
 
+    }
 
+    private fun init(): MutableList<FoodDataBaseModel>{
+        val array: MutableList<FoodDataBaseModel> = mutableListOf()
+        var element = FoodDataBaseModel(name = "1", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = FoodDataBaseModel(name = "2", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = FoodDataBaseModel(name = "3", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = FoodDataBaseModel(name = "4", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = FoodDataBaseModel(name = "5", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        return array
     }
 }

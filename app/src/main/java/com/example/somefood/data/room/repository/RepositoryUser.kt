@@ -11,7 +11,7 @@ class RepositoryUser(
         myDao.addUser(newUser)
     }
 
-    fun checkAuth(email: String, password: String): Flow<List<UserModel>> =
+    fun checkAuth(email: String, password: String): Flow<UserModel> =
         myDao.checkAuth(email = email, password = password)
 
     fun checkRegistration(email: String): Flow<List<UserModel>> =

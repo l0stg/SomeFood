@@ -13,6 +13,6 @@ interface FoodDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllElement(newFavorite: List<FoodDataBaseModel>)
-    
+
 
 }
