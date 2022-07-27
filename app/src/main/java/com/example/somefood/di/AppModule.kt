@@ -2,6 +2,7 @@ package com.example.somefood.di
 
 import androidx.room.Room
 import com.example.somefood.data.room.Repository
+import com.example.somefood.data.room.provider.FavoriteDataBase
 import com.example.somefood.data.room.provider.UserDataBase
 import com.example.somefood.ui.Registration.RegistrationViewModel
 import com.example.somefood.ui.helloScreen.HelloScreenViewModel
@@ -20,9 +21,13 @@ import org.koin.dsl.module
         single{cicerone.router}
         single{cicerone.getNavigatorHolder()}
 
-        // Сингл ДАО и БД
+        // Сингл ДАО и БД User
         single { Room.databaseBuilder(get(), UserDataBase::class.java, "user_table").build() }
         single{ get<UserDataBase>().somethingDao()}
+
+        // Сингл ДАО и БД Favorite
+        single { Room.databaseBuilder(get(), FavoriteDataBase::class.java, "favorite_table").build() }
+        single { get<FavoriteDataBase>().favoriteDao() }
 
         // Сингл репозитория для работы с БД пользователей
         single { Repository(get()) }

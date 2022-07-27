@@ -8,7 +8,7 @@ import com.example.somefood.data.model.UserModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface Dao {
+interface UserDao {
 
     // Для регистрации
     @Insert(onConflict = OnConflictStrategy.REPLACE)
