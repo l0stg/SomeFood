@@ -26,7 +26,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Избаранное"
 
-        updateDataInUI()
+        /*    updateDataInUI()
         myAdapter = FavoriteAdapter{
             viewModel.deleteFood(it)
         }
@@ -34,8 +34,8 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
             favoriteFoodRecyclerView.layoutManager = LinearLayoutManager(activity)
             favoriteFoodRecyclerView.adapter = myAdapter
         }
-    }
-    private fun updateDataInUI() {
+    }*/
+/*    private fun updateDataInUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
@@ -43,8 +43,6 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                 }
             }
         }
+    }*/
     }
-
-
-
 }

@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class UserModel(
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
     @ColumnInfo(name = "email") val eMail: String,
-    @ColumnInfo(name = "password") val password: String
+    @ColumnInfo(name = "password") val password: String,
+    //@ColumnInfo(name = "favorite") val favorite: List<Int>
 )

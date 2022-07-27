@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite_table")
-data class FavoriteDataBaseModel(
+@Entity(tableName = "food_table")
+data class FoodDataBaseModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     @ColumnInfo(name = "name")
@@ -15,6 +15,5 @@ data class FavoriteDataBaseModel(
     val description: String,
     @ColumnInfo(name = "image")
     val image: Int,
-    @ColumnInfo(name = "email")
-    val email: String,
+
 )

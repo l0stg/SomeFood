@@ -1,9 +1,9 @@
 package com.example.somefood.di
 
 import androidx.room.Room
-import com.example.somefood.data.room.provider.FavoriteDataBase
+import com.example.somefood.data.room.provider.FoodDataBase
 import com.example.somefood.data.room.provider.UserDataBase
-import com.example.somefood.data.room.repository.RepositoryFavorite
+import com.example.somefood.data.room.repository.RepositoryFood
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.FavoriteFood.FavoriteViewModel
 import com.example.somefood.ui.Registration.RegistrationViewModel
@@ -27,13 +27,13 @@ import org.koin.dsl.module
         single { Room.databaseBuilder(get(), UserDataBase::class.java, "user_table").build() }
         single{ get<UserDataBase>().somethingDao()}
 
-        // Сингл ДАО и БД Favorite
-        single { Room.databaseBuilder(get(), FavoriteDataBase::class.java, "favorite_table").build() }
-        single { get<FavoriteDataBase>().favoriteDao() }
+        // Сингл ДАО и БД Food
+        single { Room.databaseBuilder(get(), FoodDataBase::class.java, "favorite_table").build() }
+        single { get<FoodDataBase>().favoriteDao() }
 
         // Сингл репозитория для работы с БД пользователей
         single { RepositoryUser(get()) }
-        single { RepositoryFavorite(get()) }
+        single { RepositoryFood(get()) }
 
         viewModel { MainViewModel(get(), get()) }
         viewModel { HelloScreenViewModel(get()) }

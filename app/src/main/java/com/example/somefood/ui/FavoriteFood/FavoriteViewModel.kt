@@ -1,18 +1,13 @@
 package com.example.somefood.ui.FavoriteFood
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.FavoriteDataBaseModel
-import com.example.somefood.data.room.repository.RepositoryFavorite
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import com.example.somefood.data.room.repository.RepositoryFood
 
 class FavoriteViewModel(
-    private val repositoryFavorite:  RepositoryFavorite
+    private val repositoryFavorite:  RepositoryFood
 ): ViewModel() {
 
-    private val _list = MutableStateFlow<List<FavoriteDataBaseModel>>(emptyList())
+   /* private val _list = MutableStateFlow<List<FavoriteDataBaseModel>>(emptyList())
     val list: Flow<List<FavoriteDataBaseModel>> = _list
 
     val email = "q"
@@ -31,9 +26,9 @@ class FavoriteViewModel(
         }
     }
 
-    fun deleteFood(item: FavoriteDataBaseModel) {
+   *//* fun deleteFood(item: FavoriteDataBaseModel) {
         viewModelScope.launch {
             repositoryFavorite.deleteItem(item)
         }
-    }
+    }*/
 }
