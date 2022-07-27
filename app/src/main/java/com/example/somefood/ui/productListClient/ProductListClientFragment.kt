@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.ProductListModel
+import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +24,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
     companion object{
         private const val USERID = "USER_ID"
-        fun newInstance(userID: Int) = ProductListClientFragment().apply {
+        fun newInstance(userID: UserModel) = ProductListClientFragment().apply {
             arguments = Bundle().apply {
                 putSerializable(USERID, userID)
             }
@@ -34,7 +35,10 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
 
+
         val userID = arguments?.getSerializable(USERID)
+
+        println(userID)
 
         val array = init()
         viewModel.addToFood(array)
@@ -42,7 +46,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         myAdapter = ProductListClientAdapter({
             viewModel.routeToDetail()
         },{
-            println(" ${it.id}  $userID ")
+            viewModel.updateFavoriteInUser(userID as UserModel, it.id)
         })
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)

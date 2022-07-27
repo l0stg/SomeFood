@@ -6,9 +6,9 @@ import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
@@ -21,15 +21,17 @@ class SignInViewModel(
     val userID: Flow<Int> = _userID
 
     // Навигация
-    private fun routeToProductList(userID: Int){
+    private fun routeToProductList(userID: UserModel){
         router.navigateTo(Screens().routeToProductList(userID))
     }
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
-        viewModelScope.launch {
+        var job: Job? = null
+        job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
                 if (it != null){
-                    routeToProductList(it.id!!)
+                    routeToProductList(it)
+                    job?.cancel()
                 } else status.value = true
             }
         }

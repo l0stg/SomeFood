@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.ProductListModel
+import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.repository.RepositoryFood
+import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class ProductListClientViewModel(
     private val router: Router,
-    private val repositoryFood: RepositoryFood
+    private val repositoryFood: RepositoryFood,
+    private val repositoryUser: RepositoryUser
 ): ViewModel() {
     val email = "q"
 
@@ -34,6 +37,15 @@ class ProductListClientViewModel(
     fun addToFood(newList: List<FoodDataBaseModel>){
         viewModelScope.launch {
             repositoryFood.addAllElement(newList)
+        }
+    }
+
+    fun updateFavoriteInUser(userID: UserModel, idFood: Int){
+        val newList: MutableList<Int> = mutableListOf()
+        newList?.add(idFood)
+        val newUser = UserModel(id = userID.id, eMail = userID.eMail, password = userID.password, favorite = newList.toList())
+        viewModelScope.launch {
+            repositoryUser.addUser(newUser)
         }
     }
 
