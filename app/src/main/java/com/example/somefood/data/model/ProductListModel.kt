@@ -7,5 +7,4 @@ data class ProductListModel(
     val name: String,
     val image: Int,
     val description: String,
-    var favorite: Boolean
 ): Serializable

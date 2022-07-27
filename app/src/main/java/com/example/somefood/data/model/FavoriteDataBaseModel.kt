@@ -11,10 +11,10 @@ data class FavoriteDataBaseModel(
     val id: Int? = null,
     @ColumnInfo(name = "name")
     val name: String,
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "description")
     val description: String,
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "image")
     val image: Int,
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "email")
     val email: String,
 )

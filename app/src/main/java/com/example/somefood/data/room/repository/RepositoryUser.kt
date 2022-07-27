@@ -1,10 +1,10 @@
-package com.example.somefood.data.room
+package com.example.somefood.data.room.repository
 
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.dao.UserDao
 import kotlinx.coroutines.flow.Flow
 
-class Repository(
+class RepositoryUser(
     private val myDao: UserDao
 ) {
     suspend fun addUser(newUser: UserModel){

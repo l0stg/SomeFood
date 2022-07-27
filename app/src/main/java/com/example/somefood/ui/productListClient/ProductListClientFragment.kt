@@ -20,19 +20,27 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
 
-        myAdapter = ProductListClientAdapter{
+        myAdapter = ProductListClientAdapter({
             viewModel.routeToDetail()
-        }
+        },{
+            viewModel.addToFavorite(it)
+        })
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
             productRecyclerView.adapter = myAdapter
         }
 
         val array: MutableList<ProductListModel> = mutableListOf()
-        val element = ProductListModel("Борщ", R.drawable.img, "Вкусный наваристый борщец, ням ням ням", false)
-        repeat(10){
-            array.add(element)
-        }
+        var element = ProductListModel("1", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = ProductListModel("2", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = ProductListModel("3", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = ProductListModel("4", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
+        element = ProductListModel("5", R.drawable.img, "Вкусный наваристый борщец, ням ням ням")
+        array.add(element)
         myAdapter?.set(array.toList())
         binding.buttonRouteToFavorite.setOnClickListener {
             viewModel.routeToFavorite()

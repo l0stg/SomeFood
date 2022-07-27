@@ -1,11 +1,9 @@
 package com.example.somefood.ui.signIn
 
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserModel
-import com.example.somefood.data.room.Repository
+import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class SignInViewModel(
     private val router: Router,
-    private val myRepository: Repository
+    private val myRepository: RepositoryUser
 ): ViewModel() {
 
     val status = MutableStateFlow(false)
