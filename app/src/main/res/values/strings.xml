@@ -8,4 +8,7 @@
     <string name="sign">Войти</string>
     <string name="Favorite">Избранное</string>
     <string name="detail_fragment_info">Окно для детального просмотра блюда</string>
+    <string name="foor_iv">изображение блюда</string>
+    <string name="nameFood">Name</string>
+    <string name="descriptionFood">Description</string>
 </resources>

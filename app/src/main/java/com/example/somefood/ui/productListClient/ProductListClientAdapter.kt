@@ -4,16 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.somefood.R
+import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
 
-class ProductListClientAdapter(private val itemClicked: (item: Int) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
+class ProductListClientAdapter(private val itemClicked: (item: ProductListModel) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
-    private val myList: MutableList<Int> = mutableListOf()
+    private val myList: MutableList<ProductListModel> = mutableListOf()
 
     // Сначала очищаем а потом сетим новый список
-    fun set(newList: List<Int>){
+    fun set(newList: List<ProductListModel>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
@@ -21,9 +23,27 @@ class ProductListClientAdapter(private val itemClicked: (item: Int) -> Unit): Re
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
-        fun bind(item: Int, itemClicked: (item: Int) -> Unit)
+        fun bind(item: ProductListModel, itemClicked: (item: ProductListModel) -> Unit)
             = with(binding) {
-                textView4.text = item.toString()
+                tvName.text = item.name
+                tvDescription.text = item.description
+            Glide
+                .with(ivFood.context)
+                .load(item.image)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(ivFood)
+
+                buttonFavorite.setOnClickListener {
+                    if (!item.favorite){
+                         item.favorite = true
+                         buttonFavorite.setColorFilter(R.color.purple_200)
+                    }else{
+                        item.favorite = false
+                        buttonFavorite.setColorFilter(R.color.white)
+                    }
+                }
+
                 root.setOnClickListener {
                     itemClicked(item)
                 }
