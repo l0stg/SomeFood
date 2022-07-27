@@ -16,11 +16,11 @@ interface Dao {
 
     // Для авторизации
     @Query("SELECT * FROM user_table WHERE email LIKE :email  AND password LIKE :password ")
-    fun searchUsers(email: String, password: String): Flow<List<UserModel>>
+    fun checkAuth(email: String, password: String): Flow<List<UserModel>>
 
     // для проверки при регистрации по емэйлу
-    @Query("SELECT * FROM user_table WHERE email LIKE '%' || :email || '%'")
-    fun searchUsersRegistration(email: String): Flow<List<UserModel>>
+    @Query("SELECT * FROM user_table WHERE email LIKE :email ")
+    fun checkRegistration(email: String): Flow<List<UserModel>>
 
 
 }

@@ -11,8 +11,6 @@ import org.koin.core.context.GlobalContext.startKoin
 class App: Application() {
     override fun onCreate() {
 
-        UserDataBase.create(this)
-
         super.onCreate()
         startKoin{
             androidLogger()

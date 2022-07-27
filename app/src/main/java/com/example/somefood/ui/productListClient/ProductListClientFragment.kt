@@ -20,6 +20,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
+
         myAdapter = ProductListClientAdapter{
             viewModel.routeToDetail()
         }
@@ -27,6 +28,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
             productRecyclerView.adapter = myAdapter
         }
+
         val array: List<Int> = listOf(1,2,3,4,5,6,7,8,90,1,233,234,3,3,3,3,3,3,3,3)
         myAdapter?.set(array)
         binding.buttonRouteToFavorite.setOnClickListener {

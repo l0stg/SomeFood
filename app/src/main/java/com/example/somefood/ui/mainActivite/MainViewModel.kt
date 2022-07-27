@@ -13,9 +13,5 @@ class MainViewModel(
 ): ViewModel() {
     fun create(){
         router.newRootScreen(Screens().routeToHelloScreenFragment())
-
-        viewModelScope.launch {
-            myRepository.addUser()
-        }
     }
 }
