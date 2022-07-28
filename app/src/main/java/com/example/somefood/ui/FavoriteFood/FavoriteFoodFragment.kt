@@ -22,9 +22,11 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
     companion object {
         private const val USERID = "USER_ID"
-        fun newInstance(userID: Int) = FavoriteFoodFragment().apply {
+        fun newInstance(userID: Int?) = FavoriteFoodFragment().apply {
             arguments = Bundle().apply {
-                putInt(USERID, userID)
+                if (userID != null) {
+                    putInt(USERID, userID)
+                }
             }
         }
     }
@@ -38,7 +40,6 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         viewModel.getFavoriteID(userID)
 
         updateDataInUI()
-
 
 
         myAdapter = FavoriteAdapter {

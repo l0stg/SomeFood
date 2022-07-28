@@ -51,7 +51,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         }
 
         binding.buttonRouteToFavorite.setOnClickListener {
-            userID.let { viewModel.routeToFavorite(it.id!!) }
+            viewModel.routeToFavorite(userID.id)
         }
 
         // Установка данных в адаптер

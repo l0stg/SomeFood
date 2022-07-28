@@ -26,7 +26,7 @@ class ProductListClientViewModel(
     private val _list = MutableStateFlow<List<FoodDataBaseModel>>(emptyList())
     val list: Flow<List<FoodDataBaseModel>> = _list
 
-    fun routeToFavorite(userID: Int){
+    fun routeToFavorite(userID: Int?){
         router.navigateTo(Screens().routeToFavorite(userID))
     }
 

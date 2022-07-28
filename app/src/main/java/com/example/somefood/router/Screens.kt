@@ -17,5 +17,5 @@ class Screens {
     fun openRegistration() = FragmentScreen{ RegistrationFragment() }
     fun routeToProductList(userID: UserModel) = FragmentScreen{ ProductListClientFragment.newInstance(userID) }
     fun routeToDetail(model: ProductListModel) = FragmentScreen{ DetailFoodFragment.newInstance(model) }
-    fun routeToFavorite(userID: Int) = FragmentScreen{ FavoriteFoodFragment.newInstance(userID) }
+    fun routeToFavorite(userID: Int?) = FragmentScreen{ FavoriteFoodFragment.newInstance(userID) }
 }
