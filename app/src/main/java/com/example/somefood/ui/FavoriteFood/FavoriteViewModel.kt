@@ -20,15 +20,11 @@ class FavoriteViewModel(
     val list: Flow<List<FoodDataBaseModel>> = _list
 
 
-    // Наблюдатель за изменением базы данных
+    // Тягает у нас актуальный список избранных айди
     fun getFavoriteID(user: Int) {
-        var job: Job? = null
-        var listID: List<Int>? = null
-        job = viewModelScope.launch {
+        viewModelScope.launch {
             repositoryUser.updateUser(user).collect {
-                listID = it.favorite
-                listID?.let { it1 -> updateUI(it1) }
-                job?.cancel()
+                it.favorite?.let { it1 -> updateUI(it1) }
             }
         }
     }
@@ -51,7 +47,6 @@ class FavoriteViewModel(
                     list.remove(id)
                 }
                 it.favorite = list
-                updateUI((it.favorite as MutableList<Int>).toList())
                 repositoryUser.addUser(it)
                 job?.cancel()
             }

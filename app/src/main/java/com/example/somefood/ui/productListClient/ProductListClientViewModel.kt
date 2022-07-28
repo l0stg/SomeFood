@@ -40,10 +40,11 @@ class ProductListClientViewModel(
         }
     }
 
-    fun updateFavoriteInUser(userID: Int, idFood: Int){
+    fun updateFavoriteInUser(userID: UserModel, idFood: Int){
+
         var job: Job? = null
         job = viewModelScope.launch {
-            repositoryUser.updateUser(userID).collect{
+            repositoryUser.updateUser(userID.id!!).collect{
                 val list: MutableList<Int>
                 if(it.favorite != null) {
                     list = it.favorite!!.toMutableList()
@@ -57,6 +58,7 @@ class ProductListClientViewModel(
         }
     }
 
+    // Слежка за данными в таблице
     private fun updateFoodTable(){
         viewModelScope.launch {
             repositoryFood.updateTable().collect {

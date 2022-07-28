@@ -24,9 +24,9 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
     companion object{
         private const val USERID = "USER_ID"
-        fun newInstance(userID: Int) = ProductListClientFragment().apply {
+        fun newInstance(userID: UserModel) = ProductListClientFragment().apply {
             arguments = Bundle().apply {
-                putInt(USERID, userID)
+                putSerializable(USERID, userID)
             }
         }
     }
@@ -34,21 +34,27 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
-
-        val userID = arguments?.getInt(USERID)
-        val array = init()
-        viewModel.addToFood(array)
+        val userID = arguments?.getSerializable(USERID) as UserModel
+        viewModel.addToFood(init())
 
         myAdapter = ProductListClientAdapter({
             viewModel.routeToDetail(it)
         },{
-            viewModel.updateFavoriteInUser(userID!!, it.id)
+            /*userID.favorite?.toMutableList()?.add(it.id)
+            userID.favorite?.toList()*/
+            viewModel.updateFavoriteInUser(userID, it.id)
         })
+
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
             productRecyclerView.adapter = myAdapter
         }
 
+        binding.buttonRouteToFavorite.setOnClickListener {
+            userID.let { viewModel.routeToFavorite(it.id!!) }
+        }
+
+        // Установка данных в адаптер
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.list.collect{
@@ -63,9 +69,6 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         }
 
 
-        binding.buttonRouteToFavorite.setOnClickListener {
-            userID?.let { viewModel.routeToFavorite(it) }
-        }
     }
 
     private fun init(): MutableList<FoodDataBaseModel>{
