@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.ProductListModel
+import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +26,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         private const val USERID = "USER_ID"
         fun newInstance(userID: Int) = ProductListClientFragment().apply {
             arguments = Bundle().apply {
-                putSerializable(USERID, userID)
+                putInt(USERID, userID)
             }
         }
     }
@@ -34,15 +35,14 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
 
-        val userID = arguments?.getSerializable(USERID)
-
+        val userID = arguments?.getInt(USERID)
         val array = init()
         viewModel.addToFood(array)
 
         myAdapter = ProductListClientAdapter({
             viewModel.routeToDetail()
         },{
-            println(" ${it.id}  $userID ")
+            viewModel.updateFavoriteInUser(userID!!, it.id)
         })
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -64,9 +64,8 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
 
         binding.buttonRouteToFavorite.setOnClickListener {
-            viewModel.routeToFavorite()
+            userID?.let { viewModel.routeToFavorite(it) }
         }
-
     }
 
     private fun init(): MutableList<FoodDataBaseModel>{
