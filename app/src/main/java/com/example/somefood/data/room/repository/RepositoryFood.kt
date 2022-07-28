@@ -18,5 +18,7 @@ class RepositoryFood(
         favoriteDao.deleteElement(item)
     }*/
 
+    fun updateFavoriteTable(listID: List<Int>): Flow<List<FoodDataBaseModel>> = foodDao.updateFavoriteTable(listID)
+
     fun updateTable(): Flow<List<FoodDataBaseModel>> = foodDao.updateFoodTable()
 }

@@ -40,5 +40,5 @@ import org.koin.dsl.module
         viewModel { SignInViewModel(get(), get()) }
         viewModel { RegistrationViewModel(get(), get()) }
         viewModel { ProductListClientViewModel(get(), get(), get()) }
-        viewModel { FavoriteViewModel(get())}
+        viewModel { FavoriteViewModel(get(), get())}
     }

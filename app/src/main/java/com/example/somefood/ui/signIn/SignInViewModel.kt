@@ -2,7 +2,6 @@ package com.example.somefood.ui.signIn
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
@@ -21,7 +20,7 @@ class SignInViewModel(
     val userID: Flow<Int> = _userID
 
     // Навигация
-    private fun routeToProductList(userID: UserModel){
+    private fun routeToProductList(userID: Int){
         router.navigateTo(Screens().routeToProductList(userID))
     }
     // Проверка на соответствие в базе данных
@@ -30,7 +29,7 @@ class SignInViewModel(
         job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
                 if (it != null){
-                    routeToProductList(it)
+                    routeToProductList(it.id!!)
                     job?.cancel()
                 } else status.value = true
             }
