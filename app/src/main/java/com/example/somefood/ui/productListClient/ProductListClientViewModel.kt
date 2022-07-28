@@ -30,8 +30,8 @@ class ProductListClientViewModel(
         router.navigateTo(Screens().routeToFavorite(userID))
     }
 
-    fun routeToDetail(){
-        router.navigateTo(Screens().routeToDetail())
+    fun routeToDetail(model: ProductListModel){
+        router.navigateTo(Screens().routeToDetail(model))
     }
 
     fun addToFood(newList: List<FoodDataBaseModel>){

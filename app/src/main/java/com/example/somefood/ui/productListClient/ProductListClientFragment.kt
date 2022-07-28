@@ -40,7 +40,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewModel.addToFood(array)
 
         myAdapter = ProductListClientAdapter({
-            viewModel.routeToDetail()
+            viewModel.routeToDetail(it)
         },{
             viewModel.updateFavoriteInUser(userID!!, it.id)
         })
