@@ -10,8 +10,6 @@ class RepositoryUser(
     suspend fun addUser(newUser: UserModel){
         myDao.addUser(newUser)
     }
-
-
     fun updateUser(newUser: Int): Flow<UserModel> =
         myDao.updateUser(newUser)
 

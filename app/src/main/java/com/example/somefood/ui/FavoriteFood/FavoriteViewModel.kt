@@ -28,7 +28,7 @@ class FavoriteViewModel(
             }
         }
     }
-
+    // Обновляет данные если список изменился
     private fun updateUI(id: List<Int>){
        viewModelScope.launch {
            repositoryFood.updateFavoriteTable(id).collect{
@@ -37,6 +37,7 @@ class FavoriteViewModel(
         }
     }
 
+    // Удаление элемента, сначала тягаем список избранных айди, изменяем его и сетим в базу данных
     fun deleteFood(id: Int?, userID: Int){
         var job: Job? = null
         job = viewModelScope.launch {
