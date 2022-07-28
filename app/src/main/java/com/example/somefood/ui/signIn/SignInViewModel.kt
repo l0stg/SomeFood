@@ -21,7 +21,7 @@ class SignInViewModel(
 
     // Навигация
     private fun routeToProductList(userID: Int){
-        router.navigateTo(Screens().routeToProductList(userID))
+        router.replaceScreen(Screens().routeToProductList(userID))
     }
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
