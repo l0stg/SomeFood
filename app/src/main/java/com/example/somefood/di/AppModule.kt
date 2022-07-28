@@ -39,6 +39,6 @@ import org.koin.dsl.module
         viewModel { HelloScreenViewModel(get()) }
         viewModel { SignInViewModel(get(), get()) }
         viewModel { RegistrationViewModel(get(), get()) }
-        viewModel { ProductListClientViewModel(get(), get()) }
-        viewModel { FavoriteViewModel(get())}
+        viewModel { ProductListClientViewModel(get(), get(), get()) }
+        viewModel { FavoriteViewModel(get(), get())}
     }

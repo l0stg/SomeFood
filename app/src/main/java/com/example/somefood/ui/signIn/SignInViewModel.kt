@@ -2,13 +2,12 @@ package com.example.somefood.ui.signIn
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
@@ -26,10 +25,12 @@ class SignInViewModel(
     }
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
-        viewModelScope.launch {
+        var job: Job? = null
+        job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
                 if (it != null){
                     routeToProductList(it.id!!)
+                    job?.cancel()
                 } else status.value = true
             }
         }

@@ -27,14 +27,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Авторизация"
 
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userID.collect{
-                }
-            }
-        }
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.status.collect {
@@ -45,8 +37,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
             }
         }
-
-
 
         binding.buttonSignInAccounts.setOnClickListener {
             signInButton()
