@@ -35,15 +35,15 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "SomeFood"
         val userID = arguments?.getSerializable(USERID) as UserModel
+
         viewModel.addToFood(init())
 
-        myAdapter = ProductListClientAdapter({
-            viewModel.routeToDetail(it)
-        },{
-            /*userID.favorite?.toMutableList()?.add(it.id)
-            userID.favorite?.toList()*/
-            viewModel.updateFavoriteInUser(userID, it.id)
-        })
+        myAdapter = ProductListClientAdapter{
+            when (it) {
+                is OpenDetail -> viewModel.routeToDetail(it.item)
+                is AddToFavorite -> viewModel.updateFavorite(userID.id, it.item.id)
+            }
+        }
 
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)

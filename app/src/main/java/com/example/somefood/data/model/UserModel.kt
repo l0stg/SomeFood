@@ -1,13 +1,11 @@
 package com.example.somefood.data.model
 
 import androidx.room.*
-import com.example.somefood.data.room.FavoriteConverter
 import java.io.Serializable
 
 @Entity(tableName = "user_table")
 data class UserModel(
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "email") val eMail: String,
     @ColumnInfo(name = "password") val password: String,
-    @ColumnInfo(name = "favorite") var favorite: List<Int>? = null
 ): Serializable

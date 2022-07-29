@@ -1,5 +1,6 @@
 package com.example.somefood.ui.productListClient
 
+import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,24 +10,24 @@ import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
 
-class ProductListClientAdapter(private val itemClicked: (item: ProductListModel) -> Unit, private val favoriteClick: (item: ProductListModel) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
+sealed class Click()
+class AddToFavorite(val item: ProductListModel): Click()
+class OpenDetail(val item: ProductListModel): Click()
 
-    // Приватный и неизменяемый, для большего контроля деействий в адаптере
+class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
+
     private val myList: MutableList<ProductListModel> = mutableListOf()
 
-    // Сначала очищаем а потом сетим новый список
     fun set(newList: List<ProductListModel>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
-    // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
         fun bind(
             item: ProductListModel,
-            itemClicked: (item: ProductListModel) -> Unit,
-            favoriteClick: (item: ProductListModel) -> Unit
+            ClickListener: (click: Click) -> Unit
         )
             = with(binding) {
                 tvName.text = item.name
@@ -39,11 +40,11 @@ class ProductListClientAdapter(private val itemClicked: (item: ProductListModel)
                 .into(ivFood)
 
                 buttonFavorite.setOnClickListener {
-                    favoriteClick(item)
+                    ClickListener(AddToFavorite(item))
                 }
 
                 root.setOnClickListener {
-                    itemClicked(item)
+                    ClickListener(OpenDetail(item))
                 }
         }
     }
@@ -54,10 +55,9 @@ class ProductListClientAdapter(private val itemClicked: (item: ProductListModel)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position], itemClicked, favoriteClick)
+        holder.bind(myList[position], ClickListener)
     }
 
     override fun getItemCount(): Int =
         myList.size
-
 }

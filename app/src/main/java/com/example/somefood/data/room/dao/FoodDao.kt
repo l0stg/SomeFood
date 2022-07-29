@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FoodDao {
 
-    @Query("SELECT * FROM food_table ")
+    @Query("SELECT * FROM food_table1")
     fun updateFoodTable(): Flow<List<FoodDataBaseModel>>
 
-    @Query("SELECT * FROM food_table WHERE id IN (:listID) ")
+    @Query("SELECT * FROM food_table1 WHERE id IN (:listID) ")
     fun updateFavoriteTable(listID: List<Int>): Flow<List<FoodDataBaseModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

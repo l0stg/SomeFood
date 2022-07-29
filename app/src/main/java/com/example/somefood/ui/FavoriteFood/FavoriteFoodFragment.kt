@@ -36,14 +36,11 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         activity?.title = "Избаранное"
 
         val userID = arguments?.getInt(USERID) as Int
-
-        viewModel.getFavoriteID(userID)
-
+        viewModel.updateUI(userID)
         updateDataInUI()
 
-
         myAdapter = FavoriteAdapter {
-            viewModel.deleteFood(it.id, userID)
+            viewModel.deleteFood(it, userID)
         }
 
         with(binding) {

@@ -44,8 +44,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun signInButton(){
-        // Логика проверки на соответствие в базе данных
-        // Если соответсвует открыть фрагмент со списком
         val email = binding.editEmail.text
         val password = binding.editPassword.text
         viewModel.checkUser(email = email.toString(), password = password.toString())
