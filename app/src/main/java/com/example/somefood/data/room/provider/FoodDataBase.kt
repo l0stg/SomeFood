@@ -7,5 +7,5 @@ import com.example.somefood.data.room.dao.FoodDao
 
 @Database(entities = [FoodDataBaseModel::class], version = 1)
 abstract class FoodDataBase: RoomDatabase() {
-    abstract fun favoriteDao(): FoodDao
+    abstract fun foodDao(): FoodDao
 }

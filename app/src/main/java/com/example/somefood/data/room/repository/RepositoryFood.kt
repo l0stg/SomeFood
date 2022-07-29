@@ -12,12 +12,6 @@ class RepositoryFood(
         foodDao.addAllElement(item)
     }
 
-    //fun checkFood(email: String, name: String): Flow<List<FavoriteDataBaseModel>> = favoriteDao.checkFood(email, name)
-
-    /*suspend fun deleteItem(item: FavoriteDataBaseModel){
-        favoriteDao.deleteElement(item)
-    }*/
-
     fun updateFavoriteTable(listID: List<Int>): Flow<List<FoodDataBaseModel>> = foodDao.updateFavoriteTable(listID)
 
     fun updateTable(): Flow<List<FoodDataBaseModel>> = foodDao.updateFoodTable()
