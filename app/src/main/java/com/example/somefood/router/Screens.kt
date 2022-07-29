@@ -4,6 +4,7 @@ import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.ui.FavoriteFood.FavoriteFoodFragment
 import com.example.somefood.ui.Registration.RegistrationFragment
+import com.example.somefood.ui.orderList.CreatorListFragment
 import com.example.somefood.ui.detailFood.DetailFoodFragment
 import com.example.somefood.ui.helloScreen.HelloScreenFragment
 import com.example.somefood.ui.productListClient.ProductListClientFragment
@@ -18,4 +19,5 @@ class Screens {
     fun routeToProductList(userID: UserModel) = FragmentScreen{ ProductListClientFragment.newInstance(userID) }
     fun routeToDetail(model: ProductListModel) = FragmentScreen{ DetailFoodFragment.newInstance(model) }
     fun routeToFavorite(userID: Int?) = FragmentScreen{ FavoriteFoodFragment.newInstance(userID) }
+    fun routeToCreatorList() = FragmentScreen { CreatorListFragment()}
 }

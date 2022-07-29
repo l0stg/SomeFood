@@ -25,6 +25,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Регистрация"
+        var types: Boolean? = null
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -41,16 +42,22 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             }
         }
 
+        binding.switchTypes.setOnCheckedChangeListener { _, isChecked ->
+            types = isChecked
+        }
 
         binding.buttonNewRegistration.setOnClickListener {
-            registrationButton()
+            types?.let { it1 -> registrationButton(it1) }
         }
+
+
     }
 
-    private fun registrationButton() {
+
+    private fun registrationButton(types: Boolean) {
         val email = binding.editEmailRegistration.text
         val password = binding.editPasswordRegistration.text
-        viewModel.addUser(email = email.toString(), password = password.toString())
+        viewModel.addUser(email = email.toString(), password = password.toString(), types = types)
     }
 
 
