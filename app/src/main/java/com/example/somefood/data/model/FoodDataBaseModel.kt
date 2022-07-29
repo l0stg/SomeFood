@@ -15,5 +15,4 @@ data class FoodDataBaseModel(
     val description: String,
     @ColumnInfo(name = "image")
     val image: Int,
-
 )

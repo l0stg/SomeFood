@@ -24,13 +24,20 @@ class SignInViewModel(
     private fun routeToProductList(userID: UserModel){
         router.replaceScreen(Screens().routeToProductList(userID))
     }
+
+    private fun routeToCreatorList(){
+        router.replaceScreen(Screens().routeToCreatorList())
+    }
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
         var job: Job? = null
         job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
                 if (it != null){
-                    routeToProductList(it)
+                    if (!it.types)
+                        routeToProductList(it)
+                    else
+                        routeToCreatorList()
                     job?.cancel()
                 } else status.value = true
             }

@@ -18,11 +18,11 @@ class RegistrationViewModel(
     private var job: Job? = null
     val statusRegistration = MutableStateFlow(false)
 
-    fun addUser(email: String, password: String){
+    fun addUser(email: String, password: String, types: Boolean){
         job = viewModelScope.launch {
             myRepository.checkRegistration(email).collect{
                 if (it.isNullOrEmpty()){
-                    val newUser = UserModel(eMail = email, password = password)
+                    val newUser = UserModel(eMail = email, password = password, types = types)
                     myRepository.addUser(newUser)
                     router.navigateTo(Screens().openSignIn())
                     job?.cancel()
