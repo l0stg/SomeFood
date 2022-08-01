@@ -20,7 +20,7 @@ class OrderBasketViewModel(
     fun checkOrderByClient(userID: Int){
         viewModelScope.launch {
             orderRepository.checkOrderByClient(userID).collect{
-
+                _list.value = it
             }
         }
     }

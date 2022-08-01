@@ -15,6 +15,12 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
 
     private val myList: MutableList<OrderClass> = mutableListOf()
 
+    fun set(newList: List<OrderClass>){
+        myList.clear()
+        myList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemBinding.bind(itemView)
         fun bind(item: OrderClass){
@@ -29,9 +35,9 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderBasketAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.order_item_by_client, parent, false)
-        return OrderBasketAdapter.MyViewHolder(itemView)
+        return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
