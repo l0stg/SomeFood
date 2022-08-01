@@ -1,5 +1,6 @@
 package com.example.somefood.ui.orderList
 
+import android.graphics.Color.GREEN
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.OrderClass
 import com.example.somefood.databinding.OrderItemBinding
 
-class OrderAdapter(): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
+class OrderAdapter(private val itemInOrderClick: (item: OrderClass)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
     private val myList: MutableList<OrderClass> = mutableListOf()
@@ -22,12 +23,19 @@ class OrderAdapter(): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = OrderItemBinding.bind(view)
-        fun bind(item: OrderClass)
+        fun bind(item: OrderClass, itemInOrderClick: (item: OrderClass) -> Unit)
                 = with(binding) {
-            textView4.text = item.orderName
-            textView5.text = item.nameZakazchik
-            textView6.text = item.timeToComplit
+            itemName.text = item.orderName
+            itemPrice.text = item.integerBuy.toString()
+            itemTime.text = item.timeToComplit
+            if(item.orderON){
+                root.setBackgroundColor(GREEN)
+            }
+            binding.ButtonInOrder.setOnClickListener {
+                itemInOrderClick(item)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -36,7 +44,7 @@ class OrderAdapter(): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position])
+        holder.bind(myList[position], itemInOrderClick)
     }
 
     override fun getItemCount(): Int {

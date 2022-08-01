@@ -13,6 +13,7 @@ import com.example.somefood.databinding.FoodItemBinding
 sealed class Click()
 class AddToFavorite(val item: ProductListModel): Click()
 class OpenDetail(val item: ProductListModel): Click()
+class AddToBuy(val item: ProductListModel): Click()
 
 class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
 
@@ -45,6 +46,10 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
 
                 root.setOnClickListener {
                     ClickListener(OpenDetail(item))
+                }
+
+                buttonAddToBuy.setOnClickListener {
+                    ClickListener(AddToBuy(item))
                 }
         }
     }
