@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
 data class OrderClass(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "orderName") val orderName: String,
-    @ColumnInfo(name = "nameZakazchik") val nameZakazchik: String,
+    @ColumnInfo(name = "userID") val userID: Int,
     @ColumnInfo(name = "timeToComplit") val timeToComplit: String,
-    @ColumnInfo(name = "integerBuy") val integerBuy: Int
+    @ColumnInfo(name = "integerBuy") val integerBuy: Int,
+    @ColumnInfo(name = "orderON") val orderON: Boolean
 )

@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.productListClient.ProductListClientFragment">
+    tools:context=".ui.orderBasket.OrderBasketFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="food"
+        android:id="@+id/orderBasketRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/food_item">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
+        tools:listitem="@layout/order_item_by_client"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

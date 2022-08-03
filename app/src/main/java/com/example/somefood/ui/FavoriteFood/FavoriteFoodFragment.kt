@@ -33,10 +33,12 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Избаранное"
+        activity?.title = "Избранное"
 
         val userID = arguments?.getInt(USERID) as Int
+
         viewModel.updateUI(userID)
+
         updateDataInUI()
 
         myAdapter = FavoriteAdapter {
