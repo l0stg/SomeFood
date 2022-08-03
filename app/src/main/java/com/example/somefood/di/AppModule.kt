@@ -1,6 +1,10 @@
 package com.example.somefood.di
 
 import androidx.room.Room
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import com.example.somefood.R
+import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.room.provider.FavoriteDataBase
 import com.example.somefood.data.room.provider.FoodDataBase
 import com.example.somefood.data.room.provider.OrderDataBase
@@ -21,6 +25,7 @@ import com.example.somefood.ui.signIn.SignInViewModel
 import com.github.terrakok.cicerone.Cicerone
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
 
 
     val appModule = module {
@@ -60,4 +65,6 @@ import org.koin.dsl.module
         viewModel { FavoriteViewModel(get(), get())}
         viewModel {OrderFragmentViewModel(get(), get())}
         viewModel { OrderBasketViewModel(get())}
+
+
     }

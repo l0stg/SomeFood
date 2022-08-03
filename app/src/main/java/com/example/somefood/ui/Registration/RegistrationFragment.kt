@@ -53,10 +53,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
 
     private fun registrationButton(types: Boolean) {
-        val email = binding.editEmailRegistration.text
-        val password = binding.editPasswordRegistration.text
-        viewModel.addUser(email = email.toString(), password = password.toString(), types = types)
+        viewModel.addUser(
+            email = binding.editEmailRegistration.editText?.text.toString(),
+            password = binding.editPasswordRegistration.editText?.text.toString(),
+            types = types
+        )
     }
-
-
 }

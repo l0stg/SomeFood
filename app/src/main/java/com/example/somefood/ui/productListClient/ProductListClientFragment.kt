@@ -2,6 +2,7 @@ package com.example.somefood.ui.productListClient
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -44,6 +45,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         val menuHost: MenuHost = requireActivity()
         activity?.title = "SomeFood"
 
+        // Меню в туллбаре
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.main_menu, menu)
@@ -59,12 +61,15 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                         viewModel.routeToBascet(userID.id)
                         true
                     }
+                    R.id.logOut -> {
+                        viewModel.routeToHelloScreen()
+                        Snackbar.make(binding.root, "Выход из приложения", Snackbar.LENGTH_SHORT).show()
+                        true
+                    }
                     else -> false
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-        viewModel.addToFood(init())
 
         myAdapter = ProductListClientAdapter {
             when (it) {
@@ -87,6 +92,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                 }
             }
         }
+
         with(binding) {
             productRecyclerView.layoutManager = LinearLayoutManager(activity)
             productRecyclerView.adapter = myAdapter
@@ -109,18 +115,4 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
     }
 
-    private fun init(): MutableList<FoodDataBaseModel>{
-        val array: MutableList<FoodDataBaseModel> = mutableListOf()
-        var element = FoodDataBaseModel(name = "1", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "2", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "3", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "4", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "5", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        return array
-    }
 }
