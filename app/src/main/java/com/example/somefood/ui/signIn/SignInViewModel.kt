@@ -28,6 +28,7 @@ class SignInViewModel(
     private fun routeToCreatorList(){
         router.replaceScreen(Screens().routeToCreatorList())
     }
+
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
         var job: Job? = null

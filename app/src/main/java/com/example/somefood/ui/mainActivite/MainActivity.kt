@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             currentFragment: Fragment?,
             nextFragment: Fragment
         ) {
-            /*fragmentTransaction.setCustomAnimations(
+            fragmentTransaction.setCustomAnimations(
                 R.anim.slide_in,
                 R.anim.fade_out,
                 R.anim.fade_in,
                 R.anim.slide_out
-            )*/
+            )
         }
     }
 

@@ -39,12 +39,10 @@ class ProductListClientViewModel(
     fun routeToBascet(userID: Int) {
         router.navigateTo(Screens().routeToBascet(userID))
     }
-    // добавление элементов
-    fun addToFood(newList: List<FoodDataBaseModel>){
-        viewModelScope.launch {
-            repositoryFood.addAllElement(newList)
-        }
+    fun routeToHelloScreen() {
+        router.navigateTo(Screens().routeToHelloScreenFragment())
     }
+
 
     fun addNewFavoriteItem(userID: Int, idFood: Int){
         var job: Job? = null
@@ -63,7 +61,6 @@ class ProductListClientViewModel(
             }
         }
     }
-
 
 
 

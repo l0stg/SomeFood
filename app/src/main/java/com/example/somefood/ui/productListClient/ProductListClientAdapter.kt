@@ -10,7 +10,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
 
-sealed class Click()
+sealed class Click
 class AddToFavorite(val item: ProductListModel): Click()
 class OpenDetail(val item: ProductListModel): Click()
 class AddToBuy(val item: ProductListModel): Click()
