@@ -39,11 +39,10 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userID = arguments?.getInt(USERID)
+        val userID = arguments?.getInt(USERID) ?: 0
 
-        if (userID != null) {
-            viewModel.checkOrderByClient(userID)
-        }
+        viewModel.checkOrderByClient(userID)
+
 
         myAdapter = OrderBasketAdapter()
 

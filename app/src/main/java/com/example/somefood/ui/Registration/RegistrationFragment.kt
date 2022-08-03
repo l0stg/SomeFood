@@ -25,7 +25,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Регистрация"
-        var types: Boolean? = null
+        var types = false
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -47,10 +47,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         }
 
         binding.buttonNewRegistration.setOnClickListener {
-            types?.let { it1 -> registrationButton(it1) }
+            registrationButton(types)
         }
-
-
     }
 
 
