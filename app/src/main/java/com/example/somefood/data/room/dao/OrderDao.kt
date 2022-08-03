@@ -18,7 +18,7 @@ interface OrderDao {
     @Query("SELECT * FROM order_table ")
     fun getOrderTable(): Flow<List<OrderClass>>
 
-    @Query("SELECT * FROM order_table WHERE ")
+    @Query("SELECT * FROM order_table WHERE userID LIKE :userID")
     fun getOrderByClient(userID: Int): Flow<List<OrderClass>>
 
 }

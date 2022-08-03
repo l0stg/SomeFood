@@ -22,7 +22,7 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = OrderItemBinding.bind(itemView)
+        private val binding = OrderItemByClientBinding.bind(itemView)
         fun bind(item: OrderClass){
             with(binding) {
                 itemName.text = item.orderName

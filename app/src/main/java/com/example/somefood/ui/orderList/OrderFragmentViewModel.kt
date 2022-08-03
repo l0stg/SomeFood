@@ -31,7 +31,7 @@ class OrderFragmentViewModel(
     }
 
     fun addInJob(item: OrderClass) {
-        val itemInJob = OrderClass(id = item.id, orderName = item.orderName, nameZakazchik = item.nameZakazchik, timeToComplit = item.timeToComplit, integerBuy = item.integerBuy, orderON = true)
+        val itemInJob = OrderClass(id = item.id, orderName = item.orderName, userID = item.userID, timeToComplit = item.timeToComplit, integerBuy = item.integerBuy, orderON = true)
         viewModelScope.launch {
             orderRepository.addNewBuy(itemInJob)
         }
