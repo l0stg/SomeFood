@@ -7,16 +7,27 @@ import kotlinx.coroutines.flow.Flow
 
 class RepositoryUser(
     private val myDao: UserDao,
+    private val mySharedPreferences: SharedPreferences
 ) {
     suspend fun addUser(newUser: UserModel){
         myDao.addUser(newUser)
     }
 
-    fun checkAuth(email: String, password: String): Flow<UserModel> {
-        return myDao.checkAuth(email = email, password = password)
-    }
+    fun getUserForID(userID: Int): Flow<UserModel> =
+        myDao.getUserForID(userID)
+
+    fun checkAuth(email: String, password: String): Flow<UserModel> =
+         myDao.checkAuth(email = email, password = password)
+
 
     fun checkRegistration(email: String): Flow<List<UserModel>> =
         myDao.checkRegistration(email)
+
+    fun saveUserID(id: Int){
+        mySharedPreferences.edit().putInt("preferences", id).apply()
+    }
+
+    fun getUserID(): Int =
+        mySharedPreferences.getInt("preferences", 0)
 
 }

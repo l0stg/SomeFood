@@ -42,6 +42,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun signInButton() {
-        viewModel.checkUser(email = binding.editEmail.editText?.text.toString(), password = binding.editPassword.editText?.text.toString())
+        viewModel.checkUser(
+            email = binding.editEmail.editText?.text.toString(),
+            password = binding.editPassword.editText?.text.toString())
     }
 }

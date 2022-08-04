@@ -30,17 +30,12 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     private var myAdapter: ProductListClientAdapter? = null
 
     companion object{
-        private const val USERID = "USER_ID"
-        fun newInstance(userID: UserModel) = ProductListClientFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(USERID, userID)
-            }
-        }
+        fun newInstance() = ProductListClientFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userID = arguments?.getSerializable(USERID) as UserModel
+
         val menuHost: MenuHost = requireActivity()
         activity?.title = "SomeFood"
 
@@ -53,11 +48,11 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.myFavorite -> {
-                        viewModel.routeToFavorite(userID.id)
+                        viewModel.routeToFavorite()
                         true
                     }
                     R.id.myBasket -> {
-                        viewModel.routeToBascet(userID.id)
+                        viewModel.routeToBascet()
                         true
                     }
                     R.id.logOut -> {
@@ -74,7 +69,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
             when (it) {
                 is OpenDetail -> viewModel.routeToDetail(it.item)
                 is ToFavorite -> {
-                    viewModel.addNewFavoriteItem(userID.id, it.item.id)
+                    viewModel.addNewFavoriteItem(it.item.id)
                     Snackbar.make(
                         binding.root,
                         "${it.item.name} добавлен в избранное",
@@ -85,7 +80,6 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     val bottomSheetFragment = CustomBottomSheetDialogFragment()
                     val bundle = bundleOf(
                         Pair("NAME", it.item.name),
-                        Pair("USERID", userID.id),
                     )
                     bottomSheetFragment.arguments = bundle
                     bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)

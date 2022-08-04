@@ -27,21 +27,14 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
     private var myAdapter: OrderBasketAdapter? = null
 
 
-    companion object{
-        private const val USERID = "USER_ID"
-        fun newInstance(userID: Int) = OrderBasketFragment().apply {
-            arguments = Bundle().apply {
-                putInt(USERID, userID)
-            }
-        }
+    companion object {
+        fun newInstance() = OrderBasketFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userID = arguments?.getInt(USERID) ?: 0
-
-        viewModel.checkOrderByClient(userID)
+        viewModel.checkOrderByClient()
 
 
         myAdapter = OrderBasketAdapter()

@@ -24,33 +24,21 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private val binding: FragmentBottomSheetDialogBinding by viewBinding()
     private val viewModel: DialogViewModel by viewModel()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_bottom_sheet_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val itemName = arguments?.getString("NAME")
-        val userID = arguments?.getInt("USERID") ?: 0
+        val itemName = arguments?.getString("NAME") ?: ""
 
         binding.buttonAdToBuy.setOnClickListener {
-            val time = binding.buyTime.text
-            val price = binding.buyPrice.text
             if(binding.buyPrice.text.isNotEmpty() && binding.buyTime.text.isNotEmpty()){
-            val newItem = OrderClass(
-                orderName = itemName.toString(),
-                userID = userID,
-                timeToComplit = time.toString(),
-                integerBuy = price.toString().toInt(),
-                orderON = false
-            )
-            viewModel.addNewOrder(newItem)
+            viewModel.addNewOrder(binding.buyTime.text.toString(), binding.buyPrice.text.toString(), itemName)
             dialog?.dismiss()
             }else Toast.makeText(activity, "Уточните заказ", Toast.LENGTH_SHORT).show()
         }

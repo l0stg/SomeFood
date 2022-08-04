@@ -6,6 +6,7 @@ import com.example.somefood.data.model.*
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryFavorite
 import com.example.somefood.data.room.repository.RepositoryFood
+import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
@@ -17,7 +18,7 @@ class ProductListClientViewModel(
     private val router: Router,
     private val repositoryFood: RepositoryFood,
     private val repositoryFavorite: RepositoryFavorite,
-
+    private val repositoryUser: RepositoryUser
 ): ViewModel() {
 
     init {
@@ -28,26 +29,26 @@ class ProductListClientViewModel(
     val list: Flow<List<FoodDataBaseModel>> = _list
 
     //Навигация
-    fun routeToFavorite(userID: Int?){
-        router.navigateTo(Screens().routeToFavorite(userID))
+    fun routeToFavorite(){
+        router.navigateTo(Screens().routeToFavorite())
     }
 
     fun routeToDetail(model: ProductListModel){
         router.navigateTo(Screens().routeToDetail(model))
     }
 
-    fun routeToBascet(userID: Int) {
-        router.navigateTo(Screens().routeToBascet(userID))
+    fun routeToBascet() {
+        router.navigateTo(Screens().routeToBascet())
     }
     fun routeToHelloScreen() {
+        repositoryUser.saveUserID(-1)
         router.navigateTo(Screens().routeToHelloScreenFragment())
     }
 
-
-    fun addNewFavoriteItem(userID: Int, idFood: Int){
+    fun addNewFavoriteItem(idFood: Int){
         var job: Job? = null
         job = viewModelScope.launch {
-                val newFavorite = FavoriteModel(userID = userID, foodId = idFood)
+                val newFavorite = FavoriteModel(userID = repositoryUser.getUserID(), foodId = idFood)
                 repositoryFavorite.addToFavorite(newFavorite)
                 job?.cancel()
         }
@@ -61,7 +62,4 @@ class ProductListClientViewModel(
             }
         }
     }
-
-
-
 }

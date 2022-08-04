@@ -19,15 +19,16 @@ class FavoriteViewModel(
     private val repositoryFood:  RepositoryFood,
     private val repositoryFavorite: RepositoryFavorite,
     private val router: Router,
+    private val repositoryUser: RepositoryUser
 ): ViewModel() {
 
     private val _list = MutableStateFlow<List<FoodDataBaseModel>>(emptyList())
     val list: Flow<List<FoodDataBaseModel>> = _list
 
         // Обновляет данные если список изменился
-    fun updateUI(id: Int) {
+    fun updateUI() {
         viewModelScope.launch {
-            repositoryFavorite.updateFavoriteTable(id).collect {
+            repositoryFavorite.updateFavoriteTable(repositoryUser.getUserID()).collect {
                 repositoryFood.updateFavoriteTable(it).collect {
                     _list.value = it
                 }
@@ -35,10 +36,10 @@ class FavoriteViewModel(
         }
     }
 
-    fun deleteFood(idFood: Int, userID: Int) {
+    fun deleteFood(idFood: Int) {
         viewModelScope.launch {
-            repositoryFavorite.deleteItem(idFood, userID)
-            updateUI(userID)
+            repositoryFavorite.deleteItem(idFood, repositoryUser.getUserID())
+            updateUI()
         }
     }
 

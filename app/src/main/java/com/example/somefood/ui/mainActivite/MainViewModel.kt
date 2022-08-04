@@ -8,18 +8,37 @@ import com.example.somefood.data.room.repository.RepositoryFood
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val router: Router,
-    private val myRepository: RepositoryFood
+    private val myRepository: RepositoryFood,
+    private val repositoryUser: RepositoryUser,
 ): ViewModel() {
 
     fun create(){
         viewModelScope.launch {
             myRepository.addAllElement(PREPOPULATE_DATA)
         }
-        router.newRootScreen(Screens().routeToHelloScreenFragment())
+        if (repositoryUser.getUserID() == -1){
+            router.newRootScreen(Screens().routeToHelloScreenFragment())
+        }else{
+            getUserForID(repositoryUser.getUserID())
+            router.newRootScreen(Screens().routeToProductList())
+        }
+    }
+
+    private fun getUserForID(userID: Int){
+        var userType: Boolean? = null
+        var job: Job? = null
+        job = viewModelScope.launch {
+            repositoryUser.getUserForID(userID).collect{
+                userType = it.types
+                job?.cancel()
+            }
+        }
+
     }
 
     // Начальные данные для БД

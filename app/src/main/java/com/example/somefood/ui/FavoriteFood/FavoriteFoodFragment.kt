@@ -28,35 +28,25 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
     private val viewModel: FavoriteViewModel by viewModel()
 
     companion object {
-        private const val USERID = "USER_ID"
-        fun newInstance(userID: Int?) = FavoriteFoodFragment().apply {
-            arguments = Bundle().apply {
-                if (userID != null) {
-                    putInt(USERID, userID)
-                }
-            }
-        }
+        fun newInstance() = FavoriteFoodFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Избранное"
 
-        val userID = arguments?.getInt(USERID) as Int
-
-        viewModel.updateUI(userID)
+        viewModel.updateUI()
 
         updateDataInUI()
 
         myAdapter = FavoriteAdapter {
             when(it){
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
-                is ToFavorite -> viewModel.deleteFood(it.item.id, userID)
+                is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
                     val bottomSheetFragment = CustomBottomSheetDialogFragment()
                     val bundle = bundleOf(
                         Pair("NAME", it.item.name),
-                        Pair("USERID", userID),
                     )
                     bottomSheetFragment.arguments = bundle
                     bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)

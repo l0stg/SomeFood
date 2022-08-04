@@ -16,20 +16,19 @@ import java.lang.NullPointerException
 class SignInViewModel(
     private val router: Router,
     private val myRepository: RepositoryUser,
-    private val mySharedPreferences: SharedPreferences
 ): ViewModel() {
 
     val status = MutableStateFlow(false)
-    private val _userID = MutableStateFlow<Int>(0)
+    private val _userID = MutableStateFlow(0)
     val userID: Flow<Int> = _userID
 
     // Навигация
-    private fun routeToProductList(userID: UserModel){
-        router.replaceScreen(Screens().routeToProductList(userID))
+    private fun routeToProductList(){
+        router.newRootScreen(Screens().routeToProductList())
     }
 
     private fun routeToCreatorList(){
-        router.replaceScreen(Screens().routeToCreatorList())
+        router.newRootScreen(Screens().routeToCreatorList())
     }
 
     // Проверка на соответствие в базе данных
@@ -38,9 +37,9 @@ class SignInViewModel(
         job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
                 try {
-                    //mySharedPreferences.edit().putInt("preferences", it.id).apply()
+                    myRepository.saveUserID(it.id)
                     when(it.types){
-                        false -> routeToProductList(it)
+                        false -> routeToProductList()
                         true -> routeToCreatorList()
                     }
                     job?.cancel()

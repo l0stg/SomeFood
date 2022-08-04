@@ -51,20 +51,20 @@ import org.koin.dsl.module
         single { get<OrderDataBase>().orderDao() }
 
         // Сингл репозитория для работы с БД пользователей
-        single { RepositoryUser(get()) }
+        single { RepositoryUser(get(), get()) }
         single { RepositoryFood(get()) }
         single { RepositoryFavorite(get()) }
         single { OrderRepository(get())}
 
-        viewModel { DialogViewModel(get())}
-        viewModel { MainViewModel(get(), get()) }
+        viewModel { DialogViewModel(get(), get())}
+        viewModel { MainViewModel(get(), get(), get()) }
         viewModel { HelloScreenViewModel(get()) }
-        viewModel { SignInViewModel(get(), get(), get()) }
+        viewModel { SignInViewModel(get(), get()) }
         viewModel { RegistrationViewModel(get(), get()) }
-        viewModel { ProductListClientViewModel(get(), get(), get()) }
-        viewModel { FavoriteViewModel(get(), get(), get())}
+        viewModel { ProductListClientViewModel(get(), get(), get(), get()) }
+        viewModel { FavoriteViewModel(get(), get(), get(), get())}
         viewModel {OrderFragmentViewModel(get(), get())}
-        viewModel { OrderBasketViewModel(get())}
+        viewModel { OrderBasketViewModel(get(), get())}
 
 
     }
