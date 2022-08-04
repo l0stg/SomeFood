@@ -8,15 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
+import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
+import com.example.somefood.ui.AddToBuy
+import com.example.somefood.ui.Click
+import com.example.somefood.ui.OpenDetail
+import com.example.somefood.ui.ToFavorite
 
-class FavoriteAdapter(private val itemDelete: (item: Int) -> Unit): RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
+
+class FavoriteAdapter(private val ClickListener: (click: Click) -> Unit): RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
-    private val myList: MutableList<FoodDataBaseModel> = mutableListOf()
+    private val myList: MutableList<ProductListModel> = mutableListOf()
 
     // Сначала очищаем а потом сетим новый список
-    fun set(newList: List<FoodDataBaseModel>){
+    fun set(newList: List<ProductListModel>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
@@ -24,10 +30,11 @@ class FavoriteAdapter(private val itemDelete: (item: Int) -> Unit): RecyclerView
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
-        fun bind(item: FoodDataBaseModel, itemDelete: (item: Int) -> Unit)
+        fun bind(item: ProductListModel,
+                 ClickListener: (click: Click) -> Unit)
                 = with(binding) {
-            tvName.text = item.name
-            tvDescription.text = item.description
+            //tvName.text = item.name
+            //tvDescription.text = item.description
             Glide
                 .with(ivFood.context)
                 .load(item.image)
@@ -36,7 +43,13 @@ class FavoriteAdapter(private val itemDelete: (item: Int) -> Unit): RecyclerView
                 .into(ivFood)
             buttonFavorite.setBackgroundColor(RED)
             buttonFavorite.setOnClickListener {
-                item.id?.let { itemDelete(it) }
+                ClickListener(ToFavorite(item))
+            }
+            root.setOnClickListener {
+                ClickListener(OpenDetail(item))
+            }
+            buttonAddToBuy.setOnClickListener{
+                ClickListener(AddToBuy(item))
             }
         }
     }
@@ -47,7 +60,7 @@ class FavoriteAdapter(private val itemDelete: (item: Int) -> Unit): RecyclerView
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position], itemDelete)
+        holder.bind(myList[position], ClickListener)
     }
 
     override fun getItemCount(): Int {

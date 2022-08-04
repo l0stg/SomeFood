@@ -9,11 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
+import com.example.somefood.ui.*
 
-sealed class Click
-class AddToFavorite(val item: ProductListModel): Click()
-class OpenDetail(val item: ProductListModel): Click()
-class AddToBuy(val item: ProductListModel): Click()
 
 class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
 
@@ -32,7 +29,7 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
         )
             = with(binding) {
                 tvName.text = item.name
-                tvDescription.text = item.description
+                //tvDescription.text = item.description
             Glide
                 .with(ivFood.context)
                 .load(item.image)
@@ -41,7 +38,7 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
                 .into(ivFood)
 
                 buttonFavorite.setOnClickListener {
-                    ClickListener(AddToFavorite(item))
+                    ClickListener(ToFavorite(item))
                 }
 
                 root.setOnClickListener {

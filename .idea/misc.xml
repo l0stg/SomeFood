@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/drawable/ic_basket.xml" value="0.2265" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/food_item.xml" value="0.536" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_bottom_sheet_dialog.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_creator_list.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_order_basket.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_order_basket_by_client.xml" value="0.259375" />
-        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_product_list_client.xml" value="0.259375" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_product_list_client.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_registration.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/order_item.xml" value="0.536" />

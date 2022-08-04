@@ -1,5 +1,6 @@
 package com.example.somefood.ui.signIn
 
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserModel
@@ -10,10 +11,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 class SignInViewModel(
     private val router: Router,
-    private val myRepository: RepositoryUser
+    private val myRepository: RepositoryUser,
+    private val mySharedPreferences: SharedPreferences
 ): ViewModel() {
 
     val status = MutableStateFlow(false)
@@ -34,13 +37,16 @@ class SignInViewModel(
         var job: Job? = null
         job = viewModelScope.launch {
             myRepository.checkAuth(email = email, password = password).collect{
-                if (it != null){
-                    if (!it.types)
-                        routeToProductList(it)
-                    else
-                        routeToCreatorList()
+                try {
+                    //mySharedPreferences.edit().putInt("preferences", it.id).apply()
+                    when(it.types){
+                        false -> routeToProductList(it)
+                        true -> routeToCreatorList()
+                    }
                     job?.cancel()
-                } else status.value = true
+                } catch (e: NullPointerException) {
+                    status.value = true
+                }
             }
         }
     }

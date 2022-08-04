@@ -1,20 +1,18 @@
 package com.example.somefood.ui.signIn
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
-import com.example.somefood.databinding.FragmentHelloScreenBinding
+import com.example.somefood.data.MyPreference
 import com.example.somefood.databinding.FragmentSignInBinding
-import com.example.somefood.ui.helloScreen.HelloScreenViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

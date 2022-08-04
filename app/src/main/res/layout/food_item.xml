@@ -6,8 +6,8 @@
     xmlns:card_view="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="161dp"
+        android:layout_height="129dp"
         android:layout_margin="4dp"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -20,8 +20,9 @@
         app:layout_constraintTop_toTopOf="parent"
         card_view:cardElevation="10dp"
         card_view:cardPreventCornerOverlap="false">
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="match_parent">
 
             <ImageView
@@ -40,38 +41,23 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="116dp"
                 android:text="@string/nameFood"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.137"
-                app:layout_constraintStart_toEndOf="@+id/ivFood"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="113dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="112dp"
-                android:text="@string/descriptionFood"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.379"
-                app:layout_constraintStart_toEndOf="@+id/ivFood"
-                app:layout_constraintTop_toBottomOf="@+id/tvName"
-                app:layout_constraintVertical_bias="0.578" />
+                app:layout_constraintBottom_toBottomOf="@+id/ivFood"
+                app:layout_constraintEnd_toEndOf="@+id/ivFood"
+                app:layout_constraintHorizontal_bias="0.544"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.008" />
 
             <ImageButton
                 android:id="@+id/buttonFavorite"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="8dp"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.934"
-                app:layout_constraintStart_toEndOf="@+id/tvName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_favorite"
                 app:tint="@color/white"
                 card_view:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
@@ -80,14 +66,11 @@
                 android:id="@+id/buttonAddToBuy"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginStart="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.687"
-                app:layout_constraintStart_toEndOf="@+id/tvDescription"
-                app:layout_constraintTop_toBottomOf="@+id/buttonFavorite"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/buttonFavorite"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_add"
                 card_view:ignore="SpeakableTextPresentCheck,ImageContrastCheck, ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>

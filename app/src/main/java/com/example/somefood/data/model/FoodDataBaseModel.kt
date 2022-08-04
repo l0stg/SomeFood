@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "food_table1")
 data class FoodDataBaseModel(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int = 0,
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "description")
