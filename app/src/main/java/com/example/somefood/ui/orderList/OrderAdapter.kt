@@ -20,6 +20,7 @@ class OrderAdapter(private val itemInOrderClick: (item: OrderClass)-> Unit): Rec
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
+
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = OrderItemBinding.bind(view)

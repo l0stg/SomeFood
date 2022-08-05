@@ -36,10 +36,10 @@ class MainViewModel(
         var job: Job? = null
         job = viewModelScope.launch {
             repositoryUser.getUserForID(userID).collect{
-                if (!it.types)
-                    router.newRootScreen(Screens().routeToProductList())
-                else
-                    router.newRootScreen(Screens().routeToCreatorList())
+                when(it.types){
+                    false -> router.newRootScreen(Screens().routeToProductList())
+                    true ->  router.newRootScreen(Screens().routeToCreatorList())
+                }
                 job?.cancel()
             }
         }

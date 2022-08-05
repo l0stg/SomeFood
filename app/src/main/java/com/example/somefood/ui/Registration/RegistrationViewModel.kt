@@ -21,14 +21,12 @@ class RegistrationViewModel(
     fun addUser(email: String, password: String, types: Boolean){
         job = viewModelScope.launch {
             myRepository.checkRegistration(email).collect{
-                if (it.isNullOrEmpty()){
-                    val newUser = UserModel(eMail = email, password = password, types = types)
-                    myRepository.addUser(newUser)
+                if (it.isEmpty()){
+                    myRepository.addUser(UserModel(eMail = email, password = password, types = types))
                     router.navigateTo(Screens().openSignIn())
                     job?.cancel()
                 }else statusRegistration.value = true
             }
-
         }
     }
 }

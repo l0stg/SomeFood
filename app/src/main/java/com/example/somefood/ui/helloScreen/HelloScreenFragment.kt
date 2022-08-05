@@ -18,7 +18,9 @@ class HelloScreenFragment : Fragment(R.layout.fragment_hello_screen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activity?.title = "SomeFood"
+
         binding.buttonSignIn.setOnClickListener {
             viewModel.openSigIn()
         }

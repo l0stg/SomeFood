@@ -36,7 +36,6 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
 
         viewModel.checkOrderByClient()
 
-
         myAdapter = OrderBasketAdapter()
 
         with(binding){

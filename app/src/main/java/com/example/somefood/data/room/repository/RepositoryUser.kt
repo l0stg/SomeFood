@@ -28,9 +28,9 @@ class RepositoryUser(
     }
 
     fun getUserID(): Int {
-        var userID: Int? = null
+        val userID: Int
         if(mySharedPreferences.contains("preferences"))
-           userID =  mySharedPreferences.getInt("preferences", 0)
+            userID = mySharedPreferences.getInt("preferences", 0)
         else
             userID = -1
         return userID

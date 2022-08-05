@@ -36,11 +36,20 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val itemName = arguments?.getString("NAME") ?: ""
 
+        binding.timePicker.setIs24HourView(true)
+
+        var time = ""
+        binding.timePicker.setOnTimeChangedListener { _, hour, minutes ->
+            time = "$hour : $minutes"
+        }
+
         binding.buttonAdToBuy.setOnClickListener {
-            if(binding.buyPrice.text.isNotEmpty() && binding.buyTime.text.isNotEmpty()){
-            viewModel.addNewOrder(binding.buyTime.text.toString(), binding.buyPrice.text.toString(), itemName)
-            dialog?.dismiss()
+            if(binding.buyPrice.text.isNotEmpty() ){
+                viewModel.addNewOrder(time, binding.buyPrice.text.toString(), itemName)
+                dialog?.dismiss()
             }else Toast.makeText(activity, "Уточните заказ", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 }

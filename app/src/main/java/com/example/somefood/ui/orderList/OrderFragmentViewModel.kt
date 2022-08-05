@@ -11,12 +11,11 @@ import kotlinx.coroutines.launch
 
 class OrderFragmentViewModel(
     private val orderRepository: OrderRepository,
-    private val router: Router
+    private val router: Router, // Сделать экран с детальной информацией о заказе
 ): ViewModel() {
 
     private val _list = MutableStateFlow<List<OrderClass>>(emptyList())
     val list: Flow<List<OrderClass>> = _list
-
 
     init {
         updateInUI()
@@ -31,9 +30,15 @@ class OrderFragmentViewModel(
     }
 
     fun addInJob(item: OrderClass) {
-        val itemInJob = OrderClass(id = item.id, orderName = item.orderName, userID = item.userID, timeToComplit = item.timeToComplit, integerBuy = item.integerBuy, orderON = true)
         viewModelScope.launch {
-            orderRepository.addNewBuy(itemInJob)
+            orderRepository.addNewBuy(OrderClass(
+                id = item.id,
+                orderName = item.orderName,
+                userID = item.userID,
+                timeToComplit = item.timeToComplit,
+                integerBuy = item.integerBuy,
+                orderON = true)
+            )
         }
     }
 

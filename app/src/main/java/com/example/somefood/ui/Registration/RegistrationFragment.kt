@@ -31,11 +31,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.statusRegistration.collect {
                     if (it) {
-                        Toast.makeText(
-                            activity,
-                            "Пользователь уже зарегистрирован",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(activity,"Пользователь уже зарегистрирован",Toast.LENGTH_SHORT).show()
                         viewModel.statusRegistration.value = false
                     }
                 }

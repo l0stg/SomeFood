@@ -15,7 +15,6 @@ class OrderBasketViewModel(
     private val repositoryUser: RepositoryUser,
 ): ViewModel() {
 
-
     private val _list = MutableStateFlow<List<OrderClass>>(emptyList())
     val list: Flow<List<OrderClass>> = _list
 
@@ -26,5 +25,4 @@ class OrderBasketViewModel(
             }
         }
     }
-
 }

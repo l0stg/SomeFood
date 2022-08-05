@@ -21,13 +21,13 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
+
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
         fun bind(
             item: ProductListModel,
             ClickListener: (click: Click) -> Unit
-        )
-            = with(binding) {
+        ) = with(binding) {
             Glide
                 .with(ivFood.context)
                 .load(item.image)
