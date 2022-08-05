@@ -27,7 +27,12 @@ class RepositoryUser(
         mySharedPreferences.edit().putInt("preferences", id).apply()
     }
 
-    fun getUserID(): Int =
-        mySharedPreferences.getInt("preferences", 0)
-
+    fun getUserID(): Int {
+        var userID: Int? = null
+        if(mySharedPreferences.contains("preferences"))
+           userID =  mySharedPreferences.getInt("preferences", 0)
+        else
+            userID = -1
+        return userID
+    }
 }

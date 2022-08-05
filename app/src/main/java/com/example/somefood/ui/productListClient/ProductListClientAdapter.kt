@@ -28,8 +28,6 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
             ClickListener: (click: Click) -> Unit
         )
             = with(binding) {
-                tvName.text = item.name
-                //tvDescription.text = item.description
             Glide
                 .with(ivFood.context)
                 .load(item.image)

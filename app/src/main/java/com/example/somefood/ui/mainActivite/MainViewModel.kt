@@ -21,24 +21,28 @@ class MainViewModel(
         viewModelScope.launch {
             myRepository.addAllElement(PREPOPULATE_DATA)
         }
+        checkSessionByUser()
+    }
+
+    private fun checkSessionByUser(){
         if (repositoryUser.getUserID() == -1){
             router.newRootScreen(Screens().routeToHelloScreenFragment())
         }else{
-            getUserForID(repositoryUser.getUserID())
-            router.newRootScreen(Screens().routeToProductList())
+            routerByType(repositoryUser.getUserID())
         }
     }
 
-    private fun getUserForID(userID: Int){
-        var userType: Boolean? = null
+    private fun routerByType(userID: Int) {
         var job: Job? = null
         job = viewModelScope.launch {
             repositoryUser.getUserForID(userID).collect{
-                userType = it.types
+                if (!it.types)
+                    router.newRootScreen(Screens().routeToProductList())
+                else
+                    router.newRootScreen(Screens().routeToCreatorList())
                 job?.cancel()
             }
         }
-
     }
 
     // Начальные данные для БД

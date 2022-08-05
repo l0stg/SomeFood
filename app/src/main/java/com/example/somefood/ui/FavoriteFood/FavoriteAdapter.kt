@@ -33,8 +33,6 @@ class FavoriteAdapter(private val ClickListener: (click: Click) -> Unit): Recycl
         fun bind(item: ProductListModel,
                  ClickListener: (click: Click) -> Unit)
                 = with(binding) {
-            //tvName.text = item.name
-            //tvDescription.text = item.description
             Glide
                 .with(ivFood.context)
                 .load(item.image)
