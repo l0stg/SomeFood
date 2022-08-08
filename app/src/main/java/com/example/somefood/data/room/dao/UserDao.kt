@@ -14,19 +14,15 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(newUser: UserModel)
 
-    @Query("SELECT * FROM user_table WHERE id LIKE :userID")
-    fun updateUser(userID: Int): Flow<UserModel>
-
     // Для авторизации
     @Query("SELECT * FROM user_table WHERE email LIKE :email  AND password LIKE :password ")
-    fun checkAuth(email: String, password: String): Flow<UserModel>
+    suspend fun checkAuth(email: String, password: String): UserModel
 
     // Для проверки при регистрации по емэйлу
     @Query("SELECT * FROM user_table WHERE email LIKE :email ")
-    fun checkRegistration(email: String): Flow<List<UserModel>>
+    suspend fun checkRegistration(email: String): List<UserModel>
 
-    // Берем юзера по айди
     @Query("SELECT * FROM user_table WHERE id LIKE :userID")
-    fun getUserForID(userID: Int): Flow<UserModel>
+    suspend fun observeUserById(userID: Int): UserModel
 
 }

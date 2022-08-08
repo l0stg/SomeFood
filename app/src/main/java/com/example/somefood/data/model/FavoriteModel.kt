@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "foodFavorite_table")
 data class FavoriteModel(
-    @PrimaryKey(autoGenerate = true) val idFavorite: Int? = null,
-    @ColumnInfo(name = "userID") val userID: Int,
-    @ColumnInfo(name = "foodID") val foodId: Int
+    @PrimaryKey(autoGenerate = true) val idFavorite: Int = 0,
+    @ColumnInfo(name = "userId") val userId: Int,
+    @ColumnInfo(name = "foodId") val foodId: Int
 )

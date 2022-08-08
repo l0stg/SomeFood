@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -37,7 +38,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
 
         val menuHost: MenuHost = requireActivity()
-        activity?.title = "SomeFood"
+        activity?.title = R.string.app_name.toString()
 
         // Меню в туллбаре
         menuHost.addMenuProvider(object : MenuProvider {
@@ -82,7 +83,8 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                         Pair("NAME", it.item.name),
                     )
                     bottomSheetFragment.arguments = bundle
-                    bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+
+                    bottomSheetFragment.show(childFragmentManager, "AddToOrder")
                 }
             }
         }
@@ -96,12 +98,12 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.list.collect{
-                    val array: MutableList<ProductListModel> = mutableListOf()
-                    it.forEach {
-                        val itemProduct = with(it){ProductListModel(id = id, name = name, description = description, image = image)}
-                        array.add(itemProduct)
+                    val newList: MutableList<ProductListModel> = mutableListOf()
+                    it.map {
+                        val itemProduct = ProductListModel(id = it.id, name = it.name, description = it.description, image = it.image)
+                        newList.add(itemProduct)
                     }
-                    myAdapter?.set(array)
+                    myAdapter?.set(newList)
                 }
             }
         }

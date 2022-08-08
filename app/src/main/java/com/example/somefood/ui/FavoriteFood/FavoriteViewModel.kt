@@ -25,13 +25,17 @@ class FavoriteViewModel(
     private val _list = MutableStateFlow<List<FoodDataBaseModel>>(emptyList())
     val list: Flow<List<FoodDataBaseModel>> = _list
 
-        // Обновляет данные если список изменился
+    // Обновляет данные если список изменился
     fun updateUI() {
         viewModelScope.launch {
-            repositoryFavorite.updateFavoriteTable(repositoryUser.getUserID()).collect {
+/*            repositoryFavorite.updateFavoriteTable(repositoryUser.getUserID()).collect {
                 repositoryFood.updateFavoriteTable(it).collect {
                     _list.value = it
                 }
+            }*/
+
+            repositoryFood.updateFavoriteTable(repositoryFavorite.updateFavoriteTable(repositoryUser.getUserID())).collect{
+                _list.value = it
             }
         }
     }
@@ -45,5 +49,5 @@ class FavoriteViewModel(
 
     fun routeToFavorite(item: ProductListModel) {
         router.navigateTo(Screens().routeToDetail(item))
-        }
+    }
 }

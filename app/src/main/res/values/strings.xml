@@ -11,4 +11,9 @@
     <string name="foor_iv">изображение блюда</string>
     <string name="nameFood">Name</string>
     <string name="descriptionFood">Description</string>
+    <string name="auth">Авторизация</string>
+    <string name="registr">Регистрация</string>
+    <string name="myBascet">Моя корзина</string>
+    <string name="order">Доступные заказы</string>
+
 </resources>

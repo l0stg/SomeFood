@@ -1,7 +1,12 @@
 package com.example.somefood.ui.orderList
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +16,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentCreatorListBinding
 import com.example.somefood.ui.FavoriteFood.FavoriteAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,14 +28,30 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Список заказов"
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.order_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.logOut -> {
+                        viewModel.routeToHelloScreen()
+                        Snackbar.make(binding.root, "Выход из акканута", Snackbar.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        activity?.title = R.string.order.toString()
 
         updateDataInUI()
-
         myAdapter = OrderAdapter{
             viewModel.addInJob(it)
         }
-
         with(binding) {
             orderRecyclerView.layoutManager = LinearLayoutManager(activity)
             orderRecyclerView.adapter = myAdapter

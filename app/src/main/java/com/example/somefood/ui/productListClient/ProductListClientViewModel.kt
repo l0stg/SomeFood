@@ -42,13 +42,13 @@ class ProductListClientViewModel(
     }
     fun routeToHelloScreen() {
         repositoryUser.saveUserID(-1)
-        router.navigateTo(Screens().routeToHelloScreenFragment())
+        router.newRootScreen(Screens().routeToHelloScreenFragment())
     }
 
     fun addNewFavoriteItem(idFood: Int){
         var job: Job? = null
         job = viewModelScope.launch {
-            repositoryFavorite.addToFavorite(FavoriteModel(userID = repositoryUser.getUserID(), foodId = idFood))
+            repositoryFavorite.addToFavorite(FavoriteModel(userId = repositoryUser.getUserID(), foodId = idFood))
             job?.cancel()
         }
     }

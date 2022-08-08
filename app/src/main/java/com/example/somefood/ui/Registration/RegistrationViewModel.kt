@@ -18,15 +18,14 @@ class RegistrationViewModel(
     private var job: Job? = null
     val statusRegistration = MutableStateFlow(false)
 
-    fun addUser(email: String, password: String, types: Boolean){
+    fun addUser(email: String, password: String, types: Boolean) {
         job = viewModelScope.launch {
-            myRepository.checkRegistration(email).collect{
-                if (it.isEmpty()){
-                    myRepository.addUser(UserModel(eMail = email, password = password, types = types))
-                    router.navigateTo(Screens().openSignIn())
-                    job?.cancel()
-                }else statusRegistration.value = true
-            }
+            val checkUser = myRepository.checkRegistration(email)
+            if (checkUser.isEmpty()) {
+                myRepository.addUser(UserModel(eMail = email, password = password, types = types))
+                router.navigateTo(Screens().openSignIn())
+                job?.cancel()
+            } else statusRegistration.value = true
         }
     }
 }

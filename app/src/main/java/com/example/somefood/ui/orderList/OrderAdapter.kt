@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somefood.R
-import com.example.somefood.data.model.OrderClass
+import com.example.somefood.data.model.Order
 import com.example.somefood.databinding.OrderItemBinding
 
-class OrderAdapter(private val itemInOrderClick: (item: OrderClass)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
+class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
-    private val myList: MutableList<OrderClass> = mutableListOf()
+    private val myList: MutableList<Order> = mutableListOf()
 
     // Сначала очищаем а потом сетим новый список
-    fun set(newList: List<OrderClass>){
+    fun set(newList: List<Order>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
@@ -24,13 +24,14 @@ class OrderAdapter(private val itemInOrderClick: (item: OrderClass)-> Unit): Rec
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = OrderItemBinding.bind(view)
-        fun bind(item: OrderClass, itemInOrderClick: (item: OrderClass) -> Unit)
+        fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit)
                 = with(binding) {
             itemName.text = item.orderName
             itemPrice.text = item.integerBuy.toString()
             itemTime.text = item.timeToComplit
-            if(item.orderON){
-                root.setBackgroundColor(GREEN)
+            when (item.orderON){
+                true -> root.setBackgroundColor(GREEN)
+                false -> {}
             }
             binding.ButtonInOrder.setOnClickListener {
                 itemInOrderClick(item)

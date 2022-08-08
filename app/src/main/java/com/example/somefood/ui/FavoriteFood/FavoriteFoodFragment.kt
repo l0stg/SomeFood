@@ -33,7 +33,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Избранное"
+        activity?.title = R.string.Favorite.toString()
 
         viewModel.updateUI()
 

@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somefood.R
-import com.example.somefood.data.model.OrderClass
-import com.example.somefood.databinding.OrderItemBinding
+import com.example.somefood.data.model.Order
 import com.example.somefood.databinding.OrderItemByClientBinding
-import com.example.somefood.ui.orderList.OrderAdapter
 
 class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>() {
 
-    private val myList: MutableList<OrderClass> = mutableListOf()
+    private val myList: MutableList<Order> = mutableListOf()
 
-    fun set(newList: List<OrderClass>){
+    fun set(newList: List<Order>){
         myList.clear()
         myList.addAll(newList)
         notifyDataSetChanged()
@@ -23,13 +21,14 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemByClientBinding.bind(itemView)
-        fun bind(item: OrderClass){
+        fun bind(item: Order){
             with(binding) {
                 itemName.text = item.orderName
                 itemPrice.text = item.integerBuy.toString()
                 itemTime.text = item.timeToComplit
-                if (item.orderON) {
-                    root.setBackgroundColor(Color.GREEN)
+                when (item.orderON) {
+                    true -> root.setBackgroundColor(Color.GREEN)
+                    else -> {}
                 }
             }
         }

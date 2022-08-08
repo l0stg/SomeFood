@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
+import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.repository.RepositoryFood
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
@@ -35,8 +36,8 @@ class MainViewModel(
     private fun routerByType(userID: Int) {
         var job: Job? = null
         job = viewModelScope.launch {
-            repositoryUser.getUserForID(userID).collect{
-                when(it.types){
+            val user = repositoryUser.observeUserById(userID)
+                when(user.types){
                     false -> router.newRootScreen(Screens().routeToProductList())
                     true ->  router.newRootScreen(Screens().routeToCreatorList())
                 }
@@ -57,5 +58,3 @@ class MainViewModel(
         FoodDataBaseModel(id = 8, name = "8", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
     )
 
-
-}

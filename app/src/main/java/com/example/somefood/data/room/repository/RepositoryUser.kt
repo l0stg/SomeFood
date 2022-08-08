@@ -13,14 +13,14 @@ class RepositoryUser(
         myDao.addUser(newUser)
     }
 
-    fun getUserForID(userID: Int): Flow<UserModel> =
-        myDao.getUserForID(userID)
+    suspend fun observeUserById(userID: Int): UserModel =
+        myDao.observeUserById(userID)
 
-    fun checkAuth(email: String, password: String): Flow<UserModel> =
+    suspend fun checkAuth(email: String, password: String): UserModel =
          myDao.checkAuth(email = email, password = password)
 
 
-    fun checkRegistration(email: String): Flow<List<UserModel>> =
+    suspend fun checkRegistration(email: String): List<UserModel> =
         myDao.checkRegistration(email)
 
     fun saveUserID(id: Int){

@@ -11,10 +11,10 @@ class RepositoryFavorite(
         favoriteDao.addFavoriteFood(newFavoriteModel)
     }
 
-    fun checkFavorite(idFood: Int, userID: Int): Flow<FavoriteModel> =
-        favoriteDao.checkFavorite(idFood = idFood, userID = userID)
+    fun checkFavorite(foodId: Int, userId: Int): Flow<FavoriteModel> =
+        favoriteDao.checkFavorite(foodId = foodId, userId = userId)
 
-    fun updateFavoriteTable(id: Int): Flow<List<Int>> =
+    suspend fun updateFavoriteTable(id: Int): List<Int> =
         favoriteDao.updateFavoriteTable(id)
 
     suspend fun deleteItem(idFood: Int, userID: Int) {

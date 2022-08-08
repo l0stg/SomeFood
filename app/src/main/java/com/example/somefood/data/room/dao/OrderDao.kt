@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.somefood.data.model.OrderClass
-import com.example.somefood.data.model.UserModel
+import com.example.somefood.data.model.Order
 import kotlinx.coroutines.flow.Flow
 
 
@@ -13,12 +12,12 @@ import kotlinx.coroutines.flow.Flow
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addOrder(newModel: OrderClass)
+    suspend fun addOrder(newModel: Order)
 
     @Query("SELECT * FROM order_table ")
-    fun getOrderTable(): Flow<List<OrderClass>>
+    fun getOrderTable(): Flow<List<Order>>
 
     @Query("SELECT * FROM order_table WHERE userID LIKE :userID")
-    fun getOrderByClient(userID: Int): Flow<List<OrderClass>>
+    fun getOrderByClient(userID: Int): Flow<List<Order>>
 
 }

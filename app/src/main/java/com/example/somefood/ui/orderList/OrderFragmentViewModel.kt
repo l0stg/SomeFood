@@ -2,8 +2,10 @@ package com.example.somefood.ui.orderList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.OrderClass
+import com.example.somefood.data.model.Order
 import com.example.somefood.data.room.repository.OrderRepository
+import com.example.somefood.data.room.repository.RepositoryUser
+import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,11 +13,12 @@ import kotlinx.coroutines.launch
 
 class OrderFragmentViewModel(
     private val orderRepository: OrderRepository,
-    private val router: Router, // Сделать экран с детальной информацией о заказе
+    private val router: Router,
+    private val userRepository: RepositoryUser
 ): ViewModel() {
 
-    private val _list = MutableStateFlow<List<OrderClass>>(emptyList())
-    val list: Flow<List<OrderClass>> = _list
+    private val _list = MutableStateFlow<List<Order>>(emptyList())
+    val list: Flow<List<Order>> = _list
 
     init {
         updateInUI()
@@ -29,9 +32,9 @@ class OrderFragmentViewModel(
         }
     }
 
-    fun addInJob(item: OrderClass) {
+    fun addInJob(item: Order) {
         viewModelScope.launch {
-            orderRepository.addNewBuy(OrderClass(
+            orderRepository.addNewBuy(Order(
                 id = item.id,
                 orderName = item.orderName,
                 userID = item.userID,
@@ -40,6 +43,11 @@ class OrderFragmentViewModel(
                 orderON = true)
             )
         }
+    }
+
+    fun routeToHelloScreen() {
+        userRepository.saveUserID(-1)
+        router.newRootScreen(Screens().routeToHelloScreenFragment())
     }
 
 

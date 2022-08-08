@@ -23,29 +23,26 @@ class SignInViewModel(
     val userID: Flow<Int> = _userID
 
     // Навигация
-    private fun routeToProductList(){
+    private fun routeToProductList() {
         router.newRootScreen(Screens().routeToProductList())
     }
 
-    private fun routeToCreatorList(){
+    private fun routeToCreatorList() {
         router.newRootScreen(Screens().routeToCreatorList())
     }
 
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {
-        var job: Job? = null
-        job = viewModelScope.launch {
-            myRepository.checkAuth(email = email, password = password).collect{
-                try {
-                    myRepository.saveUserID(it.id)
-                    when(it.types){
-                        false -> routeToProductList()
-                        true -> routeToCreatorList()
-                    }
-                    job?.cancel()
-                } catch (e: NullPointerException) {
-                    status.value = true
+        viewModelScope.launch {
+            val checkUser = myRepository.checkAuth(email = email, password = password)
+            if (checkUser != null){
+                myRepository.saveUserID(checkUser.id)
+                when (checkUser.types) {
+                    false -> routeToProductList()
+                    true -> routeToCreatorList()
                 }
+            }else {
+                status.value = true
             }
         }
     }

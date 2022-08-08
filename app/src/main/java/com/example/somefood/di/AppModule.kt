@@ -40,7 +40,7 @@ import org.koin.dsl.module
         single{ get<UserDataBase>().somethingDao()}
 
         // Сингл ДАО и БД Food
-        single { Room.databaseBuilder(get(), FoodDataBase::class.java, "food_table1").build() }
+        single { Room.databaseBuilder(get(), FoodDataBase::class.java, "food_table").build() }
         single { get<FoodDataBase>().foodDao() }
 
         // Сингл ДАО и БД favorite Food
@@ -63,7 +63,7 @@ import org.koin.dsl.module
         viewModel { RegistrationViewModel(get(), get()) }
         viewModel { ProductListClientViewModel(get(), get(), get(), get()) }
         viewModel { FavoriteViewModel(get(), get(), get(), get())}
-        viewModel {OrderFragmentViewModel(get(), get())}
+        viewModel {OrderFragmentViewModel(get(), get(), get())}
         viewModel { OrderBasketViewModel(get(), get())}
 
 

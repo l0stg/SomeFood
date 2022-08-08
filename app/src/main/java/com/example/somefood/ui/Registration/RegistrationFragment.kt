@@ -24,7 +24,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Регистрация"
+        activity?.title = R.string.registr.toString()
         var types = false
 
         viewLifecycleOwner.lifecycleScope.launch {

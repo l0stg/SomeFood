@@ -14,11 +14,11 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavoriteFood(newFavoriteModel: FavoriteModel)
 
-    @Query("SELECT * FROM foodFavorite_table WHERE foodID LIKE :idFood AND userID LIKE :userID ")
-    fun checkFavorite(userID: Int, idFood: Int): Flow<FavoriteModel>
+    @Query("SELECT * FROM foodFavorite_table WHERE foodId LIKE :foodId AND userId LIKE :userId ")
+    fun checkFavorite(userId: Int, foodId: Int): Flow<FavoriteModel>
 
-    @Query("SELECT foodID FROM foodFavorite_table WHERE userID LIKE :userID")
-    fun updateFavoriteTable(userID: Int): Flow<List<Int>>
+    @Query("SELECT foodId FROM foodFavorite_table WHERE userId LIKE :userID")
+    suspend fun updateFavoriteTable(userID: Int): List<Int>
 
     @Query("DELETE FROM foodFavorite_table WHERE foodID LIKE :idFood AND userID LIKE :userID ")
     suspend fun deleteItem(idFood: Int, userID: Int)
