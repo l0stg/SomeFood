@@ -41,7 +41,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         updateDataInUI()
 
         myAdapter = FavoriteAdapter {
-            when(it){
+            when (it) {
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
                 is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
@@ -60,12 +60,12 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    val array: MutableList<ProductListModel> = mutableListOf()
-                    it.forEach {
-                        val itemProduct = ProductListModel(id = it.id, name = it.name, description = it.description, image = it.image)
-                        array.add(itemProduct)
-                    }
-                    myAdapter?.set(array)
+                    myAdapter?.set(it.map {
+                        ProductListModel(id = it.id,
+                            name = it.name,
+                            description = it.description,
+                            image = it.image)
+                    })
                 }
             }
         }
