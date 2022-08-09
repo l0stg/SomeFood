@@ -4,42 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/white"
+    android:padding="15dp"
     tools:context=".ui.detailFood.DetailFoodFragment">
 
     <ImageView
         android:id="@+id/ivDetail"
-        android:layout_width="227dp"
-        android:layout_height="202dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,ImageContrastCheck"
         tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvNameDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
+        android:layout_marginTop="50dp"
         android:text="@string/nameFood"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescriptionDetail"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDetail" />
 
     <TextView
         android:id="@+id/tvDescriptionDetail"
-        android:layout_width="283dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="204dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/descriptionFood"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDetail"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameDetail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

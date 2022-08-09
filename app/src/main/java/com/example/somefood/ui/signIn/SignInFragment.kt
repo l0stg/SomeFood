@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.MyPreference
 import com.example.somefood.databinding.FragmentSignInBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,14 +24,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = R.string.auth.toString()
+        activity?.title = getString(R.string.auth)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.status.collect {
                     if (it) {
-                        Toast.makeText(activity, "Неверный логин/пароль", Toast.LENGTH_SHORT).show()
-                        viewModel.status.value = false
+                        Snackbar.make(binding.root, getString(R.string.unCorrectPassword), Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

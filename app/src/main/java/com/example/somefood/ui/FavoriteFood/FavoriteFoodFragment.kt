@@ -14,6 +14,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentFavoriteFoodBinding
 import com.example.somefood.ui.AddToBuy
+import com.example.somefood.ui.GRIDCONST
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
 import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
@@ -33,7 +34,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = R.string.Favorite.toString()
+        activity?.title = getString(R.string.Favorite)
 
         viewModel.updateUI()
 
@@ -44,18 +45,13 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
                 is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
-                    val bottomSheetFragment = CustomBottomSheetDialogFragment()
-                    val bundle = bundleOf(
-                        Pair("NAME", it.item.name),
-                    )
-                    bottomSheetFragment.arguments = bundle
-                    bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+                    CustomBottomSheetDialogFragment.newInstance(it.item.name, childFragmentManager)
                 }
             }
         }
 
         with(binding) {
-            favoriteFoodRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+            favoriteFoodRecyclerView.layoutManager = GridLayoutManager(activity, GRIDCONST)
             favoriteFoodRecyclerView.adapter = myAdapter
         }
     }

@@ -33,7 +33,7 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = R.string.myBascet.toString()
+        activity?.title = getString(R.string.myBascet)
         viewModel.checkOrderByClient()
 
         myAdapter = OrderBasketAdapter()

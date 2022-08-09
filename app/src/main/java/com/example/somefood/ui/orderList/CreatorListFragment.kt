@@ -38,7 +38,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
                 return when (menuItem.itemId) {
                     R.id.logOut -> {
                         viewModel.routeToHelloScreen()
-                        Snackbar.make(binding.root, "Выход из акканута", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
                         true
                     }
                     else -> false
@@ -46,7 +46,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        activity?.title = R.string.order.toString()
+        activity?.title = getString(R.string.order)
 
         updateDataInUI()
         myAdapter = OrderAdapter{

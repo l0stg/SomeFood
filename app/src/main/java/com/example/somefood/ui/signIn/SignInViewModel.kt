@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserModel
+import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
@@ -18,7 +19,8 @@ class SignInViewModel(
     private val myRepository: RepositoryUser,
 ): ViewModel() {
 
-    val status = MutableStateFlow(false)
+    private val _status = MutableStateFlow(false)
+    val status = _status
     private val _userID = MutableStateFlow(0)
     val userID: Flow<Int> = _userID
 
@@ -38,11 +40,12 @@ class SignInViewModel(
             if (checkUser != null){
                 myRepository.saveUserID(checkUser.id)
                 when (checkUser.types) {
-                    false -> routeToProductList()
-                    true -> routeToCreatorList()
+                    UserTypes.USER -> routeToProductList()
+                    UserTypes.CREATOR -> routeToCreatorList()
                 }
             }else {
-                status.value = true
+                _status.value = true
+                _status.value = false
             }
         }
     }

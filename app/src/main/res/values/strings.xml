@@ -15,5 +15,21 @@
     <string name="registr">Регистрация</string>
     <string name="myBascet">Моя корзина</string>
     <string name="order">Доступные заказы</string>
+    <string name="doubleRegistr">Пользователь уже зарегистрирован</string>
+    <string name="unCorrectPassword">Неверный логин/пароль</string>
+    <string name="signOut">Выход из акканута</string>
+    <string name="addToFavorite">добавлен в избранное</string>
+    <string name="checkToOrder">Уточните заказ</string>
+    <string name="createOrder">Сделать заказ</string>
+    <string name="timeOrder">Желаемое время выполнения заказа</string>
+    <string name="priceOrder">Стоимость</string>
+    <string name="newOrder">Новый заказ</string>
+    <string name="food">food</string>
+    <string name="email">E-mail</string>
+    <string name="iCreator">Я исполнитель</string>
+    <string name="foodName">Наименование блюда</string>
+    <string name="timeToComplit">Время выполнения</string>
+    <string name="priceInt">Стоимость</string>
+    <string name="inJob">Взять в работу</string>
 
 </resources>

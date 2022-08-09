@@ -17,6 +17,7 @@ import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
 import com.example.somefood.ui.AddToBuy
+import com.example.somefood.ui.GRIDCONST
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
 import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
@@ -38,7 +39,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
 
         val menuHost: MenuHost = requireActivity()
-        activity?.title = R.string.app_name.toString()
+        activity?.title = getString(R.string.app_name)
 
         // Меню в туллбаре
         menuHost.addMenuProvider(object : MenuProvider {
@@ -58,7 +59,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     }
                     R.id.logOut -> {
                         viewModel.routeToHelloScreen()
-                        Snackbar.make(binding.root, "Выход из акканута", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
                         true
                     }
                     else -> false
@@ -73,24 +74,18 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     viewModel.addNewFavoriteItem(it.item.id)
                     Snackbar.make(
                         binding.root,
-                        "${it.item.name} добавлен в избранное",
+                        getString(R.string.addToFavorite),
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
                 is AddToBuy -> {
-                    val bottomSheetFragment = CustomBottomSheetDialogFragment()
-                    val bundle = bundleOf(
-                        Pair("NAME", it.item.name),
-                    )
-                    bottomSheetFragment.arguments = bundle
-
-                    bottomSheetFragment.show(childFragmentManager, "AddToOrder")
+                    CustomBottomSheetDialogFragment.newInstance(it.item.name, childFragmentManager)
                 }
             }
         }
 
         with(binding) {
-            productRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+            productRecyclerView.layoutManager = GridLayoutManager(activity, GRIDCONST)
             productRecyclerView.adapter = myAdapter
         }
 
@@ -98,17 +93,15 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.list.collect{
-                    val newList: MutableList<ProductListModel> = mutableListOf()
-                    it.map {
-                        val itemProduct = ProductListModel(id = it.id, name = it.name, description = it.description, image = it.image)
-                        newList.add(itemProduct)
-                    }
-                    myAdapter?.set(newList)
+                    myAdapter?.set(it.map {
+                        ProductListModel(
+                            id = it.id,
+                            name = it.name,
+                            description = it.description,
+                            image = it.image)
+                    })
                 }
             }
         }
-
-
     }
-
 }

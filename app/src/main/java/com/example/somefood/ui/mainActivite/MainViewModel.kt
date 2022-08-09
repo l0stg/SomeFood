@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.UserModel
+import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryFood
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
@@ -20,7 +21,7 @@ class MainViewModel(
 
     fun create(){
         viewModelScope.launch {
-            myRepository.addAllElement(PREPOPULATE_DATA)
+            myRepository.addAllElement()
         }
         checkSessionByUser()
     }
@@ -37,24 +38,15 @@ class MainViewModel(
         var job: Job? = null
         job = viewModelScope.launch {
             val user = repositoryUser.observeUserById(userID)
-                when(user.types){
-                    false -> router.newRootScreen(Screens().routeToProductList())
-                    true ->  router.newRootScreen(Screens().routeToCreatorList())
-                }
-                job?.cancel()
+            when(user.types){
+                UserTypes.USER -> router.newRootScreen(Screens().routeToProductList())
+                UserTypes.CREATOR ->  router.newRootScreen(Screens().routeToCreatorList())
+            }
+            job?.cancel()
             }
         }
     }
 
     // Начальные данные для БД
-    private val PREPOPULATE_DATA = listOf(
-        FoodDataBaseModel(id = 1, name = "1", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 2, name = "2", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 3, name = "3", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 4, name = "4", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 5, name = "5", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 6, name = "6", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 7, name = "7", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataBaseModel(id = 8, name = "8", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-    )
+
 

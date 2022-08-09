@@ -7,17 +7,10 @@
     android:background="#FFFFFF">
 
     <androidx.cardview.widget.CardView
-        layout_height="wrap_content"
-        layout_width="wrap_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         android:divider="@android:color/transparent"
         android:dividerHeight="0.0px"
         android:elevation="8dp"
@@ -28,58 +21,37 @@
         card_view:cardElevation="10dp"
         card_view:cardPreventCornerOverlap="false">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/itemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Наименование блюда"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/itemPrice"
-                app:layout_constraintHorizontal_bias="0.094"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/foodName"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/itemTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Время выполнения"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.036"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemName"
-                app:layout_constraintVertical_bias="0.807" />
+                android:layout_marginTop="50dp"
+                android:text="@string/timeToComplit"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/itemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Стоимость"
+                android:text="@string/priceInt"
+                android:layout_gravity="end"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/ButtonInOrder"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.164" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/ButtonInOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Взять в работу"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.835"
-                app:layout_constraintStart_toEndOf="@+id/itemTime"
-                app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="40dp"
+                android:layout_gravity="end"
+                android:text="@string/inJob"/>
 
     </androidx.cardview.widget.CardView>
 

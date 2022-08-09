@@ -8,5 +8,10 @@ data class UserModel(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "email") val eMail: String,
     @ColumnInfo(name = "password") val password: String,
-    @ColumnInfo(name = "types") val types: Boolean
+    @ColumnInfo(name = "types") val types: UserTypes
 ): Serializable
+
+enum class UserTypes {
+    CREATOR,
+    USER
+}
