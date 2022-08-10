@@ -13,7 +13,7 @@ class RepositoryFood(
         foodDao.addAllElement(PREPOPULATE_DATA)
     }
 
-    fun updateFavoriteTable(listID: List<Int>): Flow<List<FoodDataBaseModel>> = foodDao.updateFavoriteTable(listID)
+    suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataBaseModel> = foodDao.updateFavoriteTable(listID)
 
     fun updateTable(): Flow<List<FoodDataBaseModel>> = foodDao.updateFoodTable()
 
