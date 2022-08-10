@@ -39,7 +39,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         super.onViewCreated(view, savedInstanceState)
 
         val menuHost: MenuHost = requireActivity()
-        activity?.title = getString(R.string.app_name)
+        activity?.title = getString(R.string.menu)
 
         // Меню в туллбаре
         menuHost.addMenuProvider(object : MenuProvider {
@@ -50,6 +50,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.myFavorite -> {
+
                         viewModel.routeToFavorite()
                         true
                     }

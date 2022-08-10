@@ -6,20 +6,20 @@
         android:id="@+id/myFavorite"
         android:icon="@drawable/ic_favorite"
         app:showAsAction="always"
-        android:title="goToFavorite"
+        android:title="Перейти в избранное"
         tools:ignore="HardcodedText" />
 
     <item
         android:id="@+id/myBasket"
         android:icon="@drawable/ic_basket"
         app:showAsAction="always"
-        android:title="TODO"
+        android:title="Перейти в корзину"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/logOut"
         android:icon="@drawable/ic_login"
         app:showAsAction="always"
-        android:title="TODO"
+        android:title="Выйти из аккаунта"
         tools:ignore="HardcodedText" />
 
 </menu>

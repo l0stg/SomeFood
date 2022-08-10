@@ -6,7 +6,6 @@
         android:id="@+id/logOut"
         android:icon="@drawable/ic_login"
         app:showAsAction="always"
-        android:title="TODO"
+        android:title="Выйти из аккаунта"
         tools:ignore="HardcodedText" />
-
 </menu>

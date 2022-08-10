@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:text="@string/button_Registration"
+        android:importantForAccessibility="no"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +22,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editEmailRegistration"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
         android:hint="@string/email"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -40,24 +42,23 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editPasswordRegistration"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="50dp"
         android:hint="@string/password"
+        android:textColorHint="@color/black"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmailRegistration">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
