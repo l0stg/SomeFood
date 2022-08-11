@@ -31,6 +31,9 @@
     <string name="priceInt">Стоимость</string>
     <string name="inJob">Взять в работу</string>
     <string name="menu">Меню</string>
+    <string name="goToFavorite">Перейти в избранное</string>
+    <string name="goToBascet">Перейти в корзину</string>
+    <string name="goToSignOut">Выйти из аккаунта</string>
 
 
 </resources>
