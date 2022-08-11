@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/buttonRegistration"
     android:layout_width="match_parent"
+    android:background="?attr/colorOnPrimary"
     android:layout_height="match_parent"
     tools:context=".ui.Registration.RegistrationFragment">
 
@@ -13,41 +13,52 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:text="@string/button_Registration"
+        android:importantForAccessibility="no"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editEmailRegistration"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/e_mail"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
-        android:id="@+id/editPasswordRegistration"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editEmailRegistration"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailRegistration" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPasswordRegistration"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailRegistration">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonNewRegistration"
@@ -56,9 +67,18 @@
         android:text="@string/button_Registration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordRegistration"
-        app:layout_constraintVertical_bias="0.400" />
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordRegistration" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/iCreator"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNewRegistration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordRegistration" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

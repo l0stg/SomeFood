@@ -1,17 +1,26 @@
 package com.example.somefood.ui.productListClient
 
 import android.os.Bundle
+import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import android.view.View
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
-import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.ProductListModel
+import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
+import com.example.somefood.ui.AddToBuy
+import com.example.somefood.ui.OpenDetail
+import com.example.somefood.ui.ToFavorite
+import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,65 +31,78 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     private var myAdapter: ProductListClientAdapter? = null
 
     companion object{
-        private const val USERID = "USER_ID"
-        fun newInstance(userID: Int) = ProductListClientFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(USERID, userID)
-            }
-        }
+        fun newInstance() = ProductListClientFragment()
+        private const val GRIDCONST = 2
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "SomeFood"
 
-        val userID = arguments?.getSerializable(USERID)
+        val menuHost: MenuHost = requireActivity()
+        activity?.title = getString(R.string.menu)
 
-        val array = init()
-        viewModel.addToFood(array)
+        // Меню в туллбаре
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+            }
 
-        myAdapter = ProductListClientAdapter({
-            viewModel.routeToDetail(it)
-        },{
-            println(" ${it.id}  $userID ")
-        })
-        with(binding) {
-            productRecyclerView.layoutManager = LinearLayoutManager(activity)
-            productRecyclerView.adapter = myAdapter
-        }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.myFavorite -> {
 
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.list.collect{
-                    val array: MutableList<ProductListModel> = mutableListOf()
-                    it.forEach {
-                        val itemProduct = ProductListModel(id = it.id!!, name = it.name, description = it.description, image = it.image)
-                        array.add(itemProduct)
+                        viewModel.routeToFavorite()
+                        true
                     }
-                    myAdapter?.set(array)
+                    R.id.myBasket -> {
+                        viewModel.routeToBascet()
+                        true
+                    }
+                    R.id.logOut -> {
+                        viewModel.routeToHelloScreen()
+                        Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        myAdapter = ProductListClientAdapter {
+            when (it) {
+                is OpenDetail -> viewModel.routeToDetail(it.item)
+                is ToFavorite -> {
+                    viewModel.addNewFavoriteItem(it.item.id)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.addToFavorite),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                is AddToBuy -> {
+                    CustomBottomSheetDialogFragment.newInstance(it.item.name, childFragmentManager)
                 }
             }
         }
 
-
-        binding.buttonRouteToFavorite.setOnClickListener {
-            viewModel.routeToFavorite()
+        with(binding) {
+            productRecyclerView.layoutManager = GridLayoutManager(activity, GRIDCONST)
+            productRecyclerView.adapter = myAdapter
         }
 
-    }
-
-    private fun init(): MutableList<FoodDataBaseModel>{
-        val array: MutableList<FoodDataBaseModel> = mutableListOf()
-        var element = FoodDataBaseModel(name = "1", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "2", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "3", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "4", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        element = FoodDataBaseModel(name = "5", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
-        array.add(element)
-        return array
+        // Установка данных в адаптер
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.list.collect{
+                    myAdapter?.set(it.map {
+                        ProductListModel(
+                            id = it.id,
+                            name = it.name,
+                            description = it.description,
+                            image = it.image)
+                    })
+                }
+            }
+        }
     }
 }

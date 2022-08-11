@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.mainActivite.MainActivity">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/containerScreen"
-        android:name="com.example.somefood.ui.helloScreen.HelloScreenFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

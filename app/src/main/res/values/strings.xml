@@ -3,12 +3,37 @@
     <string name="button_Registration">Регистрация</string>
     <string name="button_sign_in">Авторизация</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="e_mail">Введите e-mail</string>
-    <string name="password">Введите пароль</string>
+    <string name="password">Пароль</string>
     <string name="sign">Войти</string>
     <string name="Favorite">Избранное</string>
     <string name="detail_fragment_info">Окно для детального просмотра блюда</string>
-    <string name="foor_iv">изображение блюда</string>
+    <string name="foor_iv">нажмите для отображения детальной информации</string>
     <string name="nameFood">Name</string>
     <string name="descriptionFood">Description</string>
+    <string name="auth">Авторизация</string>
+    <string name="registr">Регистрация</string>
+    <string name="myBascet">Моя корзина</string>
+    <string name="order">Доступные заказы</string>
+    <string name="doubleRegistr">Пользователь уже зарегистрирован</string>
+    <string name="unCorrectPassword">Неверный логин/пароль</string>
+    <string name="signOut">Выход из акканута</string>
+    <string name="addToFavorite">добавить в избранное</string>
+    <string name="checkToOrder">Уточните заказ</string>
+    <string name="createOrder">Сделать заказ</string>
+    <string name="timeOrder">Желаемое время выполнения заказа</string>
+    <string name="priceOrder">Стоимость</string>
+    <string name="newOrder">Новый заказ</string>
+    <string name="food">food</string>
+    <string name="email">E-mail</string>
+    <string name="iCreator">Я исполнитель</string>
+    <string name="foodName">Наименование блюда</string>
+    <string name="timeToComplit">Время выполнения</string>
+    <string name="priceInt">Стоимость</string>
+    <string name="inJob">Взять в работу</string>
+    <string name="menu">Меню</string>
+    <string name="goToFavorite">Перейти в избранное</string>
+    <string name="goToBascet">Перейти в корзину</string>
+    <string name="goToSignOut">Выйти из аккаунта</string>
+
+
 </resources>
