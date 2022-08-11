@@ -9,9 +9,9 @@ class RepositoryUser(
     private val myDao: UserDao,
     private val mySharedPreferences: SharedPreferences
 ) {
-    suspend fun addUser(newUser: UserModel){
+    suspend fun addUser(newUser: UserModel): Long =
         myDao.addUser(newUser)
-    }
+
 
     suspend fun observeUserById(userID: Int): UserModel =
         myDao.observeUserById(userID)

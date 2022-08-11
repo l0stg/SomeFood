@@ -19,12 +19,24 @@ class RegistrationViewModel(
     private val _statusRegistration: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val statusRegistration: MutableStateFlow<Boolean> = _statusRegistration
 
+    private fun routeToProductList() {
+        router.newRootScreen(Screens().routeToProductList())
+    }
+
+    private fun routeToCreatorList() {
+        router.newRootScreen(Screens().routeToCreatorList())
+    }
+
     fun addUser(email: String, password: String, types: UserTypes) {
         viewModelScope.launch {
             val checkUser = myRepository.checkRegistration(email)
             if (checkUser.isEmpty()) {
-                myRepository.addUser(UserModel(eMail = email, password = password, types = types))
-                router.navigateTo(Screens().openSignIn())
+                val newUserId = myRepository.addUser(UserModel(eMail = email, password = password, types = types))
+                myRepository.saveUserID(newUserId.toInt())
+                when (types) {
+                    UserTypes.USER -> routeToProductList()
+                    UserTypes.CREATOR -> routeToCreatorList()
+                }
             } else {
                 _statusRegistration.value = true
                 _statusRegistration.value = false

@@ -12,7 +12,7 @@ interface UserDao {
 
     // Для регистрации
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addUser(newUser: UserModel)
+    suspend fun addUser(newUser: UserModel): Long
 
     // Для авторизации
     @Query("SELECT * FROM user_table WHERE email LIKE :email  AND password LIKE :password ")

@@ -13,5 +13,5 @@ data class UserModel(
 
 enum class UserTypes {
     CREATOR,
-    USER
+    USER,
 }
