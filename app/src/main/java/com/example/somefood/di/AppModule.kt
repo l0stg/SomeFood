@@ -5,10 +5,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteOpenHelper
 import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataBaseModel
-import com.example.somefood.data.room.provider.FavoriteDataBase
-import com.example.somefood.data.room.provider.FoodDataBase
-import com.example.somefood.data.room.provider.OrderDataBase
-import com.example.somefood.data.room.provider.UserDataBase
+import com.example.somefood.data.room.provider.*
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryFavorite
 import com.example.somefood.data.room.repository.RepositoryFood
@@ -35,20 +32,12 @@ import org.koin.dsl.module
         single{cicerone.router}
         single{cicerone.getNavigatorHolder()}
 
-        // Сингл ДАО и БД User
-        single { Room.databaseBuilder(get(), UserDataBase::class.java, "user_table").build() }
-        single{ get<UserDataBase>().somethingDao()}
-
-        // Сингл ДАО и БД Food
-        single { Room.databaseBuilder(get(), FoodDataBase::class.java, "food_table").build() }
-        single { get<FoodDataBase>().foodDao() }
-
-        // Сингл ДАО и БД favorite Food
-        single { Room.databaseBuilder(get(), FavoriteDataBase::class.java, "favorite_table").build() }
-        single { get<FavoriteDataBase>().favoriteDao() }
-
-        single { Room.databaseBuilder(get(), OrderDataBase::class.java, "order_table").build() }
-        single { get<OrderDataBase>().orderDao() }
+        // Сингл ДАО и БД
+        single { Room.databaseBuilder(get(), SomeFoodDataBase::class.java, "food_db").build() }
+        single { get<SomeFoodDataBase>().foodDao() }
+        single { get<SomeFoodDataBase>().somethingDao() }
+        single { get<SomeFoodDataBase>().orderDao() }
+        single { get<SomeFoodDataBase>().favoriteDao() }
 
         // Сингл репозитория для работы с БД пользователей
         single { RepositoryUser(get(), get()) }

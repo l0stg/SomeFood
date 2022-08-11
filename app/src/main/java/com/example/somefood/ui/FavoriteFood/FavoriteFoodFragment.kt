@@ -8,13 +8,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentFavoriteFoodBinding
 import com.example.somefood.ui.AddToBuy
-import com.example.somefood.ui.GRIDCONST
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
 import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
@@ -30,6 +28,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
     companion object {
         fun newInstance() = FavoriteFoodFragment()
+        private const val GRIDCONST = 2
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

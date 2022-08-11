@@ -46,10 +46,8 @@ class ProductListClientViewModel(
     }
 
     fun addNewFavoriteItem(idFood: Int){
-        var job: Job? = null
-        job = viewModelScope.launch {
+        viewModelScope.launch {
             repositoryFavorite.addToFavorite(FavoriteModel(userId = repositoryUser.getUserID(), foodId = idFood))
-            job?.cancel()
         }
     }
 

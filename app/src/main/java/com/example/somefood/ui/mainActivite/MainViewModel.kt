@@ -19,34 +19,28 @@ class MainViewModel(
     private val repositoryUser: RepositoryUser,
 ): ViewModel() {
 
-    fun create(){
+    fun create() {
         viewModelScope.launch {
             myRepository.addAllElement()
         }
         checkSessionByUser()
     }
 
-    private fun checkSessionByUser(){
-        if (repositoryUser.getUserID() == -1){
+    private fun checkSessionByUser() {
+        if (repositoryUser.getUserID() == -1) {
             router.newRootScreen(Screens().routeToHelloScreenFragment())
-        }else{
+        } else {
             routerByType(repositoryUser.getUserID())
         }
     }
 
     private fun routerByType(userID: Int) {
-        var job: Job? = null
-        job = viewModelScope.launch {
+        viewModelScope.launch {
             val user = repositoryUser.observeUserById(userID)
-            when(user.types){
+            when (user.types) {
                 UserTypes.USER -> router.newRootScreen(Screens().routeToProductList())
-                UserTypes.CREATOR ->  router.newRootScreen(Screens().routeToCreatorList())
-            }
-            job?.cancel()
+                UserTypes.CREATOR -> router.newRootScreen(Screens().routeToCreatorList())
             }
         }
     }
-
-    // Начальные данные для БД
-
-
+}

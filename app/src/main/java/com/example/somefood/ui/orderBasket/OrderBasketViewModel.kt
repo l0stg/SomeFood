@@ -19,7 +19,7 @@ class OrderBasketViewModel(
 
     fun checkOrderByClient(){
         viewModelScope.launch {
-            orderRepository.checkOrderByClient(repositoryUser.getUserID()).collect{
+            orderRepository.observeOrderTableUser(repositoryUser.getUserID()).collect{
                 _list.value = it
             }
         }

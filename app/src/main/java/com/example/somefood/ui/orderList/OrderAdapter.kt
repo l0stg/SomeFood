@@ -1,6 +1,6 @@
 package com.example.somefood.ui.orderList
 
-import android.graphics.Color.GREEN
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +30,16 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
             itemPrice.text = item.integerBuy.toString()
             itemTime.text = item.timeToComplit
             when (item.orderON){
-                true -> root.setBackgroundColor(GREEN)
-                false -> {}
+                true -> {
+                    root.setBackgroundColor(Color.GREEN)
+                    buttonInOrder.setBackgroundColor(Color.GRAY)
+                    }
+                false -> {
+                    root.setBackgroundColor(Color.WHITE)
+                    buttonInOrder.setBackgroundColor(Color.GREEN)
+                }
             }
-            binding.ButtonInOrder.setOnClickListener {
+            buttonInOrder.setOnClickListener {
                 itemInOrderClick(item)
             }
         }

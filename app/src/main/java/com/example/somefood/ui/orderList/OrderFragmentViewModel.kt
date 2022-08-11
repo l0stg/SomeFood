@@ -26,7 +26,7 @@ class OrderFragmentViewModel(
 
     private fun updateInUI(){
         viewModelScope.launch {
-            orderRepository.updateInUI().collect{
+            orderRepository.observeOrderTable().collect{
                 _list.value = it
             }
         }

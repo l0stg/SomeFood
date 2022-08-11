@@ -11,8 +11,8 @@ class OrderRepository(
 
     suspend fun addNewBuy(newItem: Order) = myDao.addOrder(newItem)
 
-    fun updateInUI(): Flow<List<Order>> = myDao.getOrderTable()
+    fun observeOrderTable(): Flow<List<Order>> = myDao.observeOrderTable()
 
-    fun checkOrderByClient(userID: Int): Flow<List<Order>> = myDao.getOrderByClient(userID)
+    fun observeOrderTableUser(userID: Int): Flow<List<Order>> = myDao.observeOrderTableUser(userID)
 
 }

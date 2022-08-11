@@ -15,9 +15,9 @@ interface OrderDao {
     suspend fun addOrder(newModel: Order)
 
     @Query("SELECT * FROM order_table ")
-    fun getOrderTable(): Flow<List<Order>>
+    fun observeOrderTable(): Flow<List<Order>>
 
     @Query("SELECT * FROM order_table WHERE userID LIKE :userID")
-    fun getOrderByClient(userID: Int): Flow<List<Order>>
+    fun observeOrderTableUser(userID: Int): Flow<List<Order>>
 
 }

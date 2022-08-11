@@ -12,7 +12,7 @@ import com.example.somefood.databinding.FoodItemBinding
 import com.example.somefood.ui.*
 
 
-class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
+class ProductListClientAdapter(private val clickListener: (click: Click) -> Unit): RecyclerView.Adapter<ProductListClientAdapter.MyViewHolder>() {
 
     private val myList: MutableList<ProductListModel> = mutableListOf()
 
@@ -26,7 +26,7 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
         private val binding = FoodItemBinding.bind(view)
         fun bind(
             item: ProductListModel,
-            ClickListener: (click: Click) -> Unit
+            clickListener: (click: Click) -> Unit
         ) = with(binding) {
             Glide
                 .with(ivFood.context)
@@ -36,15 +36,15 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
                 .into(ivFood)
 
                 buttonFavorite.setOnClickListener {
-                    ClickListener(ToFavorite(item))
+                    clickListener(ToFavorite(item))
                 }
 
                 root.setOnClickListener {
-                    ClickListener(OpenDetail(item))
+                    clickListener(OpenDetail(item))
                 }
 
                 buttonAddToBuy.setOnClickListener {
-                    ClickListener(AddToBuy(item))
+                    clickListener(AddToBuy(item))
                 }
         }
     }
@@ -55,7 +55,7 @@ class ProductListClientAdapter(private val ClickListener: (click: Click) -> Unit
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position], ClickListener)
+        holder.bind(myList[position], clickListener)
     }
 
     override fun getItemCount(): Int =

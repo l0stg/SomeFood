@@ -17,7 +17,6 @@ import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
 import com.example.somefood.ui.AddToBuy
-import com.example.somefood.ui.GRIDCONST
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
 import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
@@ -33,6 +32,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
     companion object{
         fun newInstance() = ProductListClientFragment()
+        private const val GRIDCONST = 2
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

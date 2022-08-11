@@ -22,8 +22,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     companion object{
-        const val TAG = "AddToOrder"
-        const val KEY = "NAME"
+        private const val TAG = "AddToOrder"
+        private const val KEY = "NAME"
         fun newInstance(name: String, fragmentManager: FragmentManager) = CustomBottomSheetDialogFragment().apply {
             show(fragmentManager, TAG)
             arguments = Bundle().apply {
@@ -53,11 +53,15 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding.buttonAdToBuy.setOnClickListener {
             if(binding.buyPrice.text.isNotEmpty()) {
                 val time = "${binding.timePicker.hour}:${binding.timePicker.minute}"
-                viewModel.addNewOrder(time ,binding.buyPrice.text.toString(), itemName)
+                viewModel.addNewOrder(time, binding.buyPrice.text.toString(), itemName)
                 dialog?.dismiss()
-            }else Toast.makeText(activity, getString(R.string.checkToOrder), Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(
+                    activity,
+                    getString(R.string.checkToOrder),
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
-
-
 }

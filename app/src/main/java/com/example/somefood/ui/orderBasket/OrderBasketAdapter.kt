@@ -28,7 +28,7 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
                 itemTime.text = item.timeToComplit
                 when (item.orderON) {
                     true -> root.setBackgroundColor(Color.GREEN)
-                    else -> {}
+                    false -> root.setBackgroundColor(Color.WHITE)
                 }
             }
         }

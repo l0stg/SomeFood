@@ -28,7 +28,11 @@ class FavoriteViewModel(
     // Обновляет данные если список изменился
     fun updateUI() {
         viewModelScope.launch {
-            _list.value = repositoryFood.updateFavoriteTable(repositoryFavorite.updateFavoriteTable(repositoryUser.getUserID()))
+            _list.value = repositoryFood.updateFavoriteTable(
+                repositoryFavorite
+                    .updateFavoriteTable(
+                        repositoryUser.getUserID())
+            )
         }
     }
 
