@@ -43,8 +43,8 @@ class OrderBasketAdapter: RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>(
         holder.bind(myList[position])
     }
 
-    override fun getItemCount(): Int {
-        return myList.size
-    }
+    override fun getItemCount(): Int =
+        myList.size
+
 
 }

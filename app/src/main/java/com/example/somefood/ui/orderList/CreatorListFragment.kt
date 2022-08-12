@@ -29,6 +29,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
+
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.order_menu, menu)
@@ -49,6 +50,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
         activity?.title = getString(R.string.order)
 
         updateDataInUI()
+
         myAdapter = OrderAdapter{
             viewModel.addInJob(it)
         }

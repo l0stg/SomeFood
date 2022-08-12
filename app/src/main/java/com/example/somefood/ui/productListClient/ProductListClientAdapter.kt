@@ -35,17 +35,17 @@ class ProductListClientAdapter(private val clickListener: (click: Click) -> Unit
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivFood)
 
-                buttonFavorite.setOnClickListener {
-                    clickListener(ToFavorite(item))
-                }
+            buttonFavorite.setOnClickListener {
+                clickListener(ToFavorite(item))
+            }
 
-                root.setOnClickListener {
-                    clickListener(OpenDetail(item))
-                }
+            root.setOnClickListener {
+                clickListener(OpenDetail(item))
+            }
 
-                buttonAddToBuy.setOnClickListener {
-                    clickListener(AddToBuy(item))
-                }
+            buttonAddToBuy.setOnClickListener {
+                clickListener(AddToBuy(item))
+            }
         }
     }
 

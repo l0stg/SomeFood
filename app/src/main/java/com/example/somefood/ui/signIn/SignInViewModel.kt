@@ -25,13 +25,13 @@ class SignInViewModel(
     val userID: Flow<Int> = _userID
 
     // Навигация
-    private fun routeToProductList() {
+    private fun routeToProductList() =
         router.newRootScreen(Screens().routeToProductList())
-    }
 
-    private fun routeToCreatorList() {
+
+    private fun routeToCreatorList() =
         router.newRootScreen(Screens().routeToCreatorList())
-    }
+
 
     // Проверка на соответствие в базе данных
     fun checkUser(email: String, password: String) {

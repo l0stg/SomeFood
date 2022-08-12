@@ -29,17 +29,17 @@ class ProductListClientViewModel(
     val list: Flow<List<FoodDataBaseModel>> = _list
 
     //Навигация
-    fun routeToFavorite(){
+    fun routeToFavorite() =
         router.navigateTo(Screens().routeToFavorite())
-    }
 
-    fun routeToDetail(model: ProductListModel){
+
+    fun routeToDetail(model: ProductListModel) =
         router.navigateTo(Screens().routeToDetail(model))
-    }
 
-    fun routeToBascet() {
+
+    fun routeToBascet() =
         router.navigateTo(Screens().routeToBascet())
-    }
+
     fun routeToHelloScreen() {
         repositoryUser.saveUserID(-1)
         router.newRootScreen(Screens().routeToHelloScreenFragment())
@@ -50,7 +50,6 @@ class ProductListClientViewModel(
             repositoryFavorite.addToFavorite(FavoriteModel(userId = repositoryUser.getUserID(), foodId = idFood))
         }
     }
-
     // Слежка за данными в таблице
     private fun updateFoodTable(){
         viewModelScope.launch {

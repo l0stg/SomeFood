@@ -49,6 +49,4 @@ class OrderFragmentViewModel(
         userRepository.saveUserID(-1)
         router.newRootScreen(Screens().routeToHelloScreenFragment())
     }
-
-
 }

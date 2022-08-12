@@ -50,7 +50,6 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.myFavorite -> {
-
                         viewModel.routeToFavorite()
                         true
                     }

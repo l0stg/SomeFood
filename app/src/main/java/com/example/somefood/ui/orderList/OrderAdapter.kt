@@ -55,7 +55,7 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
         holder.bind(myList[position], itemInOrderClick)
     }
 
-    override fun getItemCount(): Int {
-        return myList.size
-    }
+    override fun getItemCount(): Int =
+         myList.size
+
 }
