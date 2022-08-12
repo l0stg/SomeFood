@@ -1,10 +1,6 @@
 package com.example.somefood.di
 
 import androidx.room.Room
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.sqlite.db.SupportSQLiteOpenHelper
-import com.example.somefood.R
-import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.room.provider.*
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryFavorite

@@ -2,15 +2,11 @@ package com.example.somefood.ui.mainActivite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.R
-import com.example.somefood.data.model.FoodDataBaseModel
-import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryFood
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(

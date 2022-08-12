@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.somefood.R
-import com.example.somefood.data.model.FoodDataBaseModel
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FoodItemBinding
 import com.example.somefood.ui.AddToBuy

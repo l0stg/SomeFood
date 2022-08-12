@@ -20,7 +20,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
         private const val MODEL = "MODEL"
         fun newInstance(model: ProductListModel) = DetailFoodFragment().apply {
             arguments = Bundle().apply {
-                putSerializable(MODEL, model)
+                putParcelable(MODEL, model)
             }
         }
     }
@@ -28,7 +28,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       val model = arguments?.getSerializable(MODEL) as ProductListModel
+       val model = arguments?.getParcelable<ProductListModel>(MODEL) as ProductListModel
 
         with(binding){
             tvNameDetail.text = model.name

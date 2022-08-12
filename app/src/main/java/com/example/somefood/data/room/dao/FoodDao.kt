@@ -1,7 +1,7 @@
 package com.example.somefood.data.room.dao
 
 import androidx.room.*
-import com.example.somefood.data.model.FoodDataBaseModel
+import com.example.somefood.data.model.FoodDataModel
 import kotlinx.coroutines.flow.Flow
 
 
@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 interface FoodDao {
 
     @Query("SELECT * FROM food_table")
-    fun updateFoodTable(): Flow<List<FoodDataBaseModel>>
+    fun updateFoodTable(): Flow<List<FoodDataModel>>
 
     @Query("SELECT * FROM food_table WHERE id IN (:listID) ")
-    suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataBaseModel>
+    suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAllElement(newFavorite: List<FoodDataBaseModel>)
+    suspend fun addAllElement(newFavorite: List<FoodDataModel>)
 
 
 }

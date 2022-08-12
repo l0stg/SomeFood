@@ -9,7 +9,7 @@ data class UserModel(
     @ColumnInfo(name = "email") val eMail: String,
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "types") val types: UserTypes
-): Serializable
+)
 
 enum class UserTypes {
     CREATOR,

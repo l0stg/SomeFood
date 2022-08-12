@@ -2,9 +2,8 @@ package com.example.somefood.data.room.provider
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.somefood.R
 import com.example.somefood.data.model.FavoriteModel
-import com.example.somefood.data.model.FoodDataBaseModel
+import com.example.somefood.data.model.FoodDataModel
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.dao.FavoriteDao
@@ -14,7 +13,7 @@ import com.example.somefood.data.room.dao.UserDao
 
 @Database(
     entities = [
-        FoodDataBaseModel::class,
+        FoodDataModel::class,
         FavoriteModel::class,
         Order::class,
         UserModel::class],
