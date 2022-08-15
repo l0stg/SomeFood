@@ -39,7 +39,7 @@
     <string name="time">time:</string>
     <string name="priceWithDot">price:</string>
     <string name="status">status</string>
-    <string name="Complit">Готово</string>
+    <string name="complit">Готово</string>
     <string name="pickUpOrder">Заказ получен</string>
     <string name="goodEat">Приятного аппетита</string>
 

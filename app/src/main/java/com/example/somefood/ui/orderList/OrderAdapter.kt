@@ -10,6 +10,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.OrderItem2Binding
+import com.example.somefood.ui.productListClient.ProductListClientAdapter
 
 class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
@@ -26,6 +27,9 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = OrderItem2Binding.bind(view)
+        private val inJob = view.context.getString(R.string.inJob)
+        private val complit = view.context.getString(R.string.complit)
+        private val pickUp = view.context.getString(R.string.pickUpOrder)
         fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit)
                 = with(binding) {
             nameFoodOrder.text = item.orderName
@@ -33,17 +37,17 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
             timeFoodOrder.text = item.timeToComplit
             when (item.status){
                 Status.WAIT -> {
-                    buttonStatus.text = "Взять в работу"
+                    buttonStatus.text = inJob
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.GRAY)
                     }
                 Status.JOB -> {
-                    buttonStatus.text = "Готово"
+                    buttonStatus.text = complit
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.YELLOW)
                 }
                 Status.COMPLIT -> {
-                    buttonStatus.text = "Ожидание подтверждения"
+                    buttonStatus.text = pickUp
                     buttonStatus.setBackgroundColor(Color.GRAY)
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.GREEN)
