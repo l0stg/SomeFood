@@ -1,4 +1,4 @@
-package com.example.somefood.ui.orderList
+package com.example.somefood.ui.orderByCreator
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,17 +6,14 @@ import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryUser
-import com.example.somefood.ui.Screens
-import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class OrderFragmentViewModel(
+class OrderByCreatorViewModel(
     private val orderRepository: OrderRepository,
-    private val router: Router,
     private val userRepository: RepositoryUser
-): ViewModel() {
+    ): ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
     val list: Flow<List<Order>> = _list
@@ -25,23 +22,15 @@ class OrderFragmentViewModel(
         updateInUI()
     }
 
-    private fun updateInUI(){
-        viewModelScope.launch {
-            orderRepository.observeOrderTable().collect{
-                _list.value = it
-            }
-        }
-    }
-
     fun addInJob(item: Order) {
         var newStatus: Status? = null
-       /* when (item.status) {
+        when (item.status) {
             Status.WAIT -> {
                 newStatus = Status.JOB
             }
             Status.JOB -> newStatus = Status.COMPLIT
             Status.COMPLIT -> newStatus = Status.COMPLIT
-        }*/
+        }
         viewModelScope.launch {
             orderRepository.addNewBuy(Order(
                 id = item.id,
@@ -49,19 +38,22 @@ class OrderFragmentViewModel(
                 userID = item.userID,
                 timeToComplit = item.timeToComplit,
                 integerBuy = item.integerBuy,
-                status = Status.JOB,
+                status = newStatus,
                 image = item.image,
-                userIdGoToJob = userRepository.getUserID()
+                userIdGoToJob = item.userIdGoToJob
             )
             )
         }
     }
 
-    fun routeToHelloScreen() {
-        userRepository.saveUserID(-1)
-        router.newRootScreen(Screens().routeToHelloScreenFragment())
+    private fun updateInUI(){
+        viewModelScope.launch {
+            orderRepository.observeOrderTableByCreator(
+                userRepository.getUserID()
+            ).collect{
+                _list.value = it
+            }
+        }
     }
-    fun routeToOrderByCreator() {
-        router.navigateTo(Screens().routeToOrderByCreator())
-    }
+
 }

@@ -42,6 +42,10 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
                         Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
                         true
                     }
+                    R.id.goToOrder -> {
+                        viewModel.routeToOrderByCreator()
+                        true
+                    }
                     else -> false
                 }
             }

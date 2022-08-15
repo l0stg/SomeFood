@@ -9,6 +9,7 @@ import com.example.somefood.ui.detailFood.DetailFoodFragment
 import com.example.somefood.ui.helloScreen.HelloScreenFragment
 import com.example.somefood.ui.orderBasket.OrderBasketAdapter
 import com.example.somefood.ui.orderBasket.OrderBasketFragment
+import com.example.somefood.ui.orderByCreator.OrderByCreatorFragment
 import com.example.somefood.ui.productListClient.ProductListClientFragment
 import com.example.somefood.ui.signIn.SignInFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
@@ -23,4 +24,5 @@ class Screens {
     fun routeToFavorite() = FragmentScreen{ FavoriteFoodFragment.newInstance() }
     fun routeToCreatorList() = FragmentScreen { CreatorListFragment()}
     fun routeToBascet() = FragmentScreen { OrderBasketFragment.newInstance()}
+    fun routeToOrderByCreator() = FragmentScreen { OrderByCreatorFragment()}
 }

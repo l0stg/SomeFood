@@ -12,8 +12,9 @@ data class Order(
     @ColumnInfo(name = "userID") val userID: Int,
     @ColumnInfo(name = "timeToComplit") val timeToComplit: String,
     @ColumnInfo(name = "integerBuy") val integerBuy: Int,
-    @ColumnInfo(name = "orderON") val status: Status,
+    @ColumnInfo(name = "status") val status: Status,
     @ColumnInfo(name = "image") val image: Int,
+    @ColumnInfo(name = "userIdGoToJob") val userIdGoToJob: Int = -1,
 
 )
 enum class Status(val status: String) {
