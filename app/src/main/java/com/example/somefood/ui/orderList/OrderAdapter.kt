@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.somefood.R
 import com.example.somefood.data.model.Order
-import com.example.somefood.databinding.OrderItemBinding
+import com.example.somefood.data.model.Status
+import com.example.somefood.databinding.OrderItem2Binding
 
 class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
@@ -23,31 +25,46 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
 
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val binding = OrderItemBinding.bind(view)
+        private val binding = OrderItem2Binding.bind(view)
         fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit)
                 = with(binding) {
-            itemName.text = item.orderName
-            itemPrice.text = item.integerBuy.toString()
-            itemTime.text = item.timeToComplit
-            when (item.orderON){
-                true -> {
-                    root.setBackgroundColor(Color.GREEN)
-                    buttonInOrder.setBackgroundColor(Color.GRAY)
+            nameFoodOrder.text = item.orderName
+            priceFoodOrder.text = item.integerBuy.toString()
+            timeFoodOrder.text = item.timeToComplit
+            when (item.status){
+                Status.WAIT -> {
+                    buttonStatus.text = "Взять в работу"
+                    statusFoodOrder.text = item.status.status
+                    statusFoodOrder.setTextColor(Color.GRAY)
                     }
-                false -> {
-                    root.setBackgroundColor(Color.WHITE)
-                    buttonInOrder.setBackgroundColor(Color.GREEN)
+                Status.JOB -> {
+                    buttonStatus.text = "Готово"
+                    statusFoodOrder.text = item.status.status
+                    statusFoodOrder.setTextColor(Color.YELLOW)
+                }
+                Status.COMPLIT -> {
+                    buttonStatus.text = "Ожидание подтверждения"
+                    buttonStatus.setBackgroundColor(Color.GRAY)
+                    statusFoodOrder.text = item.status.status
+                    statusFoodOrder.setTextColor(Color.GREEN)
                 }
             }
-            buttonInOrder.setOnClickListener {
+            buttonStatus.setOnClickListener {
                 itemInOrderClick(item)
             }
+
+            Glide
+                .with(imageFoodorder.context)
+                .load(item.image)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .into(imageFoodorder)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.order_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.order_item_2, parent, false)
         return MyViewHolder(itemView)
     }
 

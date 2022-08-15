@@ -8,7 +8,7 @@
     <string name="Favorite">Избранное</string>
     <string name="detail_fragment_info">Окно для детального просмотра блюда</string>
     <string name="foor_iv">нажмите для отображения детальной информации</string>
-    <string name="nameFood">Name</string>
+    <string name="nameFood">Блюдо </string>
     <string name="descriptionFood">Description</string>
     <string name="auth">Авторизация</string>
     <string name="registr">Регистрация</string>
@@ -17,7 +17,7 @@
     <string name="doubleRegistr">Пользователь уже зарегистрирован</string>
     <string name="unCorrectPassword">Неверный логин/пароль</string>
     <string name="signOut">Выход из акканута</string>
-    <string name="addToFavorite">добавить в избранное</string>
+    <string name="addToFavorite">добавленно в избранное</string>
     <string name="checkToOrder">Уточните заказ</string>
     <string name="createOrder">Сделать заказ</string>
     <string name="timeOrder">Желаемое время выполнения заказа</string>
@@ -26,7 +26,7 @@
     <string name="food">food</string>
     <string name="email">E-mail</string>
     <string name="iCreator">Я исполнитель</string>
-    <string name="foodName">Наименование блюда</string>
+    <string name="foodName">Name</string>
     <string name="timeToComplit">Время выполнения</string>
     <string name="priceInt">Стоимость</string>
     <string name="inJob">Взять в работу</string>
@@ -34,6 +34,14 @@
     <string name="goToFavorite">Перейти в избранное</string>
     <string name="goToBascet">Перейти в корзину</string>
     <string name="goToSignOut">Выйти из аккаунта</string>
+    <string name="price">price</string>
+    <string name="name">name:</string>
+    <string name="time">time:</string>
+    <string name="priceWithDot">price:</string>
+    <string name="status">status</string>
+    <string name="Complit">Готово</string>
+    <string name="pickUpOrder">Заказ получен</string>
+    <string name="goodEat">Приятного аппетита</string>
 
 
 </resources>

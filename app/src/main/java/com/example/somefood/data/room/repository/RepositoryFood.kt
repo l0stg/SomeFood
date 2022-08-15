@@ -17,15 +17,23 @@ class RepositoryFood(
 
     fun updateTable(): Flow<List<FoodDataModel>> = foodDao.updateFoodTable()
 
+    private val recept = "Сварить бульон из говядины на косточке.\n" +
+            "Свеклу очистить, нарезать соломкой, посолить и сбрызнуть лимонным соком или лимонной кислотой, положить в кастрюлю. Затем добавить измельченный репчатый лук, растертый со свиным салом, томатную пасту, сахар и тушить массу до полу готовности.\n" +
+            "Очистить корень петрушки и морковь, нарезать их соломкой и пассировать на сливочном масле.\n" +
+            "Очистить картофель, нарезать дольками, положить в процеженный мясной бульон и довести до кипения. Добавить нашинкованную капусту и варить в течение 15 минут.\n" +
+            "После этого положить в кастрюлю тушеную свеклу, пассированную петрушку и морковь, нарезанные свежие помидоры, перец, лавровый лист, 1 чайную ложку пассированной муки и варить борщ еще 10 минут.\n" +
+            "Заправить нарезанной зеленью и толченым чесноком. Подавать с кусочками мяса, сметаной и зеленью."
+
     private val PREPOPULATE_DATA = listOf(
-        FoodDataModel(id = 1, name = "БОРЩ", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 2, name = "КАРТОШКА", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 3, name = "ПЛОВ", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 4, name = "ОКРОШКА", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 5, name = "МЯСО", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 6, name = "КУРИЦА", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 7, name = "ЖАРЕННЫЕ ГВОЗДИ", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням"),
-        FoodDataModel(id = 8, name = "ЖАРЕННЫЙ ПЕТУХ", image = R.drawable.img, description = "Вкусный наваристый борщец, ням ням ням")
+        FoodDataModel(id = 1, name = "БОРЩ", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 2, name = "КАРТОШКА", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 3, name = "ПЛОВ", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 4, name = "ОКРОШКА", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 5, name = "МЯСО", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 6, name = "КУРИЦА", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 7, name = "ЖАРЕННЫЕ ГВОЗДИ", image = R.drawable.img, recept = recept),
+        FoodDataModel(id = 8, name = "ЖАРЕННЫЙ ПЕТУХ", image = R.drawable.img, recept = recept)
     )
+
 
 }

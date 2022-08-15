@@ -5,12 +5,13 @@
       <map>
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/drawable/ic_add.xml" value="0.2265" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/drawable/ic_basket.xml" value="0.2265" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/drawable/rounded_corner.xml" value="0.2275" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/drawable/splash_screen.xml" value="0.2265" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/food_item.xml" value="0.536" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_bottom_sheet_dialog.xml" value="0.4" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_creator_list.xml" value="0.259375" />
-        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_detail_food.xml" value="0.259375" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_detail_food.xml" value="0.4" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_favorite_food.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_hello_screen.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_order_basket.xml" value="0.259375" />
@@ -18,7 +19,8 @@
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_product_list_client.xml" value="0.264" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_registration.xml" value="0.4" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
-        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/order_item.xml" value="0.536" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/order_item.xml" value="0.4" />
+        <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/order_item_2.xml" value="0.6" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/layout/order_item_by_client.xml" value="0.4" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/menu/main_menu.xml" value="0.259375" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/menu/order_menu.xml" value="0.259375" />

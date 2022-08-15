@@ -1,8 +1,10 @@
 package com.example.somefood.ui.bottomSheetFragment
 
+import android.media.Image
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.Order
+import com.example.somefood.data.model.Status
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryUser
 import kotlinx.coroutines.launch
@@ -12,13 +14,14 @@ class DialogViewModel(
     private val repositoryUser: RepositoryUser,
 ): ViewModel() {
 
-    fun addNewOrder(time: String, price: String, itemName: String) {
+    fun addNewOrder(time: String, price: String, itemName: String, itemImage: Int) {
         val newItem = Order(
             orderName = itemName,
             userID = repositoryUser.getUserID(),
             timeToComplit = time,
             integerBuy = price.toInt(),
-            orderON = false
+            status = Status.WAIT,
+            image = itemImage,
         )
         viewModelScope.launch {
             repositoryOrder.addNewBuy(newItem)

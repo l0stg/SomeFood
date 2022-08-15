@@ -15,4 +15,6 @@ class OrderRepository(
 
     fun observeOrderTableUser(userID: Int): Flow<List<Order>> = myDao.observeOrderTableUser(userID)
 
+    suspend fun deleteOrder(order: Order) = myDao.deleteOrder(order)
+
 }

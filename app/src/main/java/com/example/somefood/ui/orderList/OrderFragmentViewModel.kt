@@ -3,6 +3,7 @@ package com.example.somefood.ui.orderList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.Order
+import com.example.somefood.data.model.Status
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
@@ -33,6 +34,12 @@ class OrderFragmentViewModel(
     }
 
     fun addInJob(item: Order) {
+        var newStatus: Status? = null
+        when (item.status) {
+            Status.WAIT -> newStatus = Status.JOB
+            Status.JOB -> newStatus = Status.COMPLIT
+            Status.COMPLIT -> newStatus = Status.COMPLIT
+        }
         viewModelScope.launch {
             orderRepository.addNewBuy(Order(
                 id = item.id,
@@ -40,7 +47,9 @@ class OrderFragmentViewModel(
                 userID = item.userID,
                 timeToComplit = item.timeToComplit,
                 integerBuy = item.integerBuy,
-                orderON = true)
+                status = newStatus,
+                image = item.image
+            )
             )
         }
     }

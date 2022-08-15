@@ -24,10 +24,12 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     companion object{
         private const val TAG = "AddToOrder"
         private const val KEY = "NAME"
-        fun newInstance(name: String, fragmentManager: FragmentManager) = CustomBottomSheetDialogFragment().apply {
+        private const val IMAGE = "IMAGE"
+        fun newInstance(name: String, image: Int,  fragmentManager: FragmentManager) = CustomBottomSheetDialogFragment().apply {
             show(fragmentManager, TAG)
             arguments = Bundle().apply {
                 putString(KEY, name)
+                putInt(IMAGE, image)
             }
         }
     }
@@ -47,13 +49,14 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val itemName = arguments?.getString(KEY) ?: ""
+        val itemImage = arguments?.getInt(IMAGE) ?: 0
 
         binding.timePicker.setIs24HourView(true)
 
         binding.buttonAdToBuy.setOnClickListener {
             if(binding.buyPrice.text.isNotEmpty()) {
                 val time = "${binding.timePicker.hour}:${binding.timePicker.minute}"
-                viewModel.addNewOrder(time, binding.buyPrice.text.toString(), itemName)
+                viewModel.addNewOrder(time, binding.buyPrice.text.toString(), itemName, itemImage)
                 dialog?.dismiss()
             }else {
                 Toast.makeText(

@@ -76,7 +76,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     ).show()
                 }
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.newInstance(it.item.name, childFragmentManager)
+                    CustomBottomSheetDialogFragment.newInstance(it.item.name, it.item.image, childFragmentManager)
                 }
             }
         }
@@ -94,7 +94,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                         ProductListModel(
                             id = it.id,
                             name = it.name,
-                            description = it.description,
+                            description = it.recept,
                             image = it.image)
                     })
                 }

@@ -5,11 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
+import com.example.somefood.ui.Crypto.encode
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.util.*
 
 class RegistrationViewModel(
     private val router: Router,
@@ -28,7 +32,9 @@ class RegistrationViewModel(
     fun addUser(email: String, password: String, types: UserTypes) {
         viewModelScope.launch {
             if (myRepository.checkRegistration(email).isEmpty()) {
-                val newUserId = myRepository.addUser(UserModel(eMail = email, password = password, types = types))
+                val newUserId = myRepository.addUser(UserModel(eMail = email,
+                    password = encode(password),
+                    types = types))
                 myRepository.saveUserID(newUserId.toInt())
                 when (types) {
                     UserTypes.USER -> routeToProductList()

@@ -17,6 +17,7 @@ import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.databinding.FragmentOrderBasketBinding
 import com.example.somefood.ui.productListClient.ProductListClientFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,7 +37,14 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
         activity?.title = getString(R.string.myBascet)
         viewModel.checkOrderByClient()
 
-        myAdapter = OrderBasketAdapter()
+        myAdapter = OrderBasketAdapter{
+            viewModel.pickUpOrder(it)
+            Snackbar.make(
+                binding.root,
+                getString(R.string.goodEat),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
 
         with(binding){
             orderBasketRecyclerView.layoutManager = LinearLayoutManager(activity)

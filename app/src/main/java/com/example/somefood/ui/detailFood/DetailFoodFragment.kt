@@ -10,11 +10,15 @@ import com.bumptech.glide.Glide
 import com.example.somefood.R
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentDetailFoodBinding
+import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
 import com.example.somefood.ui.productListClient.ProductListClientFragment
+import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
 
     private val binding: FragmentDetailFoodBinding by viewBinding()
+    private val viewModel: DetailFoodViewModel by viewModel()
 
     companion object{
         private const val MODEL = "MODEL"
@@ -29,7 +33,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
         super.onViewCreated(view, savedInstanceState)
 
        val model = arguments?.getParcelable<ProductListModel>(MODEL) as ProductListModel
-
+        activity?.title = model.name
         with(binding){
             tvNameDetail.text = model.name
             tvDescriptionDetail.text = model.description
@@ -39,6 +43,17 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivDetail)
+            addToBuy.setOnClickListener {
+                CustomBottomSheetDialogFragment.newInstance(model.name, model.image, childFragmentManager)
+            }
+            addToFavorite.setOnClickListener {
+                viewModel.addNewFavoriteItem(model.id)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.addToFavorite),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
