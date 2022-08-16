@@ -11,5 +11,5 @@
         android:id="@+id/goToOrder"
         android:icon="@drawable/ic_money_white"
         app:showAsAction="always"
-        android:title="@string/goToSignOut" />
+        android:title="@string/goToMyOrder" />
 </menu>

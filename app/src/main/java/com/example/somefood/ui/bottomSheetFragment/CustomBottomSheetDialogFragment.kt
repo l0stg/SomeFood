@@ -43,7 +43,7 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val itemName = arguments?.getString(KEY) ?: ""
-        val itemImage = arguments?.getInt(IMAGE) ?: 0
+        val itemImage = arguments?.getInt(IMAGE) as Int
 
         binding.timePicker.setIs24HourView(true)
 
