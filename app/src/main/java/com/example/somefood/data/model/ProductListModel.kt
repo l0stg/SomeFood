@@ -8,14 +8,14 @@ data class ProductListModel(
     val name: String,
     val image: Int,
     val description: String,
-): Parcelable {
+) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readInt(),
-        parcel.readString().toString()) {
-    }
+        parcel.readString().toString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

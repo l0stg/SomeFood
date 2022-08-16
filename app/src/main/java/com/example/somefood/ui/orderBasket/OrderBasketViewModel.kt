@@ -12,14 +12,14 @@ import kotlinx.coroutines.launch
 class OrderBasketViewModel(
     private val orderRepository: OrderRepository,
     private val repositoryUser: RepositoryUser,
-): ViewModel() {
+) : ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
     val list: Flow<List<Order>> = _list
 
-    fun checkOrderByClient(){
+    fun checkOrderByClient() {
         viewModelScope.launch {
-            orderRepository.observeOrderTableUser(repositoryUser.getUserID()).collect{
+            orderRepository.observeOrderTableUser(repositoryUser.getUserID()).collect {
                 _list.value = it
             }
         }

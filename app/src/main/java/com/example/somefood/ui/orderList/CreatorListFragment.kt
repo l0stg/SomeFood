@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentCreatorListBinding
-import com.example.somefood.ui.FavoriteFood.FavoriteAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +38,11 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
                 return when (menuItem.itemId) {
                     R.id.logOut -> {
                         viewModel.routeToHelloScreen()
-                        Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.signOut),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                         true
                     }
                     R.id.goToOrder -> {
@@ -55,7 +58,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
 
         updateDataInUI()
 
-        myAdapter = OrderAdapter{
+        myAdapter = OrderAdapter {
             viewModel.addInJob(it)
         }
         with(binding) {

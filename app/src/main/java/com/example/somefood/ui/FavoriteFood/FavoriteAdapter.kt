@@ -15,23 +15,26 @@ import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
 
 
-class FavoriteAdapter(private val clickListener: (click: Click) -> Unit): RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
+class FavoriteAdapter(private val clickListener: (click: Click) -> Unit) :
+    RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
     private val myList: MutableList<ProductListModel> = mutableListOf()
 
     // Сначала очищаем а потом сетим новый список
-    fun set(newList: List<ProductListModel>){
+    fun set(newList: List<ProductListModel>) {
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
+
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
-        fun bind(item: ProductListModel,
-                 clickListener: (click: Click) -> Unit)
-                = with(binding) {
+        fun bind(
+            item: ProductListModel,
+            clickListener: (click: Click) -> Unit
+        ) = with(binding) {
             Glide
                 .with(ivFood.context)
                 .load(item.image)
@@ -45,14 +48,15 @@ class FavoriteAdapter(private val clickListener: (click: Click) -> Unit): Recycl
             root.setOnClickListener {
                 clickListener(OpenDetail(item))
             }
-            buttonAddToBuy.setOnClickListener{
+            buttonAddToBuy.setOnClickListener {
                 clickListener(AddToBuy(item))
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.food_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.food_item, parent, false)
         return MyViewHolder(itemView)
     }
 

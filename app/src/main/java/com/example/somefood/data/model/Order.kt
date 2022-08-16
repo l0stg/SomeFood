@@ -15,8 +15,8 @@ data class Order(
     @ColumnInfo(name = "status") val status: Status,
     @ColumnInfo(name = "image") val image: Int,
     @ColumnInfo(name = "userIdGoToJob") val userIdGoToJob: Int = -1,
-
 )
+
 enum class Status(val status: String) {
     WAIT("В ожидании"),
     JOB("В работе"),

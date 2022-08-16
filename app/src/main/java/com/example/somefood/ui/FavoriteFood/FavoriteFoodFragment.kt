@@ -1,8 +1,8 @@
 package com.example.somefood.ui.FavoriteFood
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -43,7 +43,11 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
                 is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.newInstance(it.item.name, it.item.image, childFragmentManager)
+                    CustomBottomSheetDialogFragment.newInstance(
+                        it.item.name,
+                        it.item.image,
+                        childFragmentManager
+                    )
                 }
             }
         }
@@ -59,10 +63,12 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it.map {
-                        ProductListModel(id = it.id,
+                        ProductListModel(
+                            id = it.id,
                             name = it.name,
                             description = it.recept,
-                            image = it.image)
+                            image = it.image
+                        )
                     })
                 }
             }

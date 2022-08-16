@@ -16,7 +16,7 @@ class OrderFragmentViewModel(
     private val orderRepository: OrderRepository,
     private val router: Router,
     private val userRepository: RepositoryUser
-): ViewModel() {
+) : ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
     val list: Flow<List<Order>> = _list
@@ -25,9 +25,9 @@ class OrderFragmentViewModel(
         updateInUI()
     }
 
-    private fun updateInUI(){
+    private fun updateInUI() {
         viewModelScope.launch {
-            orderRepository.observeOrderTable().collect{
+            orderRepository.observeOrderTable().collect {
                 _list.value = it
             }
         }
@@ -35,16 +35,17 @@ class OrderFragmentViewModel(
 
     fun addInJob(item: Order) {
         viewModelScope.launch {
-            orderRepository.addNewBuy(Order(
-                id = item.id,
-                orderName = item.orderName,
-                userID = item.userID,
-                timeToComplit = item.timeToComplit,
-                integerBuy = item.integerBuy,
-                status = Status.JOB,
-                image = item.image,
-                userIdGoToJob = userRepository.getUserID()
-            )
+            orderRepository.addNewBuy(
+                Order(
+                    id = item.id,
+                    orderName = item.orderName,
+                    userID = item.userID,
+                    timeToComplit = item.timeToComplit,
+                    integerBuy = item.integerBuy,
+                    status = Status.JOB,
+                    image = item.image,
+                    userIdGoToJob = userRepository.getUserID()
+                )
             )
         }
     }
@@ -53,6 +54,7 @@ class OrderFragmentViewModel(
         userRepository.saveUserID(-1)
         router.newRootScreen(Screens().routeToHelloScreenFragment())
     }
+
     fun routeToOrderByCreator() {
         router.navigateTo(Screens().routeToOrderByCreator())
     }

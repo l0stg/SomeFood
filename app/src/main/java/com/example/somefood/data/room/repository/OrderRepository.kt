@@ -14,7 +14,8 @@ class OrderRepository(
 
     fun observeOrderTable(): Flow<List<Order>> = myDao.observeOrderTable(Status.WAIT)
 
-    fun observeOrderTableByCreator(userId: Int): Flow<List<Order>> = myDao.observeOrderTableByCreator(userId)
+    fun observeOrderTableByCreator(userId: Int): Flow<List<Order>> =
+        myDao.observeOrderTableByCreator(userId)
 
     fun observeOrderTableUser(userID: Int): Flow<List<Order>> = myDao.observeOrderTableUser(userID)
 

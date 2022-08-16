@@ -1,10 +1,13 @@
 package com.example.somefood.ui.productListClient
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -27,7 +30,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
     private val viewModel: ProductListClientViewModel by viewModel()
     private var myAdapter: ProductListClientAdapter? = null
 
-    companion object{
+    companion object {
         fun newInstance() = ProductListClientFragment()
         private const val GRIDCONST = 2
     }
@@ -56,7 +59,11 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     }
                     R.id.logOut -> {
                         viewModel.routeToHelloScreen()
-                        Snackbar.make(binding.root, getString(R.string.signOut), Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.signOut),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                         true
                     }
                     else -> false
@@ -76,7 +83,11 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     ).show()
                 }
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.newInstance(it.item.name, it.item.image, childFragmentManager)
+                    CustomBottomSheetDialogFragment.newInstance(
+                        it.item.name,
+                        it.item.image,
+                        childFragmentManager
+                    )
                 }
             }
         }
@@ -87,15 +98,16 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         }
 
         // Установка данных в адаптер
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.list.collect{
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.list.collect {
                     myAdapter?.set(it.map {
                         ProductListModel(
                             id = it.id,
                             name = it.name,
                             description = it.recept,
-                            image = it.image)
+                            image = it.image
+                        )
                     })
                 }
             }

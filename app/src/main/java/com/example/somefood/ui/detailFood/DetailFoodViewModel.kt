@@ -10,11 +10,16 @@ import kotlinx.coroutines.launch
 class DetailFoodViewModel(
     private val repositoryFavorite: RepositoryFavorite,
     private val repositoryUser: RepositoryUser
-): ViewModel() {
+) : ViewModel() {
 
-    fun addNewFavoriteItem(idFood: Int){
+    fun addNewFavoriteItem(idFood: Int) {
         viewModelScope.launch {
-            repositoryFavorite.addToFavorite(FavoriteModel(userId = repositoryUser.getUserID(), foodId = idFood))
+            repositoryFavorite.addToFavorite(
+                FavoriteModel(
+                    userId = repositoryUser.getUserID(),
+                    foodId = idFood
+                )
+            )
         }
     }
 }

@@ -8,17 +8,13 @@ import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Crypto.encode
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.util.*
 
 class RegistrationViewModel(
     private val router: Router,
     private val myRepository: RepositoryUser
-): ViewModel() {
+) : ViewModel() {
 
     private val _statusRegistration: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val statusRegistration: MutableStateFlow<Boolean> = _statusRegistration
@@ -32,9 +28,13 @@ class RegistrationViewModel(
     fun addUser(email: String, password: String, types: UserTypes) {
         viewModelScope.launch {
             if (myRepository.checkRegistration(email).isEmpty()) {
-                val newUserId = myRepository.addUser(UserModel(eMail = email,
-                    password = encode(password),
-                    types = types))
+                val newUserId = myRepository.addUser(
+                    UserModel(
+                        eMail = email,
+                        password = encode(password),
+                        types = types
+                    )
+                )
                 myRepository.saveUserID(newUserId.toInt())
                 when (types) {
                     UserTypes.USER -> routeToProductList()

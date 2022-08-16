@@ -1,9 +1,8 @@
 package com.example.somefood.ui.Registration
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -12,7 +11,6 @@ import com.example.somefood.R
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.databinding.FragmentRegistrationBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +28,11 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.statusRegistration.collect {
                     if (it)
-                        Snackbar.make(binding.root,getString(R.string.doubleRegistr),Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            binding.root,
+                            getString(R.string.doubleRegistr),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                 }
             }
         }

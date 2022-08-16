@@ -6,13 +6,13 @@ import com.github.terrakok.cicerone.Router
 
 class HelloScreenViewModel(
     private val router: Router
-): ViewModel() {
+) : ViewModel() {
 
-    fun openSigIn(){
+    fun openSigIn() {
         router.navigateTo(Screens().openSignIn())
     }
 
-    fun openRegistration(){
+    fun openRegistration() {
         router.navigateTo(Screens().openRegistration())
     }
 }

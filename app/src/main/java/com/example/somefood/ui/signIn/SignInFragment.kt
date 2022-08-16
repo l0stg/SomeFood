@@ -1,8 +1,8 @@
 package com.example.somefood.ui.signIn
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -29,7 +29,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                         Snackbar.make(
                             binding.root,
                             getString(R.string.unCorrectPassword),
-                            Snackbar.LENGTH_SHORT).show()
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -43,6 +44,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun signInButton() {
         viewModel.checkUser(
             email = binding.editEmail.editText?.text.toString(),
-            password = binding.editPassword.editText?.text.toString())
+            password = binding.editPassword.editText?.text.toString()
+        )
     }
 }

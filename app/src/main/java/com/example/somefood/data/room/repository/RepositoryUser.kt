@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.room.dao.UserDao
 import com.example.somefood.di.PREFERENCES_FILE_KEY
-import kotlinx.coroutines.flow.Flow
 
 class RepositoryUser(
     private val myDao: UserDao,
@@ -18,7 +17,7 @@ class RepositoryUser(
         myDao.observeUserById(userID)
 
     suspend fun checkAuth(email: String, password: String): UserModel =
-         myDao.checkAuth(email = email, password = password)
+        myDao.checkAuth(email = email, password = password)
 
 
     suspend fun checkRegistration(email: String): List<UserModel> =
@@ -30,7 +29,7 @@ class RepositoryUser(
 
     fun getUserID(): Int {
         val userID: Int
-        if(mySharedPreferences.contains(PREFERENCES_FILE_KEY))
+        if (mySharedPreferences.contains(PREFERENCES_FILE_KEY))
             userID = mySharedPreferences.getInt(PREFERENCES_FILE_KEY, 0)
         else
             userID = -1

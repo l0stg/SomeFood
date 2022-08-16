@@ -9,11 +9,12 @@ import kotlinx.coroutines.flow.Flow
 class RepositoryFood(
     private val foodDao: FoodDao
 ) {
-    suspend fun addAllElement(){
+    suspend fun addAllElement() {
         foodDao.addAllElement(PREPOPULATE_DATA)
     }
 
-    suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> = foodDao.updateFavoriteTable(listID)
+    suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> =
+        foodDao.updateFavoriteTable(listID)
 
     fun updateTable(): Flow<List<FoodDataModel>> = foodDao.updateFoodTable()
 

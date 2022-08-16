@@ -13,7 +13,7 @@ class MainViewModel(
     private val router: Router,
     private val myRepository: RepositoryFood,
     private val repositoryUser: RepositoryUser,
-): ViewModel() {
+) : ViewModel() {
 
     fun create() {
         viewModelScope.launch {

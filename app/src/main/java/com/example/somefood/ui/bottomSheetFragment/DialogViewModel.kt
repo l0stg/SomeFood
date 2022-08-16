@@ -1,6 +1,5 @@
 package com.example.somefood.ui.bottomSheetFragment
 
-import android.media.Image
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.Order
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 class DialogViewModel(
     private val repositoryOrder: OrderRepository,
     private val repositoryUser: RepositoryUser,
-): ViewModel() {
+) : ViewModel() {
 
     fun addNewOrder(time: String, price: String, itemName: String, itemImage: Int) {
         val newItem = Order(

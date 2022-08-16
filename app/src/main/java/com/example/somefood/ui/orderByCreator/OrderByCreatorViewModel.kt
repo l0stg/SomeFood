@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class OrderByCreatorViewModel(
     private val orderRepository: OrderRepository,
     private val userRepository: RepositoryUser
-    ): ViewModel() {
+) : ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
     val list: Flow<List<Order>> = _list
@@ -30,25 +30,26 @@ class OrderByCreatorViewModel(
             Status.COMPLIT -> newStatus = Status.COMPLIT
         }
         viewModelScope.launch {
-            orderRepository.addNewBuy(Order(
-                id = item.id,
-                orderName = item.orderName,
-                userID = item.userID,
-                timeToComplit = item.timeToComplit,
-                integerBuy = item.integerBuy,
-                status = newStatus,
-                image = item.image,
-                userIdGoToJob = item.userIdGoToJob
-            )
+            orderRepository.addNewBuy(
+                Order(
+                    id = item.id,
+                    orderName = item.orderName,
+                    userID = item.userID,
+                    timeToComplit = item.timeToComplit,
+                    integerBuy = item.integerBuy,
+                    status = newStatus,
+                    image = item.image,
+                    userIdGoToJob = item.userIdGoToJob
+                )
             )
         }
     }
 
-    private fun updateInUI(){
+    private fun updateInUI() {
         viewModelScope.launch {
             orderRepository.observeOrderTableByCreator(
                 userRepository.getUserID()
-            ).collect{
+            ).collect {
                 _list.value = it
             }
         }

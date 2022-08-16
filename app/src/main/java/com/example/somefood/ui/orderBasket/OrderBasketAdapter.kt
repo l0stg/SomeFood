@@ -11,11 +11,12 @@ import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.OrderItemByClientBinding
 
-class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order)-> Unit): RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>() {
+class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
+    RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>() {
 
     private val myList: MutableList<Order> = mutableListOf()
 
-    fun set(newList: List<Order>){
+    fun set(newList: List<Order>) {
         myList.clear()
         myList.addAll(newList)
         notifyDataSetChanged()
@@ -23,12 +24,12 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order)-> Unit): R
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemByClientBinding.bind(itemView)
-        fun bind(item: Order, buttonPickUpOrder: (item: Order) -> Unit){
+        fun bind(item: Order, buttonPickUpOrder: (item: Order) -> Unit) {
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
                 timeFoodOrder.text = item.timeToComplit
-                when (item.status){
+                when (item.status) {
                     Status.WAIT -> {
                         buttonPickUp.visibility = View.INVISIBLE
                         buttonPickUp.isEnabled = false
@@ -55,7 +56,7 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order)-> Unit): R
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(imageFoodorder)
 
-                buttonPickUp.setOnClickListener{
+                buttonPickUp.setOnClickListener {
                     buttonPickUpOrder(item)
                 }
             }
@@ -63,7 +64,8 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order)-> Unit): R
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.order_item_by_client, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.order_item_by_client, parent, false)
         return MyViewHolder(itemView)
     }
 

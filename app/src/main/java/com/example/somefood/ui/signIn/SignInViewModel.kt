@@ -10,12 +10,11 @@ import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import java.util.*
 
 class SignInViewModel(
     private val router: Router,
     private val myRepository: RepositoryUser,
-): ViewModel() {
+) : ViewModel() {
 
     private val _status = MutableStateFlow(false)
     val status = _status

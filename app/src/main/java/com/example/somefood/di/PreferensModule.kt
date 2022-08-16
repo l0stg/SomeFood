@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import org.koin.android.ext.koin.androidApplication
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val preferenceModule = module {

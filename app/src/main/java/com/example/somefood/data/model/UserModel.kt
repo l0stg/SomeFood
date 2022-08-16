@@ -1,7 +1,8 @@
 package com.example.somefood.data.model
 
-import androidx.room.*
-import java.io.Serializable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_table")
 data class UserModel(

@@ -14,11 +14,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(
-    private val repositoryFood:  RepositoryFood,
+    private val repositoryFood: RepositoryFood,
     private val repositoryFavorite: RepositoryFavorite,
     private val router: Router,
     private val repositoryUser: RepositoryUser
-): ViewModel() {
+) : ViewModel() {
 
     private val _list = MutableStateFlow<List<FoodDataModel>>(emptyList())
     val list: Flow<List<FoodDataModel>> = _list
@@ -29,7 +29,8 @@ class FavoriteViewModel(
             _list.value = repositoryFood.updateFavoriteTable(
                 repositoryFavorite
                     .updateFavoriteTable(
-                        repositoryUser.getUserID())
+                        repositoryUser.getUserID()
+                    )
             )
         }
     }

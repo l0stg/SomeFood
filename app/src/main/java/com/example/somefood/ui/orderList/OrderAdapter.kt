@@ -10,37 +10,36 @@ import com.example.somefood.R
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.OrderItem2Binding
-import com.example.somefood.ui.productListClient.ProductListClientAdapter
 
-class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
+class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
+    RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
     private val myList: MutableList<Order> = mutableListOf()
 
     // Сначала очищаем а потом сетим новый список
-    fun set(newList: List<Order>){
+    fun set(newList: List<Order>) {
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
 
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = OrderItem2Binding.bind(view)
         private val inJob = view.context.getString(R.string.inJob)
         private val complit = view.context.getString(R.string.complit)
         private val pickUp = view.context.getString(R.string.pickUpOrder)
-        fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit)
-                = with(binding) {
+        fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
             timeFoodOrder.text = item.timeToComplit
-            when (item.status){
+            when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = inJob
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.GRAY)
-                    }
+                }
                 Status.JOB -> {
                     buttonStatus.text = complit
                     statusFoodOrder.text = item.status.status
@@ -68,7 +67,8 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.order_item_2, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.order_item, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -77,6 +77,6 @@ class OrderAdapter(private val itemInOrderClick: (item: Order)-> Unit): Recycler
     }
 
     override fun getItemCount(): Int =
-         myList.size
+        myList.size
 
 }
