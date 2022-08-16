@@ -25,9 +25,7 @@ class OrderByCreatorViewModel(
     fun addInJob(item: Order) {
         var newStatus: Status? = null
         when (item.status) {
-            Status.WAIT -> {
-                newStatus = Status.JOB
-            }
+            Status.WAIT -> newStatus = Status.JOB
             Status.JOB -> newStatus = Status.COMPLIT
             Status.COMPLIT -> newStatus = Status.COMPLIT
         }

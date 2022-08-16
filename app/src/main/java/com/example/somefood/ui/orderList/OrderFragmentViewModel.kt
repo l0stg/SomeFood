@@ -34,14 +34,6 @@ class OrderFragmentViewModel(
     }
 
     fun addInJob(item: Order) {
-        var newStatus: Status? = null
-       /* when (item.status) {
-            Status.WAIT -> {
-                newStatus = Status.JOB
-            }
-            Status.JOB -> newStatus = Status.COMPLIT
-            Status.COMPLIT -> newStatus = Status.COMPLIT
-        }*/
         viewModelScope.launch {
             orderRepository.addNewBuy(Order(
                 id = item.id,
