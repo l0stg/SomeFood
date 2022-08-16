@@ -23,6 +23,7 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = getString(R.string.myOrderByCreator)
 
         updateDataInUI()
 

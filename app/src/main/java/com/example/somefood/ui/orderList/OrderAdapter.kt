@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.somefood.R
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
-import com.example.somefood.databinding.OrderItem2Binding
+import com.example.somefood.databinding.OrderItemBinding
 
 class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
     RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
@@ -25,33 +25,32 @@ class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
     }
 
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = OrderItem2Binding.bind(view)
-        private val inJob = view.context.getString(R.string.inJob)
-        private val complit = view.context.getString(R.string.complit)
-        private val pickUp = view.context.getString(R.string.pickUpOrder)
+    class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = OrderItemBinding.bind(view)
         fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
             timeFoodOrder.text = item.timeToComplit
+            
             when (item.status) {
                 Status.WAIT -> {
-                    buttonStatus.text = inJob
+                    buttonStatus.text = view.context.getString(R.string.inJob)
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.GRAY)
                 }
                 Status.JOB -> {
-                    buttonStatus.text = complit
+                    buttonStatus.text = view.context.getString(R.string.complit)
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.YELLOW)
                 }
                 Status.COMPLIT -> {
-                    buttonStatus.text = pickUp
+                    buttonStatus.text = view.context.getString(R.string.pickUpOrder)
                     buttonStatus.setBackgroundColor(Color.GRAY)
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.GREEN)
                 }
             }
+
             buttonStatus.setOnClickListener {
                 itemInOrderClick(item)
             }

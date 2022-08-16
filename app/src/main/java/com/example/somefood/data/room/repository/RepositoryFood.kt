@@ -25,15 +25,16 @@ class RepositoryFood(
             "После этого положить в кастрюлю тушеную свеклу, пассированную петрушку и морковь, нарезанные свежие помидоры, перец, лавровый лист, 1 чайную ложку пассированной муки и варить борщ еще 10 минут.\n" +
             "Заправить нарезанной зеленью и толченым чесноком. Подавать с кусочками мяса, сметаной и зеленью."
 
+    private val foodImg = "https://images.spoonacular.com/file/wximages/316774-312x231.png"
     private val PREPOPULATE_DATA = listOf(
-        FoodDataModel(id = 1, name = "БОРЩ", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 2, name = "КАРТОШКА", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 3, name = "ПЛОВ", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 4, name = "ОКРОШКА", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 5, name = "МЯСО", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 6, name = "КУРИЦА", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 7, name = "ЖАРЕННЫЕ ГВОЗДИ", image = R.drawable.img, recept = recept),
-        FoodDataModel(id = 8, name = "ЖАРЕННЫЙ ПЕТУХ", image = R.drawable.img, recept = recept)
+        FoodDataModel(id = 1, name = "БОРЩ", image = foodImg, recept = recept),
+        FoodDataModel(id = 2, name = "КАРТОШКА", image = foodImg, recept = recept),
+        FoodDataModel(id = 3, name = "ПЛОВ", image = foodImg, recept = recept),
+        FoodDataModel(id = 4, name = "ОКРОШКА", image = foodImg, recept = recept),
+        FoodDataModel(id = 5, name = "МЯСО", image = foodImg, recept = recept),
+        FoodDataModel(id = 6, name = "КУРИЦА", image = foodImg, recept = recept),
+        FoodDataModel(id = 7, name = "ЖАРЕННЫЕ ГВОЗДИ", image = foodImg, recept = recept),
+        FoodDataModel(id = 8, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept)
     )
 
 

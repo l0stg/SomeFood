@@ -43,6 +43,7 @@
     <string name="pickUpOrder">Заказ получен</string>
     <string name="goodEat">Приятного аппетита</string>
     <string name="goToMyOrder">Перейти в мои заказы</string>
+    <string name="myOrderByCreator">Мои заказы</string>
 
 
 </resources>

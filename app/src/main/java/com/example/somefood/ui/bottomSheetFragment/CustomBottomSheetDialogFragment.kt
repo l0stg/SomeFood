@@ -18,12 +18,12 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val TAG = "AddToOrder"
         private const val KEY = "NAME"
         private const val IMAGE = "IMAGE"
-        fun newInstance(name: String, image: Int, fragmentManager: FragmentManager) =
+        fun newInstance(name: String, image: String, fragmentManager: FragmentManager) =
             CustomBottomSheetDialogFragment().apply {
                 show(fragmentManager, TAG)
                 arguments = Bundle().apply {
                     putString(KEY, name)
-                    putInt(IMAGE, image)
+                    putString(IMAGE, image)
                 }
             }
     }
@@ -43,7 +43,7 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val itemName = arguments?.getString(KEY) ?: ""
-        val itemImage = arguments?.getInt(IMAGE) as Int
+        val itemImage = arguments?.getString(IMAGE) ?: ""
 
         binding.timePicker.setIs24HourView(true)
 

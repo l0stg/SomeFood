@@ -13,7 +13,7 @@ class DialogViewModel(
     private val repositoryUser: RepositoryUser,
 ) : ViewModel() {
 
-    fun addNewOrder(time: String, price: String, itemName: String, itemImage: Int) {
+    fun addNewOrder(time: String, price: String, itemName: String, itemImage: String) {
         val newItem = Order(
             orderName = itemName,
             userID = repositoryUser.getUserID(),

@@ -6,21 +6,21 @@ import android.os.Parcelable
 data class ProductListModel(
     val id: Int,
     val name: String,
-    val image: Int,
+    val image: String,
     val description: String,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
-        parcel.readInt(),
+        parcel.readString().toString(),
         parcel.readString().toString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
-        parcel.writeInt(image)
+        parcel.writeString(image)
         parcel.writeString(description)
     }
 

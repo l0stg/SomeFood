@@ -13,5 +13,5 @@ data class FoodDataModel(
     @ColumnInfo(name = "description")
     val recept: String,
     @ColumnInfo(name = "image")
-    val image: Int,
+    val image: String,
 )
