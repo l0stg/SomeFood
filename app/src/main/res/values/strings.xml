@@ -34,9 +34,9 @@
     <string name="goToFavorite">Перейти в избранное</string>
     <string name="goToBascet">Перейти в корзину</string>
     <string name="goToSignOut">Выйти из аккаунта</string>
-    <string name="price">price</string>
-    <string name="name">name:</string>
-    <string name="time">time:</string>
+    <string name="price">Цена</string>
+    <string name="name">Название</string>
+    <string name="time">Время</string>
     <string name="priceWithDot">price:</string>
     <string name="status">status</string>
     <string name="complit">Готово</string>

@@ -31,7 +31,7 @@ class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
             timeFoodOrder.text = item.timeToComplit
-            
+
             when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = view.context.getString(R.string.inJob)
