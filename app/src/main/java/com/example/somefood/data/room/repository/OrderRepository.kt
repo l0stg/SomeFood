@@ -12,7 +12,7 @@ class OrderRepository(
 
     suspend fun addNewBuy(newItem: Order) = myDao.addOrder(newItem)
 
-    fun observeOrderTable(): Flow<List<Order>> = myDao.observeOrderTable(Status.WAIT)
+    fun observeOrderTable(status: Status): Flow<List<Order>> = myDao.observeOrderTable(status)
 
     fun observeOrderTableByCreator(userId: Int): Flow<List<Order>> =
         myDao.observeOrderTableByCreator(userId)

@@ -28,10 +28,8 @@ class ProductListClientViewModel(
     private val _list = MutableStateFlow<List<FoodDataModel>>(emptyList())
     val list: Flow<List<FoodDataModel>> = _list
 
-    //Навигация
     fun routeToFavorite() =
         router.navigateTo(Screens().routeToFavorite())
-
 
     fun routeToDetail(model: ProductListModel) =
         router.navigateTo(Screens().routeToDetail(model))

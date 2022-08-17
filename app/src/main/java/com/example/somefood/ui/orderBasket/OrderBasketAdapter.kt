@@ -30,25 +30,24 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
                 priceFoodOrder.text = item.integerBuy.toString()
                 timeFoodOrder.text = item.timeToComplit
                 when (item.status) {
-                    Status.WAIT -> {
-                        buttonPickUp.visibility = View.INVISIBLE
-                        buttonPickUp.isEnabled = false
-                        statusFoodOrder.text = item.status.status
-                        statusFoodOrder.setTextColor(Color.GRAY)
-                    }
-                    Status.JOB -> {
-                        buttonPickUp.visibility = View.INVISIBLE
-                        buttonPickUp.isEnabled = false
-                        statusFoodOrder.text = item.status.status
-                        statusFoodOrder.setTextColor(Color.YELLOW)
-                    }
                     Status.COMPLIT -> {
                         buttonPickUp.visibility = View.VISIBLE
                         buttonPickUp.isEnabled = true
                         statusFoodOrder.text = item.status.status
                         statusFoodOrder.setTextColor(Color.GREEN)
                     }
+                    else -> {
+                        buttonPickUp.visibility = View.INVISIBLE
+                        buttonPickUp.isEnabled = false
+                        statusFoodOrder.text = item.status.status
+                        when(item.status) {
+                            Status.WAIT -> statusFoodOrder.setTextColor(Color.GRAY)
+                            Status.JOB -> statusFoodOrder.setTextColor(Color.YELLOW)
+                            else -> {}
+                        }
+                    }
                 }
+
                 Glide
                     .with(imageFoodorder.context)
                     .load(item.image)

@@ -23,11 +23,10 @@ class OrderByCreatorViewModel(
     }
 
     fun addInJob(item: Order) {
-        var newStatus: Status? = null
-        when (item.status) {
-            Status.WAIT -> newStatus = Status.JOB
-            Status.JOB -> newStatus = Status.COMPLIT
-            Status.COMPLIT -> newStatus = Status.COMPLIT
+        val newStatus = when (item.status) {
+            Status.WAIT -> Status.JOB
+            Status.JOB -> Status.COMPLIT
+            Status.COMPLIT -> Status.COMPLIT
         }
         viewModelScope.launch {
             orderRepository.addNewBuy(
