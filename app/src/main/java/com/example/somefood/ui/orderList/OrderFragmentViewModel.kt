@@ -58,4 +58,8 @@ class OrderFragmentViewModel(
     fun routeToOrderByCreator() {
         router.navigateTo(Screens().routeToOrderByCreator())
     }
+
+    fun routeToProfile() {
+        router.navigateTo( Screens().routeToProfile() )
+    }
 }

@@ -6,20 +6,25 @@
         android:id="@+id/myFavorite"
         android:icon="@drawable/ic_favorite"
         app:showAsAction="always"
-        android:title="@string/goToFavorite"
-        tools:ignore="HardcodedText" />
+        android:title="@string/goToFavorite" />
 
     <item
         android:id="@+id/myBasket"
         android:icon="@drawable/ic_basket"
         app:showAsAction="always"
-        android:title="@string/goToBascet"
-        tools:ignore="HardcodedText" />
+        android:title="@string/goToBascet" />
+
+    <item
+        android:id="@+id/goToProfile"
+        android:icon="@drawable/ic_baseline_person_24"
+        app:showAsAction="always"
+        android:title="@string/goToProfile" />
+
     <item
         android:id="@+id/logOut"
         android:icon="@drawable/ic_login"
         app:showAsAction="always"
-        android:title="@string/goToSignOut"
-        tools:ignore="HardcodedText" />
+        android:title="@string/goToSignOut" />
+
 
 </menu>

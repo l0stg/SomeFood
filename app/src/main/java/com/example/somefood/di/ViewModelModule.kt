@@ -10,6 +10,7 @@ import com.example.somefood.ui.orderBasket.OrderBasketViewModel
 import com.example.somefood.ui.orderByCreator.OrderByCreatorViewModel
 import com.example.somefood.ui.orderList.OrderFragmentViewModel
 import com.example.somefood.ui.productListClient.ProductListClientViewModel
+import com.example.somefood.ui.profile.ProfileViewModel
 import com.example.somefood.ui.signIn.SignInViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,4 +27,5 @@ val viewModelModule = module {
     viewModel { OrderBasketViewModel(get(), get()) }
     viewModel { DetailFoodViewModel(get(), get()) }
     viewModel { OrderByCreatorViewModel(get(), get()) }
+    viewModel { ProfileViewModel (get(), get()) }
 }

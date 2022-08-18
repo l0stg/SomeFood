@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.somefood.data.model.UserModel
+import com.example.somefood.data.model.UserTypes
 
 @Dao
 interface UserDao {
@@ -23,5 +24,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE id LIKE :userID")
     suspend fun observeUserById(userID: Int): UserModel
+
+    @Query("UPDATE user_table SET types = :newTypes WHERE id = :userId")
+    suspend fun updateUserTypes(userId: Int, newTypes: UserTypes)
 
 }

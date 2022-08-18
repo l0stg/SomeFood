@@ -43,6 +43,10 @@ class ProductListClientViewModel(
         router.newRootScreen(Screens().routeToHelloScreenFragment())
     }
 
+    fun routeToProfile() {
+        router.navigateTo( Screens().routeToProfile() )
+    }
+
     fun addNewFavoriteItem(idFood: Int) {
         viewModelScope.launch {
             repositoryFavorite.addToFavorite(
