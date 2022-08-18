@@ -7,9 +7,23 @@
     tools:context=".ui.profile.ProfileFragment"
     android:orientation="vertical">
 
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/addNewProfileImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_baseline_add_a_photo_24"
+        android:translationZ="1dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -21,6 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <androidx.cardview.widget.CardView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -29,10 +44,14 @@
                 app:cardCornerRadius="50dp">
 
                 <ImageView
+                    android:id="@+id/profilePhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_launcher_foreground" />
+
+
+
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -49,8 +68,11 @@
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchTypesInProfile"
                 android:layout_width="wrap_content"
+                android:minHeight="48dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/white"
                 android:text="@string/iCreator"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -167,7 +189,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/buttonEditDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -186,12 +208,14 @@
                     android:layout_gravity="center"
                     android:background="#66808080" />
 
-                <TextView
+                <EditText
                     android:id="@+id/userDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:enabled="false"
                     android:text="@string/descriptionFood"
+                    android:background="@null"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -226,7 +250,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:gravity="center_horizontal"
                         android:text="Оценка как исполнителя" />
 
@@ -238,6 +262,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/starForCreator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -270,7 +295,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:text="Оценка\nобщая"
                         android:textAlignment="center"
                         android:textSize="20sp" />
@@ -283,6 +308,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/starMidlle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -315,7 +341,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:gravity="center_horizontal"
                         android:text="Оценка как заказчика" />
 
@@ -327,6 +353,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/starForClient"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"

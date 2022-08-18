@@ -28,4 +28,7 @@ interface UserDao {
     @Query("UPDATE user_table SET types = :newTypes WHERE id = :userId")
     suspend fun updateUserTypes(userId: Int, newTypes: UserTypes)
 
+    @Query("UPDATE user_table SET description = :newDescription WHERE id = :userId")
+    suspend fun updateUserDescription(userId: Int, newDescription: String)
+
 }

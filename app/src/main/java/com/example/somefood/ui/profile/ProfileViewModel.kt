@@ -36,7 +36,7 @@ class ProfileViewModel(
         }
     }
 
-    fun switchTypes(types: UserTypes) {
+    private fun switchTypes(types: UserTypes) {
         viewModelScope.launch {
             userRepository.updateUserType(userRepository.getUserID(), types)
         }
@@ -45,11 +45,26 @@ class ProfileViewModel(
 
     fun routeToMainScreen() {
         viewModelScope.launch {
-            val checkUser = userRepository.observeUserById(userRepository.getUserID())
-            when (checkUser.types) {
+            when (
+                userRepository
+                .observeUserById(
+                    userRepository.getUserID())
+                .types) {
                 UserTypes.USER -> routeToProductList()
                 UserTypes.CREATOR -> routeToCreatorList()
             }
+        }
+    }
+
+    fun updateDescription(newDescription: String) {
+        viewModelScope.launch {
+            userRepository.updateUserDescription(userRepository.getUserID(), newDescription)
+        }
+    }
+    fun goSwitchType(isChecked: Boolean) {
+        when (isChecked) {
+            true -> switchTypes(UserTypes.CREATOR)
+            false -> switchTypes(UserTypes.USER)
         }
     }
 }

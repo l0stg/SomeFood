@@ -1,5 +1,6 @@
 package com.example.somefood.data.room.repository
 
+import android.content.ClipDescription
 import android.content.SharedPreferences
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserTypes
@@ -19,12 +20,14 @@ class RepositoryUser(
     suspend fun checkAuth(email: String, password: String): UserModel =
         myDao.checkAuth(email = email, password = password)
 
-
     suspend fun checkRegistration(email: String): List<UserModel> =
         myDao.checkRegistration(email)
 
     suspend fun updateUserType(userId: Int, types: UserTypes) =
         myDao.updateUserTypes(userId, types)
+
+    suspend fun updateUserDescription(userId: Int, newDescription: String) =
+        myDao.updateUserDescription(userId, newDescription)
 
 
     fun saveUserID(id: Int) {

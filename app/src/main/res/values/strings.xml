@@ -45,6 +45,7 @@
     <string name="goToMyOrder">Перейти в мои заказы</string>
     <string name="myOrderByCreator">Мои заказы</string>
     <string name="goToProfile">Перейти в профиль</string>
+    <string name="profile">Профиль</string>
 
 
 </resources>

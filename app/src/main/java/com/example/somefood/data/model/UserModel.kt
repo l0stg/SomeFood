@@ -11,7 +11,9 @@ data class UserModel(
     @ColumnInfo(name = "email") val eMail: String,
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "types") val types: UserTypes,
-    @ColumnInfo(name = "Description") val description: String = ""
+    @ColumnInfo(name = "description") val description: String = "",
+    @ColumnInfo(name = "starForCreator") val starForCreator: Double = 0.0,
+    @ColumnInfo(name = "starForClient") val starForClient: Double = 0.0,
 )
 
 enum class UserTypes {
