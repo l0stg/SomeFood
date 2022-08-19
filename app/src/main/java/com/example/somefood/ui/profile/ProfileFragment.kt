@@ -54,7 +54,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                 }
             }
             addNewProfileImageButton.setOnClickListener {
-                pickImageFromGallery()
             }
             switchTypesInProfile.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.goSwitchType(isChecked)
@@ -89,23 +88,4 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         }
     }
 
-    private fun pickImageFromGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
-    }
-
-    companion object {
-        private val IMAGE_PICK_CODE = 1000;
-        }
-
-    //handle requested permission result
-
-    //handle result of picked image
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            binding.profilePhoto.setImageURI(data?.data)
-
-        }
-    }
 }
