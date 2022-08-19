@@ -57,6 +57,10 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                         viewModel.routeToBascet()
                         true
                     }
+                    R.id.goToProfile -> {
+                        viewModel.routeToProfile()
+                        true
+                    }
                     R.id.logOut -> {
                         viewModel.routeToHelloScreen()
                         Snackbar.make(

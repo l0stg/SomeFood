@@ -49,6 +49,10 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
                         viewModel.routeToOrderByCreator()
                         true
                     }
+                    R.id.goToProfile -> {
+                        viewModel.routeToProfile()
+                        true
+                    }
                     else -> false
                 }
             }

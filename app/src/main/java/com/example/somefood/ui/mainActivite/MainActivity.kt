@@ -1,10 +1,15 @@
 package com.example.somefood.ui.mainActivite
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.somefood.R
+import com.example.somefood.ui.BackButtonListener
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
@@ -36,5 +41,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onResume() {
         super.onResume()
         navigatorHolder.setNavigator(navigator)
+    }
+
+
+    override fun onBackPressed() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.containerScreen)
+        if (fragment != null && fragment is BackButtonListener
+            && (fragment as BackButtonListener).onBackPressed()) {
+            return
+        } else {
+            super.onBackPressed()
+        }
     }
 }
