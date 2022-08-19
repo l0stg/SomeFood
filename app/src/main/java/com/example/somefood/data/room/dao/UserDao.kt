@@ -1,5 +1,6 @@
 package com.example.somefood.data.room.dao
 
+import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -36,7 +37,5 @@ interface UserDao {
 
     @Query("UPDATE user_table SET orderByCreator = orderByCreator + 1 WHERE id =:userId")
     suspend fun updateOrderByCreator(userId: Int)
-
-
 
 }

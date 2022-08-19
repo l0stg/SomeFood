@@ -1,5 +1,6 @@
 package com.example.somefood.data.model
 
+import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 

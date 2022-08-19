@@ -1,5 +1,6 @@
 package com.example.somefood.ui.profile
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.*
@@ -17,7 +18,7 @@ class ProfileViewModel(
     private val userRatingRepositiry: UserRatingRepositiry,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow<UserProfileModel>(UserProfileModel("", UserTypes.USER, "", 0, 0, 0.0, 0.0))
+    private val _userProfile = MutableStateFlow(UserProfileModel("", UserTypes.USER, "", 0, 0, 0.0, 0.0))
     val userProfile: Flow<UserProfileModel> = _userProfile
 
     private fun routeToProductList() =
@@ -33,14 +34,15 @@ class ProfileViewModel(
     private fun getUserProfile(){
         viewModelScope.launch {
             val userInfo = userRepository.observeUserById(userRepository.getUserID())
+            val orderRating = userRatingRepositiry.observeUserRating(userRepository.getUserID())
             _userProfile.value = UserProfileModel(
                 eMail = userInfo.eMail,
                 types = userInfo.types,
                 description = userInfo.description,
                 orderByClient = userInfo.orderByClient,
                 orderByCreator = userInfo.orderByCreator,
-                ratingByClient = userRatingRepositiry.observeUserRating(userRepository.getUserID()).starForClient,
-                ratingByCreator = userRatingRepositiry.observeUserRating(userRepository.getUserID()).starForCreator,
+                ratingByClient = orderRating.starForClient,
+                ratingByCreator = orderRating.starForCreator,
             )
         }
     }

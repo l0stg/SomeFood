@@ -11,7 +11,7 @@ import com.example.somefood.data.room.dao.*
         FavoriteModel::class,
         Order::class,
         UserModel::class,
-        UserRating::class,
+        OrderRating::class,
                ],
     version = 1
 )
@@ -21,5 +21,5 @@ abstract class SomeFoodDataBase : RoomDatabase() {
     abstract fun foodDao(): FoodDao
     abstract fun orderDao(): OrderDao
     abstract fun somethingDao(): UserDao
-    abstract fun UserRatingDao(): UserRatingDao
+    abstract fun UserRatingDao(): OrderRatingDao
 }

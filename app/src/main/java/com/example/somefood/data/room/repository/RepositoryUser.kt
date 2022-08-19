@@ -2,6 +2,7 @@ package com.example.somefood.data.room.repository
 
 import android.content.ClipDescription
 import android.content.SharedPreferences
+import android.net.Uri
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.dao.UserDao

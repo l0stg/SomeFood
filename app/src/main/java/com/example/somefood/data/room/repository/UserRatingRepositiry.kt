@@ -1,16 +1,15 @@
 package com.example.somefood.data.room.repository
 
 import com.example.somefood.data.model.AverageRating
-import com.example.somefood.data.model.UserRating
-import com.example.somefood.data.room.dao.UserRatingDao
-import kotlinx.coroutines.flow.Flow
+import com.example.somefood.data.model.OrderRating
+import com.example.somefood.data.room.dao.OrderRatingDao
 
 class UserRatingRepositiry(
-    private val myDao: UserRatingDao
+    private val myDao: OrderRatingDao
 ) {
 
-    suspend fun updateUserRating(newUserRating: UserRating) =
-        myDao.updateUserRating(newUserRating)
+    suspend fun updateUserRating(newOrderRating: OrderRating) =
+        myDao.updateUserRating(newOrderRating)
 
     suspend fun observeUserRating(userID: Int): AverageRating =
         myDao.observeUserRating(userID)

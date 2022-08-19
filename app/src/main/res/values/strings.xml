@@ -46,6 +46,16 @@
     <string name="myOrderByCreator">Мои заказы</string>
     <string name="goToProfile">Перейти в профиль</string>
     <string name="profile">Профиль</string>
+    <string name="complitInProfile">Выполнено</string>
+    <string name="editPhotoInProfile">Изменить фото профиля</string>
+    <string name="photoInProfile">Фото профиля</string>
+    <string name="orderIntInProfile">Заказано</string>
+    <string name="editDecriptionInProfile">Изменить описание профиля</string>
+    <string name="starForCreatorInProfile">Оценка как исполнителя</string>
+    <string name="defStarInProfile">5</string>
+    <string name="midleStarInProfile">Оценка\nобщая</string>
+    <string name="starForClientInProfile">Оценка как заказчика</string>
+    <string name="descriptionInProfile">Описание</string>
 
 
 </resources>

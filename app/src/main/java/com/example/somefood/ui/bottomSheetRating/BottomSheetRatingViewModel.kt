@@ -2,7 +2,7 @@ package com.example.somefood.ui.bottomSheetRating
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.UserRating
+import com.example.somefood.data.model.OrderRating
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.data.room.repository.UserRatingRepositiry
@@ -13,9 +13,9 @@ class BottomSheetRatingViewModel(
     private val userRepository: RepositoryUser
 ) : ViewModel() {
 
-    private fun updateUserRating(newUserRating: UserRating){
+    private fun updateUserRating(newOrderRating: OrderRating){
         viewModelScope.launch {
-            userRatingRepositiry.updateUserRating(newUserRating)
+            userRatingRepositiry.updateUserRating(newOrderRating)
         }
     }
 
@@ -23,8 +23,8 @@ class BottomSheetRatingViewModel(
         viewModelScope.launch {
             val user = userRepository.observeUserById(userIdToRating!!)
             when (user.types){
-                UserTypes.USER -> updateUserRating(UserRating(userId = userIdToRating, starForCreator = rating, starForClient = null))
-                UserTypes.CREATOR -> updateUserRating(UserRating(userId = userIdToRating, starForCreator = null, starForClient = rating))
+                UserTypes.USER -> updateUserRating(OrderRating(userId = userIdToRating, starForCreator = rating, starForClient = null))
+                UserTypes.CREATOR -> updateUserRating(OrderRating(userId = userIdToRating, starForCreator = null, starForClient = rating))
             }
         }
     }

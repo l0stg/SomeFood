@@ -1,11 +1,20 @@
 package com.example.somefood.ui.profile
 
+import android.Manifest
+import android.R.attr
+import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +24,6 @@ import com.example.somefood.R
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.databinding.FragmentProfileBinding
 import com.example.somefood.ui.BackButtonListener
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +33,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
 
     private val viewModel: ProfileViewModel by viewModel()
     private val binding: FragmentProfileBinding by viewBinding()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +52,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                         userDescription.requestFocus()
                     }
                 }
+            }
+            addNewProfileImageButton.setOnClickListener {
+                pickImageFromGallery()
             }
             switchTypesInProfile.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.goSwitchType(isChecked)
@@ -74,6 +86,26 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                     }
                 }
             }
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    companion object {
+        private val IMAGE_PICK_CODE = 1000;
+        }
+
+    //handle requested permission result
+
+    //handle result of picked image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            binding.profilePhoto.setImageURI(data?.data)
+
         }
     }
 }
