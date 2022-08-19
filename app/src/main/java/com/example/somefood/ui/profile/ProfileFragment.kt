@@ -1,20 +1,7 @@
 package com.example.somefood.ui.profile
 
-import android.Manifest
-import android.R.attr
-import android.app.Activity
-import android.app.Activity.RESULT_OK
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,10 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener {
 
-
     private val viewModel: ProfileViewModel by viewModel()
     private val binding: FragmentProfileBinding by viewBinding()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,13 +56,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.collect {
                     with(binding){
-                        emailUser.text = it.eMail
+                        emailUser.text = it.email
                         userDescription.setText(it.description)
                         orderIntComplit.text = it.orderByClient.toString()
                         orderIntPick.text = it.orderByCreator.toString()
-                        starForCreator.text = String.format("%.1f", it.ratingByCreator)
-                        starForClient.text = String.format("%.1f",it.ratingByClient)
-                        starMidlle.text = String.format("%.1f", listOf(it.ratingByClient, it.ratingByCreator).average())
+                        starForCreator.text = String.format("%.1f", it.starForCreator)
+                        starForClient.text = String.format("%.1f",it.starForClient)
+                        starMidlle.text = String.format("%.1f", listOf(it.starForClient, it.starForCreator).average())
                         when(it.types){
                             UserTypes.USER -> switchTypesInProfile.isChecked = false
                             UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
@@ -87,5 +72,4 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
             }
         }
     }
-
 }

@@ -1,15 +1,13 @@
 package com.example.somefood.data.model
 
-import android.net.Uri
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
+
 
 data class UserProfileModel(
-    val eMail: String,
+    val email: String,
     val types: UserTypes,
     val description: String = "",
     val orderByCreator: Int,
     val orderByClient: Int,
-    val ratingByCreator: Double,
-    val ratingByClient: Double,
+    val starForCreator: Double = 0.0,
+    val starForClient: Double = 0.0,
 )

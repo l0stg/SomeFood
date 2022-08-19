@@ -1,6 +1,5 @@
 package com.example.somefood.ui.profile
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.*
@@ -31,22 +30,13 @@ class ProfileViewModel(
         getUserProfile()
     }
 
-    private fun getUserProfile(){
+    fun getUserProfile(){
         viewModelScope.launch {
-            val userInfo = userRepository.observeUserById(userRepository.getUserID())
-            val orderRating = userRatingRepositiry.observeUserRating(userRepository.getUserID())
-            _userProfile.value = UserProfileModel(
-                eMail = userInfo.eMail,
-                types = userInfo.types,
-                description = userInfo.description,
-                orderByClient = userInfo.orderByClient,
-                orderByCreator = userInfo.orderByCreator,
-                ratingByClient = orderRating.starForClient,
-                ratingByCreator = orderRating.starForCreator,
-            )
+            userRepository.observeUserByIdFlow(userRepository.getUserID()).collect{
+                _userProfile.value = it
+            }
         }
     }
-
     private fun switchTypes(types: UserTypes) {
         viewModelScope.launch {
             userRepository.updateUserType(userRepository.getUserID(), types)

@@ -4,9 +4,11 @@ import android.content.ClipDescription
 import android.content.SharedPreferences
 import android.net.Uri
 import com.example.somefood.data.model.UserModel
+import com.example.somefood.data.model.UserProfileModel
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.dao.UserDao
 import com.example.somefood.di.PREFERENCES_FILE_KEY
+import kotlinx.coroutines.flow.Flow
 
 class RepositoryUser(
     private val myDao: UserDao,
@@ -35,6 +37,9 @@ class RepositoryUser(
 
     suspend fun updateOrderByCreator(userId: Int) =
         myDao.updateOrderByCreator(userId)
+
+    fun observeUserByIdFlow(userId: Int): Flow<UserProfileModel> =
+        myDao.observeUserByIdFlow(userId)
 
     fun saveUserID(id: Int) {
         mySharedPreferences.edit().putInt(PREFERENCES_FILE_KEY, id).apply()

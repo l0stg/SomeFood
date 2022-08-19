@@ -1,7 +1,5 @@
 package com.example.somefood.ui.signIn
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserTypes
@@ -37,7 +35,7 @@ class SignInViewModel(
         viewModelScope.launch {
             val checkUser = myRepository.checkAuth(email = email, password = encode(password))
             if (checkUser != null) {
-                myRepository.saveUserID(checkUser.id)
+                myRepository.saveUserID(checkUser.userUID)
                 when (checkUser.types) {
                     UserTypes.USER -> routeToProductList()
                     UserTypes.CREATOR -> routeToCreatorList()
