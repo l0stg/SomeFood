@@ -296,8 +296,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:text="Оценка\nобщая"
-                        android:textAlignment="center"
+                        android:text="Оценка"
                         android:textSize="20sp" />
 
                     <LinearLayout

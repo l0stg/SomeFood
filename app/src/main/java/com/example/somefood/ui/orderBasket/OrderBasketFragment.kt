@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentOrderBasketBinding
+import com.example.somefood.ui.bottomSheetRating.BottomSheetRatingFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,6 +38,7 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
                 getString(R.string.goodEat),
                 Snackbar.LENGTH_SHORT
             ).show()
+            BottomSheetRatingFragment.newInstance(it.userIdGoToJob, childFragmentManager)
         }
 
         with(binding) {

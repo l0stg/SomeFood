@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class OrderByCreatorViewModel(
     private val orderRepository: OrderRepository,
-    private val userRepository: RepositoryUser
+    private val userRepository: RepositoryUser,
 ) : ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
@@ -26,7 +26,9 @@ class OrderByCreatorViewModel(
         val newStatus = when (item.status) {
             Status.WAIT -> Status.JOB
             Status.JOB -> Status.COMPLIT
-            Status.COMPLIT -> Status.COMPLIT
+            Status.COMPLIT -> {
+                Status.COMPLIT
+            }
         }
         viewModelScope.launch {
             orderRepository.addNewBuy(

@@ -31,4 +31,12 @@ interface UserDao {
     @Query("UPDATE user_table SET description = :newDescription WHERE id = :userId")
     suspend fun updateUserDescription(userId: Int, newDescription: String)
 
+    @Query("UPDATE user_table SET orderByClient = orderByClient + 1 WHERE id =:userId")
+    suspend fun updateOrderByClient(userId: Int)
+
+    @Query("UPDATE user_table SET orderByCreator = orderByCreator + 1 WHERE id =:userId")
+    suspend fun updateOrderByCreator(userId: Int)
+
+
+
 }

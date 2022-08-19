@@ -2,21 +2,17 @@ package com.example.somefood.data.room.provider
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.somefood.data.model.FavoriteModel
-import com.example.somefood.data.model.FoodDataModel
-import com.example.somefood.data.model.Order
-import com.example.somefood.data.model.UserModel
-import com.example.somefood.data.room.dao.FavoriteDao
-import com.example.somefood.data.room.dao.FoodDao
-import com.example.somefood.data.room.dao.OrderDao
-import com.example.somefood.data.room.dao.UserDao
+import com.example.somefood.data.model.*
+import com.example.somefood.data.room.dao.*
 
 @Database(
     entities = [
         FoodDataModel::class,
         FavoriteModel::class,
         Order::class,
-        UserModel::class],
+        UserModel::class,
+        UserRating::class,
+               ],
     version = 1
 )
 abstract class SomeFoodDataBase : RoomDatabase() {
@@ -25,4 +21,5 @@ abstract class SomeFoodDataBase : RoomDatabase() {
     abstract fun foodDao(): FoodDao
     abstract fun orderDao(): OrderDao
     abstract fun somethingDao(): UserDao
+    abstract fun UserRatingDao(): UserRatingDao
 }

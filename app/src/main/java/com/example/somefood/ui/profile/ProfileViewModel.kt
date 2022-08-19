@@ -2,10 +2,9 @@ package com.example.somefood.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.Order
-import com.example.somefood.data.model.UserModel
-import com.example.somefood.data.model.UserTypes
+import com.example.somefood.data.model.*
 import com.example.somefood.data.room.repository.RepositoryUser
+import com.example.somefood.data.room.repository.UserRatingRepositiry
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
@@ -14,11 +13,12 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val router: Router,
-    private val userRepository: RepositoryUser
+    private val userRepository: RepositoryUser,
+    private val userRatingRepositiry: UserRatingRepositiry,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow<UserModel>(UserModel(0, "","", UserTypes.USER,))
-    val userProfile: Flow<UserModel> = _userProfile
+    private val _userProfile = MutableStateFlow<UserProfileModel>(UserProfileModel("", UserTypes.USER, "", 0, 0, 0.0, 0.0))
+    val userProfile: Flow<UserProfileModel> = _userProfile
 
     private fun routeToProductList() =
         router.newRootScreen(Screens().routeToProductList())
@@ -32,27 +32,22 @@ class ProfileViewModel(
 
     private fun getUserProfile(){
         viewModelScope.launch {
-            _userProfile.value = userRepository.observeUserById(userRepository.getUserID())
+            val userInfo = userRepository.observeUserById(userRepository.getUserID())
+            _userProfile.value = UserProfileModel(
+                eMail = userInfo.eMail,
+                types = userInfo.types,
+                description = userInfo.description,
+                orderByClient = userInfo.orderByClient,
+                orderByCreator = userInfo.orderByCreator,
+                ratingByClient = userRatingRepositiry.observeUserRating(userRepository.getUserID()).starForClient,
+                ratingByCreator = userRatingRepositiry.observeUserRating(userRepository.getUserID()).starForCreator,
+            )
         }
     }
 
     private fun switchTypes(types: UserTypes) {
         viewModelScope.launch {
             userRepository.updateUserType(userRepository.getUserID(), types)
-        }
-    }
-
-
-    fun routeToMainScreen() {
-        viewModelScope.launch {
-            when (
-                userRepository
-                .observeUserById(
-                    userRepository.getUserID())
-                .types) {
-                UserTypes.USER -> routeToProductList()
-                UserTypes.CREATOR -> routeToCreatorList()
-            }
         }
     }
 
@@ -65,6 +60,19 @@ class ProfileViewModel(
         when (isChecked) {
             true -> switchTypes(UserTypes.CREATOR)
             false -> switchTypes(UserTypes.USER)
+        }
+    }
+
+    fun routeToMainScreen() {
+        viewModelScope.launch {
+            when (
+                userRepository
+                .observeUserById(
+                    userRepository.getUserID())
+                .types) {
+                UserTypes.USER -> routeToProductList()
+                UserTypes.CREATOR -> routeToCreatorList()
+            }
         }
     }
 }

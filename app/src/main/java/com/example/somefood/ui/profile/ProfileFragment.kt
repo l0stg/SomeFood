@@ -15,6 +15,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.databinding.FragmentProfileBinding
 import com.example.somefood.ui.BackButtonListener
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -61,9 +62,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                     with(binding){
                         emailUser.text = it.eMail
                         userDescription.setText(it.description)
-                        starForCreator.text = it.starForCreator.toString()
-                        starForClient.text = it.starForClient.toString()
-                        starMidlle.text = listOf(it.starForCreator, it.starForClient).average().toString()
+                        orderIntComplit.text = it.orderByClient.toString()
+                        orderIntPick.text = it.orderByCreator.toString()
+                        starForCreator.text = String.format("%.1f", it.ratingByCreator)
+                        starForClient.text = String.format("%.1f",it.ratingByClient)
+                        starMidlle.text = String.format("%.1f", listOf(it.ratingByClient, it.ratingByCreator).average())
                         when(it.types){
                             UserTypes.USER -> switchTypesInProfile.isChecked = false
                             UserTypes.CREATOR -> switchTypesInProfile.isChecked = true

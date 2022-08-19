@@ -10,4 +10,5 @@ val roomModule = module {
     single { get<SomeFoodDataBase>().somethingDao() }
     single { get<SomeFoodDataBase>().orderDao() }
     single { get<SomeFoodDataBase>().favoriteDao() }
+    single { get<SomeFoodDataBase>().UserRatingDao() }
 }

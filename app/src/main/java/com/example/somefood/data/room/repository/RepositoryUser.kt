@@ -29,6 +29,11 @@ class RepositoryUser(
     suspend fun updateUserDescription(userId: Int, newDescription: String) =
         myDao.updateUserDescription(userId, newDescription)
 
+    suspend fun updateOrderByClient(userId: Int) =
+        myDao.updateOrderByClient(userId)
+
+    suspend fun updateOrderByCreator(userId: Int) =
+        myDao.updateOrderByCreator(userId)
 
     fun saveUserID(id: Int) {
         mySharedPreferences.edit().putInt(PREFERENCES_FILE_KEY, id).apply()
