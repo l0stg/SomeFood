@@ -54,5 +54,9 @@ class RepositoryUser(
         return userID
     }
 
+    suspend fun updateUserPhoto(userID: Int, profilePhoto: String) {
+        myDao.updateUserPhoto(userID, profilePhoto)
+    }
+
 
 }

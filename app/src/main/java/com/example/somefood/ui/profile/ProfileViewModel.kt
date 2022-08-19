@@ -17,7 +17,7 @@ class ProfileViewModel(
     private val userRatingRepositiry: UserRatingRepositiry,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow(UserProfileModel("", UserTypes.USER, "", 0, 0, 0.0, 0.0))
+    private val _userProfile = MutableStateFlow(UserProfileModel("", UserTypes.USER, "", "", 0, 0, 0.0, 0.0))
     val userProfile: Flow<UserProfileModel> = _userProfile
 
     private fun routeToProductList() =
@@ -30,7 +30,7 @@ class ProfileViewModel(
         getUserProfile()
     }
 
-    fun getUserProfile(){
+    private fun getUserProfile(){
         viewModelScope.launch {
             userRepository.observeUserByIdFlow(userRepository.getUserID()).collect{
                 _userProfile.value = it
@@ -65,6 +65,12 @@ class ProfileViewModel(
                 UserTypes.USER -> routeToProductList()
                 UserTypes.CREATOR -> routeToCreatorList()
             }
+        }
+    }
+
+    fun setPhotoProfile(profilePhoto: String) {
+        viewModelScope.launch {
+            userRepository.updateUserPhoto(userRepository.getUserID(), profilePhoto)
         }
     }
 }
