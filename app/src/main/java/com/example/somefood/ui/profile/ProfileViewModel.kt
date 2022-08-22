@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val router: Router,
     private val userRepository: RepositoryUser,
-    private val userRatingRepositiry: UserRatingRepositiry,
 ) : ViewModel() {
 
     private val _userProfile = MutableStateFlow(UserProfileModel("", UserTypes.USER, "", "", 0, 0, 0.0, 0.0))

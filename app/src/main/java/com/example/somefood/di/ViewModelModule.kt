@@ -28,6 +28,6 @@ val viewModelModule = module {
     viewModel { OrderBasketViewModel(get(), get()) }
     viewModel { DetailFoodViewModel(get(), get()) }
     viewModel { OrderByCreatorViewModel(get(), get()) }
-    viewModel { ProfileViewModel (get(), get(), get()) }
+    viewModel { ProfileViewModel (get(), get()) }
     viewModel { BottomSheetRatingViewModel(get(), get())}
 }
