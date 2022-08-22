@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.FileUtils
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.example.somefood.R
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.databinding.FragmentProfileBinding
 import com.example.somefood.ui.BackButtonListener
+import com.example.somefood.ui.PhotoPicker
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,31 +26,23 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener {
 
 
+    private var photoPicker: PhotoPicker? = null
     private val viewModel: ProfileViewModel by viewModel()
     private val binding: FragmentProfileBinding by viewBinding()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        photoPicker =
+            PhotoPicker(requireActivity().activityResultRegistry) { uri ->
+                binding.profilePhoto.setImageURI(uri)
+                viewModel.setPhotoProfile(uri.toString())
+            }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = getString(R.string.profile)
         updateProfileView()
-
-        // Вынести нахер отсюда
-        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data?.data
-                with(binding) {
-                    profilePhoto.setImageURI(data)
-                    viewModel.setPhotoProfile(data.toString())
-                }
-            }
-        }
-        fun openSomeActivityForResult() {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_PICK
-            resultLauncher.launch(intent)
-
-        }
 
         with(binding){
             buttonEditDescription.setOnClickListener {
@@ -64,7 +58,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                 }
             }
             addNewProfileImageButton.setOnClickListener {
-                openSomeActivityForResult()
+                photoPicker?.pickPhoto()
             }
             switchTypesInProfile.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.goSwitchType(isChecked)
