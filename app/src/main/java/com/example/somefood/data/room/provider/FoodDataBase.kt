@@ -20,6 +20,6 @@ abstract class SomeFoodDataBase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
     abstract fun foodDao(): FoodDao
     abstract fun orderDao(): OrderDao
-    abstract fun somethingDao(): UserDao
-    abstract fun UserRatingDao(): OrderRatingDao
+    abstract fun userDao(): UserDao
+    abstract fun userRatingDao(): OrderRatingDao
 }

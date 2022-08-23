@@ -14,6 +14,10 @@ interface OrderRatingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateUserRating(newRating: OrderRating)
 
-    @Query("SELECT AVG(starForCreator) as starForCreator , AVG(starForClient) as starForClient FROM user_rating WHERE userid LIKE :userId")
-    suspend fun observeUserRating(userId: Int): AverageRating
+    @Query("UPDATE user_rating SET starForClient = :rating WHERE orderId = :orderId")
+    suspend fun increaseRatingByClients(orderId: Int, rating: Double)
+
+    @Query("UPDATE user_rating SET starForCreator = :rating WHERE orderId = :orderId")
+    suspend fun increaseRatingByCreator(orderId: Int, rating: Double)
+
 }

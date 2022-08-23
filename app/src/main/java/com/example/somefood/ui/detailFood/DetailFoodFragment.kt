@@ -41,7 +41,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivDetail)
             addToBuy.setOnClickListener {
-                CustomBottomSheetDialogFragment.newInstance(
+                CustomBottomSheetDialogFragment.show(
                     model.name,
                     model.image,
                     childFragmentManager

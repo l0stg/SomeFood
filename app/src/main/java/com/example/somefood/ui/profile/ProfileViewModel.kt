@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.*
 import com.example.somefood.data.room.repository.RepositoryUser
-import com.example.somefood.data.room.repository.UserRatingRepositiry
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +15,7 @@ class ProfileViewModel(
     private val userRepository: RepositoryUser,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow(UserProfileModel("", UserTypes.USER, "", "", 0, 0, 0.0, 0.0))
+    private val _userProfile = MutableStateFlow(UserProfileModel())
     val userProfile: Flow<UserProfileModel> = _userProfile
 
     private fun routeToProductList() =
@@ -48,9 +47,11 @@ class ProfileViewModel(
         }
     }
     fun goSwitchType(isChecked: Boolean) {
-        when (isChecked) {
-            true -> switchTypes(UserTypes.CREATOR)
-            false -> switchTypes(UserTypes.USER)
+        if (isChecked) {
+            switchTypes(UserTypes.CREATOR)
+        }
+        else {
+            switchTypes(UserTypes.USER)
         }
     }
 

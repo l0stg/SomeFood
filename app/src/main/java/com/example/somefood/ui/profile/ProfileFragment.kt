@@ -1,13 +1,9 @@
 package com.example.somefood.ui.profile
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import android.os.FileUtils
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +17,8 @@ import com.example.somefood.ui.BackButtonListener
 import com.example.somefood.ui.PhotoPicker
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
+import java.util.*
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener {
@@ -34,8 +32,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         super.onCreate(savedInstanceState)
         photoPicker =
             PhotoPicker(requireActivity().activityResultRegistry) { uri ->
-                binding.profilePhoto.setImageURI(uri)
-                viewModel.setPhotoProfile(uri.toString())
+                val byteArray = uri?.let { activity?.contentResolver?.openInputStream(it)?.readBytes() }
+                val path = activity?.getExternalFilesDir(null)
+                val folder = File(path, "Images")
+                folder.mkdirs()
+                val file = File(folder, "${UUID.randomUUID()}")
+                if (byteArray != null) {
+                    file.writeBytes(byteArray)
+                }
+                viewModel.setPhotoProfile(Uri.parse(file.absolutePath).toString())
             }
     }
 
@@ -75,23 +80,36 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.collect {
-                    with(binding){
-                        emailUser.text = it.email
-                        userDescription.setText(it.description)
-                        orderIntComplit.text = it.orderByClient.toString()
-                        orderIntPick.text = it.orderByCreator.toString()
-                        starForCreator.text = String.format("%.1f", it.starForCreator)
-                        starForClient.text = String.format("%.1f",it.starForClient)
-                        starMidlle.text = String.format("%.1f", listOf(it.starForClient, it.starForCreator).average())
-                        Glide
-                            .with(profilePhoto.context)
-                            .load(it.photoProfile)
-                            .centerCrop()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .into(profilePhoto)
-                        when(it.types){
-                            UserTypes.USER -> switchTypesInProfile.isChecked = false
-                            UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
+                    if (it.email != "") {
+                        with(binding) {
+                            emailUser.text = it.email
+                            userDescription.setText(it.description)
+                            orderIntComplit.text = it.ordersAsClient.toString()
+                            orderIntPick.text = it.ordersAsCreator.toString()
+                            starForCreator.text = String.format("%.1f", it.starForCreator)
+                            starForClient.text = String.format("%.1f", it.starForClient)
+                            starMidlle.text = String.format(
+                                "%.1f",
+                                listOf(it.starForClient, it.starForCreator).average()
+                            )
+                            Glide
+                                .with(profilePhoto.context)
+                                .load(BitmapFactory
+                                    .decodeByteArray(
+                                        File(it.photoProfile)
+                                            .readBytes(),
+                                        0,
+                                        File(it.photoProfile)
+                                            .readBytes()
+                                            .size)
+                                )
+                                .centerCrop()
+                                .placeholder(R.drawable.ic_launcher_foreground)
+                                .into(profilePhoto)
+                            when (it.types) {
+                                UserTypes.USER -> switchTypesInProfile.isChecked = false
+                                UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
+                            }
                         }
                     }
                 }

@@ -19,12 +19,12 @@ class BottomSheetRatingViewModel(
         }
     }
 
-    fun goRatingUser(userIdToRating: Int?, rating: Double){
+    fun goRatingUser(userIdToRating: Int?, rating: Double, orderId: Int){
         viewModelScope.launch {
             val user = userRepository.observeUserById(userIdToRating!!)
             when (user.types){
-                UserTypes.USER -> updateUserRating(OrderRating(userid = userIdToRating, starForCreator = rating, starForClient = null))
-                UserTypes.CREATOR -> updateUserRating(OrderRating(userid = userIdToRating, starForCreator = null, starForClient = rating))
+                UserTypes.USER -> userRatingRepositiry.increaseRatingByCreator(orderId = orderId, rating = rating)
+                UserTypes.CREATOR -> userRatingRepositiry.increaseRatingByClient(orderId = orderId, rating = rating)
             }
         }
     }

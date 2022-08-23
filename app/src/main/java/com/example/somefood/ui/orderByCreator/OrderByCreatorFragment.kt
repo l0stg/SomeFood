@@ -32,7 +32,7 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
         myAdapter = OrderByCreatorAdapter {
             viewModel.addInJob(it)
             if (it.status == Status.JOB){
-                BottomSheetRatingFragment.newInstance(it.userID, childFragmentManager)
+                BottomSheetRatingFragment.show(it.userID, it.id, childFragmentManager)
             }
         }
         with(binding) {

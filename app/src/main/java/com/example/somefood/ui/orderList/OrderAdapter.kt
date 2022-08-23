@@ -30,7 +30,7 @@ class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
         fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
-            timeFoodOrder.text = item.timeToComplit
+            timeFoodOrder.text = item.timeToComplete
             when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = view.context.getString(R.string.inJob)
@@ -42,7 +42,7 @@ class OrderAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
                     statusFoodOrder.text = item.status.status
                     statusFoodOrder.setTextColor(Color.YELLOW)
                 }
-                Status.COMPLIT -> {
+                Status.COMPLETE -> {
                     buttonStatus.text = view.context.getString(R.string.pickUpOrder)
                     buttonStatus.setBackgroundColor(Color.GRAY)
                     statusFoodOrder.text = item.status.status

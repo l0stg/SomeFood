@@ -38,7 +38,7 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
                 getString(R.string.goodEat),
                 Snackbar.LENGTH_SHORT
             ).show()
-            BottomSheetRatingFragment.newInstance(it.userIdGoToJob, childFragmentManager)
+            BottomSheetRatingFragment.show(it.userIdGoToJob, it.id, childFragmentManager)
         }
 
         with(binding) {

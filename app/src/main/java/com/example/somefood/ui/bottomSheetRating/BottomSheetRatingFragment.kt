@@ -16,11 +16,13 @@ class BottomSheetRatingFragment : BottomSheetDialogFragment() {
     companion object {
         private const val TAG = "addRating"
         private const val USERID = "USERID"
-        fun newInstance(userIdToRating: Int, fragmentManager: FragmentManager) =
+        private const val ORDERID = "ORDERID"
+        fun show(userIdToRating: Int, orderId: Int, fragmentManager: FragmentManager) =
             BottomSheetRatingFragment().apply {
                 show(fragmentManager, TAG)
                 arguments = Bundle().apply {
                     putInt(USERID, userIdToRating)
+                    putInt(ORDERID, orderId)
                 }
             }
     }
@@ -38,10 +40,11 @@ class BottomSheetRatingFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userIdToRating = arguments?.getInt(USERID)
+        val orderId = arguments?.getInt(ORDERID)
 
         with(binding){
             addStarButton.setOnClickListener {
-                viewModel.goRatingUser(userIdToRating, ratingBar.rating.toDouble())
+                viewModel.goRatingUser(userIdToRating, ratingBar.rating.toDouble(), orderId!!)
                 dialog?.dismiss()
             }
         }

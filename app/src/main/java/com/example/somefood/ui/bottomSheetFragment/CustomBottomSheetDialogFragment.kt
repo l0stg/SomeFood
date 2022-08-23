@@ -18,7 +18,7 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val TAG = "AddToOrder"
         private const val KEY = "NAME"
         private const val IMAGE = "IMAGE"
-        fun newInstance(name: String, image: String, fragmentManager: FragmentManager) =
+        fun show(name: String, image: String, fragmentManager: FragmentManager) =
             CustomBottomSheetDialogFragment().apply {
                 show(fragmentManager, TAG)
                 arguments = Bundle().apply {
@@ -29,7 +29,6 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private val binding: FragmentBottomSheetDialogBinding by viewBinding()
-
     private val viewModel: DialogViewModel by viewModel()
 
     override fun onCreateView(

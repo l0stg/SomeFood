@@ -10,7 +10,7 @@ class OrderRepository(
     private val myDao: OrderDao,
 ) {
 
-    suspend fun addNewBuy(newItem: Order) = myDao.addOrder(newItem)
+    suspend fun addNewBuy(newItem: Order): Long = myDao.addOrder(newItem)
 
     fun observeOrderTable(status: Status): Flow<List<Order>> =
         myDao.observeOrderTable(status)

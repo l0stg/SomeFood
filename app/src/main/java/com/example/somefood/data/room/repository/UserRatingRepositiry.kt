@@ -11,7 +11,10 @@ class UserRatingRepositiry(
     suspend fun updateUserRating(newOrderRating: OrderRating) =
         myDao.updateUserRating(newOrderRating)
 
-    suspend fun observeUserRating(userID: Int): AverageRating =
-        myDao.observeUserRating(userID)
+    suspend fun increaseRatingByClient(orderId: Int, rating: Double) =
+        myDao.increaseRatingByClients(orderId, rating)
+
+    suspend fun increaseRatingByCreator(orderId: Int, rating: Double) =
+        myDao.increaseRatingByCreator(orderId, rating)
 
 }

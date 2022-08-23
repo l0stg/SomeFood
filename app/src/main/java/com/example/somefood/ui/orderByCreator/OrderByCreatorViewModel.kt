@@ -25,9 +25,9 @@ class OrderByCreatorViewModel(
     fun addInJob(item: Order) {
         val newStatus = when (item.status) {
             Status.WAIT -> Status.JOB
-            Status.JOB -> Status.COMPLIT
-            Status.COMPLIT -> {
-                Status.COMPLIT
+            Status.JOB -> Status.COMPLETE
+            Status.COMPLETE -> {
+                Status.COMPLETE
             }
         }
         viewModelScope.launch {
@@ -36,7 +36,7 @@ class OrderByCreatorViewModel(
                     id = item.id,
                     orderName = item.orderName,
                     userID = item.userID,
-                    timeToComplit = item.timeToComplit,
+                    timeToComplete = item.timeToComplete,
                     integerBuy = item.integerBuy,
                     status = newStatus,
                     image = item.image,

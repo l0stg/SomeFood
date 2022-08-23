@@ -1,8 +1,6 @@
 package com.example.somefood.data.room.repository
 
-import android.content.ClipDescription
 import android.content.SharedPreferences
-import android.net.Uri
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserProfileModel
 import com.example.somefood.data.model.UserTypes
@@ -32,11 +30,11 @@ class RepositoryUser(
     suspend fun updateUserDescription(userId: Int, newDescription: String) =
         myDao.updateUserDescription(userId, newDescription)
 
-    suspend fun updateOrderByClient(userId: Int) =
-        myDao.updateOrderByClient(userId)
+    suspend fun increaseOrdersByClient(userId: Int) =
+        myDao.increaseOrdersByClient(userId)
 
-    suspend fun updateOrderByCreator(userId: Int) =
-        myDao.updateOrderByCreator(userId)
+    suspend fun increaseOrdersByCreator(userId: Int) =
+        myDao.increaseOrderByCreator(userId)
 
     fun observeUserByIdFlow(userId: Int): Flow<UserProfileModel> =
         myDao.observeUserByIdFlow(userId)

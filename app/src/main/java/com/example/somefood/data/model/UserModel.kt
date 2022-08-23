@@ -14,8 +14,8 @@ data class UserModel(
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "types") val types: UserTypes,
     @ColumnInfo(name = "description") val description: String = "",
-    @ColumnInfo(name = "orderByClient") val orderByClient: Int = 0,
-    @ColumnInfo(name = "orderByCreator") val orderByCreator: Int = 0,
+    @ColumnInfo(name = "ordersAsClient") val ordersAsClient: Int = 0,
+    @ColumnInfo(name = "ordersAsCreator") val ordersAsCreator: Int = 0,
 )
 
 enum class UserTypes {

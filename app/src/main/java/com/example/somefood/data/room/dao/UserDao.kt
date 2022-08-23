@@ -36,13 +36,14 @@ interface UserDao {
     @Query("UPDATE user_table SET description = :newDescription WHERE userUID = :userId")
     suspend fun updateUserDescription(userId: Int, newDescription: String)
 
-    @Query("UPDATE user_table SET orderByClient = orderByClient + 1 WHERE userUID =:userId")
-    suspend fun updateOrderByClient(userId: Int)
+    @Query("UPDATE user_table SET ordersAsClient = ordersAsClient + 1 WHERE userUID =:userId")
+    suspend fun increaseOrdersByClient(userId: Int)
 
-    @Query("UPDATE user_table SET orderByCreator = orderByCreator + 1 WHERE userUID =:userId")
-    suspend fun updateOrderByCreator(userId: Int)
+    @Query("UPDATE user_table SET ordersAsCreator = ordersAsCreator + 1 WHERE userUID =:userId")
+    suspend fun increaseOrderByCreator(userId: Int)
 
-    @Query("SELECT email, types, photoProfile, description, orderByClient, orderByCreator, AVG(starForClient) as starForClient, AVG(starForCreator) as starForCreator" +
+    @Query("SELECT email, types, photoProfile, description," +
+            " ordersAsClient, ordersAsCreator, AVG(starForClient) as starForClient, AVG(starForCreator) as starForCreator" +
             " FROM user_table LEFT JOIN user_rating ON userUID == userid WHERE userUID == :userId")
     fun observeUserByIdFlow(userId: Int): Flow<UserProfileModel>
 

@@ -28,9 +28,9 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
-                timeFoodOrder.text = item.timeToComplit
+                timeFoodOrder.text = item.timeToComplete
                 when (item.status) {
-                    Status.COMPLIT -> {
+                    Status.COMPLETE -> {
                         buttonPickUp.visibility = View.VISIBLE
                         buttonPickUp.isEnabled = true
                         statusFoodOrder.text = item.status.status
