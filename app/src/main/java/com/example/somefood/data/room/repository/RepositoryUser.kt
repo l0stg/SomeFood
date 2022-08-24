@@ -63,11 +63,11 @@ class RepositoryUser(
         myDao.updateUserPhoto(userID, profilePhoto)
     }
 
-    fun writeToInternalStoragePhoto(context: Context?, uri: Uri?): String {
-        val byteArray = uri?.let { context?.contentResolver?.openInputStream(it)?.readBytes() }
-        val path = context?.getExternalFilesDir(null)
-        val folder = File(path, "Avatars")
+    fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?, oldUri: String): String {
+        val byteArray = newUri?.let { context?.contentResolver?.openInputStream(it)?.readBytes() }
+        val folder = File(context?.getExternalFilesDir(null), "Avatars")
         folder.mkdirs()
+        File(oldUri).delete()
         val file = File(folder, "${UUID.randomUUID()}")
         if (byteArray != null) {
             file.writeBytes(byteArray)

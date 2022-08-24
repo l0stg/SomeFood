@@ -76,7 +76,7 @@ class ProfileViewModel(
         }
     }
 
-    fun writeToInternalStoragePhoto(context: Context?, uri: Uri?){
-           setPhotoProfile(userRepository.writeToInternalStoragePhoto(context, uri))
+    fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?){
+           setPhotoProfile(userRepository.writeToInternalStoragePhoto(context, newUri, _userProfile.value.photoProfile))
     }
 }
