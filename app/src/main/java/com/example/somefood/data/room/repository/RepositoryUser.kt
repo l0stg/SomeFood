@@ -1,12 +1,19 @@
 package com.example.somefood.data.room.repository
 
+import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import com.example.somefood.data.model.UserModel
 import com.example.somefood.data.model.UserProfileModel
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.dao.UserDao
 import com.example.somefood.di.PREFERENCES_FILE_KEY
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import java.io.File
+import java.util.*
 
 class RepositoryUser(
     private val myDao: UserDao,
@@ -56,5 +63,16 @@ class RepositoryUser(
         myDao.updateUserPhoto(userID, profilePhoto)
     }
 
+    fun writeToInternalStoragePhoto(context: Context?, uri: Uri?): String {
+        val byteArray = uri?.let { context?.contentResolver?.openInputStream(it)?.readBytes() }
+        val path = context?.getExternalFilesDir(null)
+        val folder = File(path, "Avatars")
+        folder.mkdirs()
+        val file = File(folder, "${UUID.randomUUID()}")
+        if (byteArray != null) {
+            file.writeBytes(byteArray)
+        }
+        return Uri.parse(file.absolutePath).toString()
+    }
 
 }

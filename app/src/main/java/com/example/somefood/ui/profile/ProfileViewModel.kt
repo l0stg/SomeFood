@@ -1,5 +1,7 @@
 package com.example.somefood.ui.profile
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.*
@@ -68,9 +70,13 @@ class ProfileViewModel(
         }
     }
 
-    fun setPhotoProfile(profilePhoto: String) {
+    private fun setPhotoProfile(profilePhoto: String) {
         viewModelScope.launch {
             userRepository.updateUserPhoto(userRepository.getUserID(), profilePhoto)
         }
+    }
+
+    fun writeToInternalStoragePhoto(context: Context?, uri: Uri?){
+           setPhotoProfile(userRepository.writeToInternalStoragePhoto(context, uri))
     }
 }

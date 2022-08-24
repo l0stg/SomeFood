@@ -2,7 +2,7 @@ package com.example.somefood.data.model
 
 
 data class UserProfileModel(
-    val email: String = "",
+    val email: String? = null,
     val types: UserTypes = UserTypes.USER,
     val photoProfile: String = "",
     val description: String = "",
