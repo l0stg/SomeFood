@@ -6,27 +6,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somefood.R
 import com.example.somefood.data.model.OrderRating
+import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.HistoryOrderItemBinding
 
 class HistoryOrderAdapter: RecyclerView.Adapter<HistoryOrderAdapter.MyViewHolder>() {
 
     private val myList: MutableList<OrderRating> = mutableListOf()
 
+    fun set(newList: List<OrderRating>) {
+        this.myList.clear()
+        this.myList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = HistoryOrderItemBinding.bind(view)
-        fun bind(orderItem: OrderRating) {
+        fun bind(orderItem: OrderRating) =
             with(binding){
                 starForClient.rating = orderItem.starForClient.toFloat()
                 starForCreator.rating = orderItem.starForCreator.toFloat()
                 orderId.text = orderItem.orderId.toString()
             }
-        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.food_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.history_order_item, parent, false)
         return MyViewHolder(itemView)
     }
 

@@ -6,6 +6,7 @@ import com.example.somefood.ui.bottomSheetFragment.DialogViewModel
 import com.example.somefood.ui.bottomSheetRating.BottomSheetRatingViewModel
 import com.example.somefood.ui.detailFood.DetailFoodViewModel
 import com.example.somefood.ui.helloScreen.HelloScreenViewModel
+import com.example.somefood.ui.historyOrderFragment.HistoryOrderViewModel
 import com.example.somefood.ui.mainActivite.MainViewModel
 import com.example.somefood.ui.orderBasket.OrderBasketViewModel
 import com.example.somefood.ui.orderByCreator.OrderByCreatorViewModel
@@ -30,4 +31,5 @@ val viewModelModule = module {
     viewModel { OrderByCreatorViewModel(get(), get()) }
     viewModel { ProfileViewModel (get(), get()) }
     viewModel { BottomSheetRatingViewModel(get(), get())}
+    viewModel { HistoryOrderViewModel(get(), get())}
 }

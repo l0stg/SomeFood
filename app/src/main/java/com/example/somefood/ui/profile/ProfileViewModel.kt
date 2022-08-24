@@ -87,4 +87,8 @@ class ProfileViewModel(
             )
         }
     }
+
+    fun routeToHistoryOrder() {
+        router.navigateTo(Screens().routeToHistoryOrder())
+    }
 }

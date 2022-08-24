@@ -90,7 +90,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                                 "%.1f",
                                 listOf(it.starForClient, it.starForCreator).average()
                             )
-
+                            cvHistoryOrder.setOnClickListener{
+                                viewModel.routeToHistoryOrder()
+                            }
                             Glide
                                 .with(profilePhoto.context)
                                 .asBitmap()

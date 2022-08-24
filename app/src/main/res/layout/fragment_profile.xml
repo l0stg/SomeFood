@@ -80,7 +80,7 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cvHistoryOrder"
             android:layout_width="380dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
@@ -234,7 +234,7 @@
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintTop_toBottomOf="@+id/cvHistoryOrder">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"

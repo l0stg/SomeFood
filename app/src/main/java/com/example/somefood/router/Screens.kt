@@ -5,6 +5,7 @@ import com.example.somefood.ui.FavoriteFood.FavoriteFoodFragment
 import com.example.somefood.ui.Registration.RegistrationFragment
 import com.example.somefood.ui.detailFood.DetailFoodFragment
 import com.example.somefood.ui.helloScreen.HelloScreenFragment
+import com.example.somefood.ui.historyOrderFragment.HistoryOrderFragment
 import com.example.somefood.ui.orderBasket.OrderBasketFragment
 import com.example.somefood.ui.orderByCreator.OrderByCreatorFragment
 import com.example.somefood.ui.orderList.CreatorListFragment
@@ -26,4 +27,5 @@ class Screens {
     fun routeToBascet() = FragmentScreen { OrderBasketFragment.newInstance() }
     fun routeToOrderByCreator() = FragmentScreen { OrderByCreatorFragment() }
     fun routeToProfile() = FragmentScreen { ProfileFragment() }
+    fun routeToHistoryOrder() = FragmentScreen { HistoryOrderFragment.newInstance() }
 }

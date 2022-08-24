@@ -6,12 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
+import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentHistoryOrderBinding
 import com.example.somefood.ui.FavoriteFood.FavoriteFoodFragment
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryOrderFragment : Fragment(R.layout.fragment_history_order) {
@@ -26,15 +31,19 @@ class HistoryOrderFragment : Fragment(R.layout.fragment_history_order) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         myAdapter = HistoryOrderAdapter()
-
         with(binding) {
             historyOrderRecyclerView.layoutManager = LinearLayoutManager(activity)
             historyOrderRecyclerView.adapter = myAdapter
         }
 
-
-
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.list.collect {
+                    if (!it.isEmpty())
+                        myAdapter?.set(it)
+                }
+            }
+        }
     }
 }
