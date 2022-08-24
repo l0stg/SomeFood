@@ -44,20 +44,30 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val itemName = arguments?.getString(KEY) ?: ""
         val itemImage = arguments?.getString(IMAGE) ?: ""
 
-        binding.timePicker.setIs24HourView(true)
-
-        binding.buttonAdToBuy.setOnClickListener {
-            if (binding.buyPrice.text.isNotEmpty()) {
-                val time = "${binding.timePicker.hour}:${binding.timePicker.minute}"
-                viewModel.addNewOrder(time, binding.buyPrice.text.toString(), itemName, itemImage)
-                dialog?.dismiss()
-            } else {
-                Toast.makeText(
-                    activity,
-                    getString(R.string.checkToOrder),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+        with(binding) {
+            timePicker.setIs24HourView(true)
+            timePicker.hour = 0
+            timePicker.minute = 0
+            buttonAdToBuy.setOnClickListener {
+                if (buyPrice.text.isNotEmpty() && !buyPrice.text.startsWith("0") && (timePicker.hour != 0 || timePicker.minute != 0)) {
+                    val time = String.format(
+                        resources.getString(R.string.timeHoursMinutesFormatter), timePicker.hour, timePicker.minute
+                    )
+                    viewModel.addNewOrder(
+                        time,
+                        buyPrice.text.toString(),
+                        itemName,
+                        itemImage
+                    )
+                    dialog?.dismiss()
+                } else {
+                    Toast.makeText(
+                        activity,
+                        getString(R.string.checkToOrder),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
         }
     }

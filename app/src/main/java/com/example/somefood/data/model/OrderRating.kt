@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class OrderRating(
     @PrimaryKey(autoGenerate = true) val orderId: Int,
     @ColumnInfo(name = "userid") val userid: Int,
-    @ColumnInfo(name = "starForCreator") val starForCreator: Double?,
-    @ColumnInfo(name = "starForClient") val starForClient: Double?,
+    @ColumnInfo(name = "starForCreator") val starForCreator: Double,
+    @ColumnInfo(name = "starForClient") val starForClient: Double,
 )
