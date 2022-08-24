@@ -34,7 +34,6 @@ class DialogViewModel(
                     starForCreator = 0.0,
                     starForClient = 0.0)
             )
-            repositoryUser.increaseOrdersByClient(repositoryUser.getUserID())
         }
     }
 
