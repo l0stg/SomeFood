@@ -48,6 +48,7 @@ class ProfileViewModel(
             userRepository.updateUserDescription(userRepository.getUserID(), newDescription)
         }
     }
+
     fun goSwitchType(isChecked: Boolean) {
         if (isChecked) {
             switchTypes(UserTypes.CREATOR)
@@ -77,6 +78,14 @@ class ProfileViewModel(
     }
 
     fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?){
-           setPhotoProfile(userRepository.writeToInternalStoragePhoto(context, newUri, _userProfile.value.photoProfile))
+        viewModelScope.launch {
+            setPhotoProfile(
+                userRepository.writeToInternalStoragePhoto(
+                    context,
+                    newUri,
+                    _userProfile.value.photoProfile
+                )
+            )
+        }
     }
 }

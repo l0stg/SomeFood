@@ -79,7 +79,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.collect {
                     if (!it.email.isNullOrEmpty()) {
-                        loading?.isDismiss()
                         with(binding) {
                             emailUser.text = it.email
                             userDescription.setText(it.description)
@@ -91,6 +90,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                                 "%.1f",
                                 listOf(it.starForClient, it.starForCreator).average()
                             )
+
                             Glide
                                 .with(profilePhoto.context)
                                 .asBitmap()
@@ -103,6 +103,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                                 UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
                             }
                         }
+                        loading?.isDismiss()
                     }
                 }
             }
