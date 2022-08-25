@@ -82,8 +82,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                         with(binding) {
                             emailUser.text = it.email
                             userDescription.setText(it.description)
-                            orderIntComplit.text = it.ordersAsClient.toString()
-                            orderIntPick.text = it.ordersAsCreator.toString()
+                            orderIntComplit.text = it.ordersAsCreator.toString()
+                            orderIntPick.text = it.ordersAsClient.toString()
                             starForCreator.text = String.format("%.1f", it.starForCreator)
                             starForClient.text = String.format("%.1f", it.starForClient)
                             starMidlle.text = String.format(

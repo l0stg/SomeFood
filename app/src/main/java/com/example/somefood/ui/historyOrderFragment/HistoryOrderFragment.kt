@@ -40,7 +40,6 @@ class HistoryOrderFragment : Fragment(R.layout.fragment_history_order) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    if (!it.isEmpty())
                         myAdapter?.set(it)
                 }
             }

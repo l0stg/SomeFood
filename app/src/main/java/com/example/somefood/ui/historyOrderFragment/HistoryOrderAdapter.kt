@@ -23,11 +23,10 @@ class HistoryOrderAdapter: RecyclerView.Adapter<HistoryOrderAdapter.MyViewHolder
         private val binding = HistoryOrderItemBinding.bind(view)
         fun bind(orderItem: OrderRating) =
             with(binding){
-                starForClient.rating = orderItem.starForClient.toFloat()
-                starForCreator.rating = orderItem.starForCreator.toFloat()
+                starForClient.rating = orderItem.starForClient?.toFloat() ?: 0.0F
+                starForCreator.rating = orderItem.starForCreator?.toFloat() ?: 0.0F
                 orderId.text = orderItem.orderId.toString()
             }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

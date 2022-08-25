@@ -17,24 +17,32 @@ class DialogViewModel(
 ) : ViewModel() {
 
     fun addNewOrder(time: String, price: String, itemName: String, itemImage: String) {
-        val newItem = Order(
-            orderName = itemName,
-            userID = repositoryUser.getUserID(),
-            timeToComplete = time,
-            integerBuy = price.toInt(),
-            status = Status.WAIT,
-            image = itemImage,
-        )
         viewModelScope.launch {
-            val newOrderId = repositoryOrder.addNewBuy(newItem)
+            increaseOrders()
+            val newOrderId = repositoryOrder.addNewBuy(
+                Order(
+                    orderName = itemName,
+                    userID = repositoryUser.getUserID(),
+                    timeToComplete = time,
+                    integerBuy = price.toInt(),
+                    status = Status.WAIT,
+                    image = itemImage,
+                )
+            )
             orderRating.updateUserRating(
                 OrderRating(
                     orderId = newOrderId.toInt(),
                     userid = repositoryUser.getUserID(),
-                    starForCreator = 0.0,
-                    starForClient = 0.0)
+                    starForCreator = null,
+                    starForClient = null
+                )
             )
         }
     }
 
+    private fun increaseOrders(){
+        viewModelScope.launch {
+            repositoryUser.increaseOrdersByClient(userId = repositoryUser.getUserID())
+        }
+    }
 }
