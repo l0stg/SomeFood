@@ -17,8 +17,8 @@ class ProfileViewModel(
     private val userRepository: RepositoryUser,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow(UserProfileModel())
-    val userProfile: Flow<UserProfileModel> = _userProfile
+    private val _userProfile = MutableStateFlow<UserProfileModel?>(null)
+    val userProfile: Flow<UserProfileModel?> = _userProfile
 
     private fun routeToProductList() =
         router.newRootScreen(Screens().routeToProductList())
@@ -82,7 +82,7 @@ class ProfileViewModel(
                 userRepository.writeToInternalStoragePhoto(
                     context,
                     newUri,
-                    _userProfile.value.photoProfile
+                    _userProfile.value?.photoProfile ?: ""
                 )
             )
         }

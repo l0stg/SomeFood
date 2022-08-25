@@ -33,13 +33,13 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
                     Status.COMPLETE -> {
                         buttonPickUp.visibility = View.VISIBLE
                         buttonPickUp.isEnabled = true
-                        statusFoodOrder.text = item.status.status
+                        statusFoodOrder.text = "готово"
                         statusFoodOrder.setTextColor(Color.GREEN)
                     }
                     else -> {
                         buttonPickUp.visibility = View.INVISIBLE
                         buttonPickUp.isEnabled = false
-                        statusFoodOrder.text = item.status.status
+                        statusFoodOrder.text = "В ожидании"
                         when(item.status) {
                             Status.WAIT -> statusFoodOrder.setTextColor(Color.GRAY)
                             Status.JOB -> statusFoodOrder.setTextColor(Color.YELLOW)

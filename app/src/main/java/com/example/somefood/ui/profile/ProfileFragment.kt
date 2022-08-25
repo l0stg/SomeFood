@@ -78,7 +78,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.collect {
-                    if (!it.email.isNullOrEmpty()) {
+                    if (it != null) {
                         with(binding) {
                             emailUser.text = it.email
                             userDescription.setText(it.description)
