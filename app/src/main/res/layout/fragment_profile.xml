@@ -203,7 +203,8 @@
                         android:src="@drawable/ic_baseline_assignment_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/editDecriptionInProfile" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
