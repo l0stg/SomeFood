@@ -18,6 +18,7 @@ import com.example.somefood.ui.BackButtonListener
 import com.example.somefood.ui.LoadingDialog
 import com.example.somefood.ui.PhotoPicker
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -77,36 +78,34 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
     private fun updateProfileView(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userProfile.collect {
-                    if (it != null) {
-                        with(binding) {
-                            emailUser.text = it.email
-                            userDescription.setText(it.description)
-                            orderIntComplit.text = it.ordersAsCreator.toString()
-                            orderIntPick.text = it.ordersAsClient.toString()
-                            starForCreator.text = String.format("%.1f", it.starForCreator)
-                            starForClient.text = String.format("%.1f", it.starForClient)
-                            starMidlle.text = String.format(
-                                "%.1f",
-                                listOf(it.starForClient, it.starForCreator).average()
-                            )
-                            cvHistoryOrder.setOnClickListener{
-                                viewModel.routeToHistoryOrder()
-                            }
-                            Glide
-                                .with(profilePhoto.context)
-                                .asBitmap()
-                                .load(it.photoProfile)
-                                .centerCrop()
-                                .placeholder(R.drawable.ic_launcher_foreground)
-                                .into(profilePhoto)
-                            when (it.types) {
-                                UserTypes.USER -> switchTypesInProfile.isChecked = false
-                                UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
-                            }
+                viewModel.userProfile.filterNotNull().collect {
+                    with(binding) {
+                        emailUser.text = it.email
+                        userDescription.setText(it.description)
+                        orderIntComplit.text = it.ordersAsCreator.toString()
+                        orderIntPick.text = it.ordersAsClient.toString()
+                        starForCreator.text = String.format("%.1f", it.starForCreator)
+                        starForClient.text = String.format("%.1f", it.starForClient)
+                        starMidlle.text = String.format(
+                            "%.1f",
+                            listOf(it.starForClient, it.starForCreator).average()
+                        )
+                        cvHistoryOrder.setOnClickListener {
+                            viewModel.routeToHistoryOrder()
                         }
-                        loading?.isDismiss()
+                        Glide
+                            .with(profilePhoto.context)
+                            .asBitmap()
+                            .load(it.photoProfile)
+                            .centerCrop()
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .into(profilePhoto)
+                        when (it.types) {
+                            UserTypes.USER -> switchTypesInProfile.isChecked = false
+                            UserTypes.CREATOR -> switchTypesInProfile.isChecked = true
+                        }
                     }
+                    loading?.isDismiss()
                 }
             }
         }

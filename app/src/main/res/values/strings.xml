@@ -30,6 +30,7 @@
     <string name="timeToComplit">Время выполнения</string>
     <string name="priceInt">Стоимость</string>
     <string name="inJob">Взять в работу</string>
+    <string name="inJobinOrderCreator">В работe</string>
     <string name="menu">Меню</string>
     <string name="goToFavorite">Перейти в избранное</string>
     <string name="goToBascet">Перейти в корзину</string>
@@ -56,6 +57,7 @@
     <string name="midleStarInProfile">Оценка\nобщая</string>
     <string name="starForClientInProfile">Оценка как заказчика</string>
     <string name="descriptionInProfile">Описание</string>
+    <string name="inWait">В ожидании</string>
 
     <string name="timeHoursMinutesFormatter" translatable="false">%02d:%02d</string>
     <string name="starsForClientInHistoryOrder">Оценка клиента</string>

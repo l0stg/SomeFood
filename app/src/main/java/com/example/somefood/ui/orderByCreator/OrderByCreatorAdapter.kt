@@ -34,18 +34,18 @@ class OrderByCreatorAdapter(private val itemInOrderClick: (item: Order) -> Unit)
             when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = view.context.getString(R.string.inJob)
-                    statusFoodOrder.text = "В ожидании"
+                    statusFoodOrder.text = view.context.getString(R.string.inWait)
                     statusFoodOrder.setTextColor(Color.GRAY)
                 }
                 Status.JOB -> {
                     buttonStatus.text = view.context.getString(R.string.complit)
-                    statusFoodOrder.text = "В работе"
+                    statusFoodOrder.text = view.context.getString(R.string.inJob)
                     statusFoodOrder.setTextColor(Color.YELLOW)
                 }
                 Status.COMPLETE -> {
                     buttonStatus.text = view.context.getString(R.string.pickUpOrder)
                     buttonStatus.setBackgroundColor(Color.GRAY)
-                    statusFoodOrder.text = "Заказ получен"
+                    statusFoodOrder.text = view.context.getString(R.string.complit)
                     statusFoodOrder.setTextColor(Color.GREEN)
                 }
             }
