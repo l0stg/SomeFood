@@ -63,9 +63,9 @@ class RepositoryUser(
         myDao.updateUserPhoto(userID, profilePhoto)
     }
 
-    suspend fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?, oldUri: String): String {
+    fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?, oldUri: String): String {
         val byteArray = newUri?.let { context?.contentResolver?.openInputStream(it)?.readBytes() }
-        val folder = File(context?.getExternalFilesDir(null), "Avatars")
+        val folder = File(context?.filesDir, "Avatars")
         folder.mkdirs()
         File(oldUri).delete()
         val file = File(folder, "${UUID.randomUUID()}")

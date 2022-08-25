@@ -52,8 +52,7 @@ class ProfileViewModel(
     fun goSwitchType(isChecked: Boolean) {
         if (isChecked) {
             switchTypes(UserTypes.CREATOR)
-        }
-        else {
+        } else {
             switchTypes(UserTypes.USER)
         }
     }

@@ -40,11 +40,11 @@ class BottomSheetRatingFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userIdToRating = arguments?.getInt(USERID)
-        val orderId = arguments?.getInt(ORDERID)
+        val orderId = arguments?.getInt(ORDERID) ?: 0
 
         with(binding){
             addStarButton.setOnClickListener {
-                viewModel.goRatingUser(userIdToRating, ratingBar.rating.toDouble(), orderId!!)
+                viewModel.goRatingUser(userIdToRating, ratingBar.rating.toDouble(), orderId)
                 dialog?.dismiss()
             }
         }
