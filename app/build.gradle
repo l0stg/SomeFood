@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation "com.airbnb.android:lottie:5.2.0"
+
     // Room
     implementation("androidx.room:room-runtime:2.4.3")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
