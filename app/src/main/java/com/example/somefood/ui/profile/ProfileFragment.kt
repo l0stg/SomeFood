@@ -1,8 +1,5 @@
 package com.example.somefood.ui.profile
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -17,12 +14,9 @@ import com.example.somefood.databinding.FragmentProfileBinding
 import com.example.somefood.ui.BackButtonListener
 import com.example.somefood.ui.LoadingDialog
 import com.example.somefood.ui.PhotoPicker
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.File
-import java.util.*
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener {
@@ -39,7 +33,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         loading?.startLoading()
         photoPicker =
             PhotoPicker(requireActivity().activityResultRegistry) { uri ->
-                viewModel.writeToInternalStoragePhoto(activity?.applicationContext, uri)
+                viewModel.savePhoto(uri)
             }
     }
 

@@ -17,7 +17,8 @@ import java.util.*
 
 class RepositoryUser(
     private val myDao: UserDao,
-    private val mySharedPreferences: SharedPreferences
+    private val mySharedPreferences: SharedPreferences,
+    private val context: Context,
 ) {
     suspend fun addUser(newUser: UserModel): Long =
         myDao.addUser(newUser)
@@ -50,6 +51,10 @@ class RepositoryUser(
         mySharedPreferences.edit().putInt(PREFERENCES_FILE_KEY, id).apply()
     }
 
+    private suspend fun getUserPhoto(){
+        myDao.getUserPhoto(getUserID())
+    }
+
     fun getUserID(): Int {
         val userID: Int
         if (mySharedPreferences.contains(PREFERENCES_FILE_KEY))
@@ -59,15 +64,15 @@ class RepositoryUser(
         return userID
     }
 
-    suspend fun updateUserPhoto(userID: Int, profilePhoto: String) {
-        myDao.updateUserPhoto(userID, profilePhoto)
+    suspend fun setPhoto(userID: Int, profilePhoto: String) {
+        myDao.setPhoto(userID, profilePhoto)
     }
 
-    fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?, oldUri: String): String {
-        val byteArray = newUri?.let { context?.contentResolver?.openInputStream(it)?.readBytes() }
-        val folder = File(context?.filesDir, "Avatars")
+    suspend fun savePhoto(newUri: Uri?): String {
+        val byteArray = newUri?.let { context.contentResolver?.openInputStream(it)?.readBytes() }
+        val folder = File(context.filesDir, "Avatars")
         folder.mkdirs()
-        File(oldUri).delete()
+        File(getUserPhoto().toString()).delete()
         val file = File(folder, "${UUID.randomUUID()}")
         if (byteArray != null) {
             file.writeBytes(byteArray)

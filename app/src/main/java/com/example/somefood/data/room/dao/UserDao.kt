@@ -27,11 +27,14 @@ interface UserDao {
     @Query("SELECT * FROM user_table WHERE userUID LIKE :userID")
     suspend fun observeUserById(userID: Int): UserModel
 
+    @Query("SELECT photoProfile FROM user_table WHERE userUID LIKE :userID")
+    suspend fun getUserPhoto(userID: Int): String
+
     @Query("UPDATE user_table SET types = :newTypes WHERE userUID = :userId")
     suspend fun updateUserTypes(userId: Int, newTypes: UserTypes)
 
     @Query("UPDATE user_table SET photoProfile = :newPhoto WHERE userUID = :userId")
-    suspend fun updateUserPhoto(userId: Int, newPhoto: String)
+    suspend fun setPhoto(userId: Int, newPhoto: String)
 
     @Query("UPDATE user_table SET description = :newDescription WHERE userUID = :userId")
     suspend fun updateUserDescription(userId: Int, newDescription: String)

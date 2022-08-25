@@ -72,19 +72,13 @@ class ProfileViewModel(
 
     private fun setPhotoProfile(profilePhoto: String) {
         viewModelScope.launch {
-            userRepository.updateUserPhoto(userRepository.getUserID(), profilePhoto)
+            userRepository.setPhoto(userRepository.getUserID(), profilePhoto)
         }
     }
 
-    fun writeToInternalStoragePhoto(context: Context?, newUri: Uri?){
+    fun savePhoto(newUri: Uri?){
         viewModelScope.launch {
-            setPhotoProfile(
-                userRepository.writeToInternalStoragePhoto(
-                    context,
-                    newUri,
-                    _userProfile.value?.photoProfile ?: ""
-                )
-            )
+            setPhotoProfile(userRepository.savePhoto(newUri))
         }
     }
 
