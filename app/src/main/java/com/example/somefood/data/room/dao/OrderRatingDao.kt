@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.somefood.data.model.AverageRating
 
 import com.example.somefood.data.model.OrderRating
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderRatingDao {
@@ -19,5 +20,8 @@ interface OrderRatingDao {
 
     @Query("UPDATE user_rating SET starForCreator = :rating WHERE orderId = :orderId")
     suspend fun increaseRatingByCreator(orderId: Int, rating: Double)
+
+    @Query("SELECT * FROM user_rating WHERE userId = :userId")
+    fun observeRatingOrder(userId: Int): Flow<List<OrderRating>>
 
 }

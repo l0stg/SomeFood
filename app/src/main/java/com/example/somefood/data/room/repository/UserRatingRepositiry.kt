@@ -3,6 +3,7 @@ package com.example.somefood.data.room.repository
 import com.example.somefood.data.model.AverageRating
 import com.example.somefood.data.model.OrderRating
 import com.example.somefood.data.room.dao.OrderRatingDao
+import kotlinx.coroutines.flow.Flow
 
 class UserRatingRepositiry(
     private val myDao: OrderRatingDao
@@ -16,5 +17,8 @@ class UserRatingRepositiry(
 
     suspend fun increaseRatingByCreator(orderId: Int, rating: Double) =
         myDao.increaseRatingByCreator(orderId, rating)
+
+    fun observeRatingOrder(userId: Int): Flow<List<OrderRating>> =
+        myDao.observeRatingOrder(userId)
 
 }

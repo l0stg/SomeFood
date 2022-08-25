@@ -59,5 +59,9 @@
     <string name="descriptionInProfile">Описание</string>
     <string name="inWait">В ожидании</string>
 
+    <string name="timeHoursMinutesFormatter" translatable="false">%02d:%02d</string>
+    <string name="starsForClientInHistoryOrder">Оценка клиента</string>
+    <string name="starsForCreatorInHistoryOrder">Оценка заказчика</string>
+
 
 </resources>

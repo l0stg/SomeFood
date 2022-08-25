@@ -13,12 +13,6 @@ class BottomSheetRatingViewModel(
     private val userRepository: RepositoryUser
 ) : ViewModel() {
 
-    private fun updateUserRating(newOrderRating: OrderRating){
-        viewModelScope.launch {
-            userRatingRepositiry.updateUserRating(newOrderRating)
-        }
-    }
-
     fun goRatingUser(userIdToRating: Int?, rating: Double, orderId: Int){
         viewModelScope.launch {
             val user = userRepository.observeUserById(userIdToRating!!)
