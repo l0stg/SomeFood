@@ -87,7 +87,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     ).show()
                 }
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.newInstance(
+                    CustomBottomSheetDialogFragment.show(
                         it.item.name,
                         it.item.image,
                         childFragmentManager

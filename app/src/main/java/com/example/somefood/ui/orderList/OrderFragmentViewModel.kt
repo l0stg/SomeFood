@@ -40,7 +40,7 @@ class OrderFragmentViewModel(
                     id = item.id,
                     orderName = item.orderName,
                     userID = item.userID,
-                    timeToComplit = item.timeToComplit,
+                    timeToComplete = item.timeToComplete,
                     integerBuy = item.integerBuy,
                     status = Status.JOB,
                     image = item.image,

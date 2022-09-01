@@ -8,23 +8,24 @@
     android:orientation="vertical">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageButton
-        android:id="@+id/addNewProfileImageButton"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_baseline_add_a_photo_24"
-        android:translationZ="1dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="110dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        android:contentDescription="@string/editPhotoInProfile" />
+        android:paddingBottom="8dp">
+
+        <ImageButton
+            android:id="@+id/addNewProfileImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="110dp"
+            android:contentDescription="@string/editPhotoInProfile"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:translationZ="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -49,9 +50,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_launcher_foreground"
-                    android:contentDescription="@string/photoInProfile" />
-
+                    android:contentDescription="@string/photoInProfile"
+                    android:src="@drawable/ic_launcher_foreground" />
 
 
             </androidx.cardview.widget.CardView>
@@ -70,17 +70,17 @@
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchTypesInProfile"
                 android:layout_width="wrap_content"
-                android:minHeight="48dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="15sp"
-                android:textColor="@color/white"
+                android:minHeight="48dp"
                 android:text="@string/iCreator"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cvHistoryOrder"
             android:layout_width="380dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
@@ -158,12 +158,13 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -183,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:gravity="center"
-                        android:text="@string/descriptionFood"
+                        android:text="@string/descriptionInProfile"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -215,26 +216,25 @@
                     android:id="@+id/userDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:enabled="false"
-                    android:text="@string/descriptionFood"
                     android:background="@null"
+                    android:enabled="false"
+                    android:padding="12dp"
+                    android:text="@string/descriptionInProfile"
                     android:textSize="20sp" />
 
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="380dp"
             android:layout_height="140dp"
-            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView3">
+            app:layout_constraintTop_toBottomOf="@+id/cvHistoryOrder">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
@@ -300,7 +300,6 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:text="@string/midleStarInProfile"
-                        android:textAlignment="center"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -372,6 +371,6 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

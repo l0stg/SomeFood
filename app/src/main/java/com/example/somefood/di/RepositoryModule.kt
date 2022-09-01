@@ -1,18 +1,16 @@
 package com.example.somefood.di
 
-import com.example.somefood.data.room.repository.OrderRepository
-import com.example.somefood.data.room.repository.RepositoryFavorite
-import com.example.somefood.data.room.repository.RepositoryFood
-import com.example.somefood.data.room.repository.RepositoryUser
+import com.example.somefood.data.room.repository.*
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 // Сингл репозитория для работы с БД пользователей
 
 val repositoryModule = module {
 
-    single { RepositoryUser(get(), get()) }
+    single { RepositoryUser(get(), get(), androidContext()) }
     single { RepositoryFood(get()) }
     single { RepositoryFavorite(get()) }
     single { OrderRepository(get()) }
-
+    single { UserRatingRepositiry(get()) }
 }

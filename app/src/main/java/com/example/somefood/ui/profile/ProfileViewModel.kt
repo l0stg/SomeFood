@@ -1,10 +1,10 @@
 package com.example.somefood.ui.profile
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.Order
-import com.example.somefood.data.model.UserModel
-import com.example.somefood.data.model.UserTypes
+import com.example.somefood.data.model.*
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
@@ -14,11 +14,11 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val router: Router,
-    private val userRepository: RepositoryUser
+    private val userRepository: RepositoryUser,
 ) : ViewModel() {
 
-    private val _userProfile = MutableStateFlow<UserModel>(UserModel(0, "","", UserTypes.USER,))
-    val userProfile: Flow<UserModel> = _userProfile
+    private val _userProfile = MutableStateFlow<UserProfileModel?>(null)
+    val userProfile: Flow<UserProfileModel?> = _userProfile
 
     private fun routeToProductList() =
         router.newRootScreen(Screens().routeToProductList())
@@ -32,16 +32,30 @@ class ProfileViewModel(
 
     private fun getUserProfile(){
         viewModelScope.launch {
-            _userProfile.value = userRepository.observeUserById(userRepository.getUserID())
+            userRepository.observeUserByIdFlow(userRepository.getUserID()).collect{
+                _userProfile.value = it
+            }
         }
     }
-
     private fun switchTypes(types: UserTypes) {
         viewModelScope.launch {
             userRepository.updateUserType(userRepository.getUserID(), types)
         }
     }
 
+    fun updateDescription(newDescription: String) {
+        viewModelScope.launch {
+            userRepository.updateUserDescription(userRepository.getUserID(), newDescription)
+        }
+    }
+
+    fun goSwitchType(isChecked: Boolean) {
+        if (isChecked) {
+            switchTypes(UserTypes.CREATOR)
+        } else {
+            switchTypes(UserTypes.USER)
+        }
+    }
 
     fun routeToMainScreen() {
         viewModelScope.launch {
@@ -56,15 +70,19 @@ class ProfileViewModel(
         }
     }
 
-    fun updateDescription(newDescription: String) {
+    private fun setPhotoProfile(profilePhoto: String) {
         viewModelScope.launch {
-            userRepository.updateUserDescription(userRepository.getUserID(), newDescription)
+            userRepository.setPhoto(userRepository.getUserID(), profilePhoto)
         }
     }
-    fun goSwitchType(isChecked: Boolean) {
-        when (isChecked) {
-            true -> switchTypes(UserTypes.CREATOR)
-            false -> switchTypes(UserTypes.USER)
+
+    fun savePhoto(newUri: Uri?){
+        viewModelScope.launch {
+            setPhotoProfile(userRepository.savePhoto(newUri))
         }
+    }
+
+    fun routeToHistoryOrder() {
+        router.navigateTo(Screens().routeToHistoryOrder())
     }
 }

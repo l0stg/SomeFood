@@ -43,7 +43,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
                 is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.newInstance(
+                    CustomBottomSheetDialogFragment.show(
                         it.item.name,
                         it.item.image,
                         childFragmentManager

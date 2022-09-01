@@ -28,7 +28,8 @@ class OrderBasketViewModel(
     fun pickUpOrder(order: Order) {
         viewModelScope.launch {
             orderRepository.deleteOrder(order)
+            repositoryUser.increaseOrdersByCreator(order.userIdGoToJob)
+
         }
     }
-
 }

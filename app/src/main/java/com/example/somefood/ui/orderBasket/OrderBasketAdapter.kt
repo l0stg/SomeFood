@@ -22,24 +22,24 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
         notifyDataSetChanged()
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemByClientBinding.bind(itemView)
         fun bind(item: Order, buttonPickUpOrder: (item: Order) -> Unit) {
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
-                timeFoodOrder.text = item.timeToComplit
+                timeFoodOrder.text = item.timeToComplete
                 when (item.status) {
-                    Status.COMPLIT -> {
+                    Status.COMPLETE -> {
                         buttonPickUp.visibility = View.VISIBLE
                         buttonPickUp.isEnabled = true
-                        statusFoodOrder.text = item.status.status
+                        statusFoodOrder.text = itemView.context.getString(R.string.complit)
                         statusFoodOrder.setTextColor(Color.GREEN)
                     }
                     else -> {
                         buttonPickUp.visibility = View.INVISIBLE
                         buttonPickUp.isEnabled = false
-                        statusFoodOrder.text = item.status.status
+                        statusFoodOrder.text = itemView.context.getString(R.string.inWait)
                         when(item.status) {
                             Status.WAIT -> statusFoodOrder.setTextColor(Color.GRAY)
                             Status.JOB -> statusFoodOrder.setTextColor(Color.YELLOW)

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addOrder(newModel: Order)
+    suspend fun addOrder(newModel: Order): Long
 
     @Query("SELECT * FROM order_table WHERE status LIKE :status ")
     fun observeOrderTable(status: Status): Flow<List<Order>>
