@@ -40,7 +40,6 @@
                 <ImageButton
                     android:id="@+id/addToFavorite"
                     android:layout_width="48dp"
-                    android:outlineSpotShadowColor="@color/black"
                     android:layout_height="48dp"
                     android:layout_margin="4dp"
                     android:background="?selectableItemBackgroundBorderless"
