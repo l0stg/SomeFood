@@ -16,7 +16,7 @@ class DialogViewModel(
     private val orderRating: UserRatingRepositiry,
 ) : ViewModel() {
 
-    fun addNewOrder(time: String, price: String, itemName: String, itemImage: String) {
+    fun addNewOrder(time: String, price: String, itemName: String, itemImage: String, foodId: Int) {
         viewModelScope.launch {
             increaseOrders()
             val newOrderId = repositoryOrder.addNewBuy(
@@ -27,6 +27,7 @@ class DialogViewModel(
                     integerBuy = price.toInt(),
                     status = Status.WAIT,
                     image = itemImage,
+                    foodId = foodId,
                 )
             )
             orderRating.updateUserRating(

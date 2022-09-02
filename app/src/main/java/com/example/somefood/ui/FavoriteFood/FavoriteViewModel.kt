@@ -28,7 +28,7 @@ class FavoriteViewModel(
         viewModelScope.launch {
             _list.value = repositoryFood.updateFavoriteTable(
                 repositoryFavorite
-                    .updateFavoriteTable(
+                    .observeFavoriteTable(
                         repositoryUser.getUserID()
                     )
             )
@@ -43,6 +43,6 @@ class FavoriteViewModel(
     }
 
     fun routeToFavorite(item: ProductListModel) {
-        router.navigateTo(Screens().routeToDetail(item))
+        router.navigateTo(Screens().routeToDetail(item.id))
     }
 }

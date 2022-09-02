@@ -31,8 +31,8 @@ class ProductListClientViewModel(
     fun routeToFavorite() =
         router.navigateTo(Screens().routeToFavorite())
 
-    fun routeToDetail(model: ProductListModel) =
-        router.navigateTo(Screens().routeToDetail(model))
+    fun routeToDetail(foodId: Int) =
+        router.navigateTo(Screens().routeToDetail(foodId))
 
 
     fun routeToBascet() =
@@ -61,7 +61,7 @@ class ProductListClientViewModel(
     // Слежка за данными в таблице
     private fun updateFoodTable() {
         viewModelScope.launch {
-            repositoryFood.updateTable().collect {
+            repositoryFood.observeTable().collect {
                 _list.value = it
             }
         }

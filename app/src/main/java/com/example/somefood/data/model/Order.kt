@@ -15,6 +15,7 @@ data class Order(
     @ColumnInfo(name = "status") val status: Status,
     @ColumnInfo(name = "image") val image: String,
     @ColumnInfo(name = "userIdGoToJob") val userIdGoToJob: Int = -1,
+    @ColumnInfo(name = "foodId") val foodId: Int,
 )
 
 enum class Status() {

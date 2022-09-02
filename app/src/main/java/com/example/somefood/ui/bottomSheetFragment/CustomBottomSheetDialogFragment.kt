@@ -18,12 +18,14 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         private const val TAG = "AddToOrder"
         private const val KEY = "NAME"
         private const val IMAGE = "IMAGE"
-        fun show(name: String, image: String, fragmentManager: FragmentManager) =
+        private const val FOODID = "FOODID"
+        fun show(name: String, image: String, foodId: Int, fragmentManager: FragmentManager) =
             CustomBottomSheetDialogFragment().apply {
                 show(fragmentManager, TAG)
                 arguments = Bundle().apply {
                     putString(KEY, name)
                     putString(IMAGE, image)
+                    putInt(FOODID, foodId)
                 }
             }
     }
@@ -43,13 +45,14 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val itemName = arguments?.getString(KEY) ?: ""
         val itemImage = arguments?.getString(IMAGE) ?: ""
+        val foodId = arguments?.getInt(FOODID) ?: 0
 
         with(binding) {
             timePicker.setIs24HourView(true)
             timePicker.hour = 0
             timePicker.minute = 0
             buttonAdToBuy.setOnClickListener {
-                if (buyPrice.text.isNotEmpty() && !buyPrice.text.startsWith("0") && (timePicker.hour != 0 || timePicker.minute != 0)) {
+                if (checkValidation(buyPrice.text.toString()) && (timePicker.hour != 0 || timePicker.minute != 0)) {
                     val time = String.format(
                         resources.getString(R.string.timeHoursMinutesFormatter), timePicker.hour, timePicker.minute
                     )
@@ -57,7 +60,8 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
                         time,
                         buyPrice.text.toString(),
                         itemName,
-                        itemImage
+                        itemImage,
+                        foodId
                     )
                     dialog?.dismiss()
                 } else {
@@ -70,5 +74,10 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+    }
+
+    // Вынести во вьюмодел
+    private fun checkValidation(buyPrice: String): Boolean {
+        return (buyPrice.isNotEmpty() && !buyPrice.startsWith("0") && !buyPrice.startsWith("-"))
     }
 }

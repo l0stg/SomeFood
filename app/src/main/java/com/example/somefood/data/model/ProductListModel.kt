@@ -8,13 +8,14 @@ data class ProductListModel(
     val name: String,
     val image: String,
     val description: String,
+    val favoriteInUser: Boolean
 ) : Parcelable {
-
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readString().toString(),
-        parcel.readString().toString()
+        parcel.readString().toString(),
+        parcel.readByte() != 0.toByte()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -22,6 +23,7 @@ data class ProductListModel(
         parcel.writeString(name)
         parcel.writeString(image)
         parcel.writeString(description)
+        parcel.writeByte(if (favoriteInUser) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -38,3 +40,4 @@ data class ProductListModel(
         }
     }
 }
+

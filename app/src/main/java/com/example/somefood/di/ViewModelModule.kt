@@ -26,8 +26,8 @@ val viewModelModule = module {
     viewModel { ProductListClientViewModel(get(), get(), get(), get()) }
     viewModel { FavoriteViewModel(get(), get(), get(), get()) }
     viewModel { OrderFragmentViewModel(get(), get(), get()) }
-    viewModel { OrderBasketViewModel(get(), get()) }
-    viewModel { DetailFoodViewModel(get(), get()) }
+    viewModel { OrderBasketViewModel(get(), get(), get()) }
+    viewModel { DetailFoodViewModel(get(), get(), get()) }
     viewModel { OrderByCreatorViewModel(get(), get()) }
     viewModel { ProfileViewModel (get(), get()) }
     viewModel { BottomSheetRatingViewModel(get(), get())}

@@ -33,8 +33,34 @@
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/menu/main_menu.xml" value="0.6" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/menu/order_menu.xml" value="0.6" />
         <entry key="..\:/AndroidProject/SomeFood/SomeFood/app/src/main/res/menu/profile_menu.xml" value="0.37135416666666665" />
-        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_baseline_assignment_24.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_baseline_local_pizza_24.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/ic_basket.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/drawable/skeleton.xml" value="0.1945" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/empty_view.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/food_item.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_bottom_sheet_rating.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_creator_list.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_detail_food.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_favorite_food.xml" value="0.22" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_hello_screen.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_history_order.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_order_basket.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_order_by_creator.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_product_list_client.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_registration.xml" value="0.22" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/history_order_item.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/loading_item.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/order_item.xml" value="0.33" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/order_item_by_client.xml" value="0.2" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/skeleton_row_layout.xml" value="0.33" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/SomeFood/app/src/main/res/layout/switch_item.xml" value="0.2" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2765" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.2765" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.2765" />

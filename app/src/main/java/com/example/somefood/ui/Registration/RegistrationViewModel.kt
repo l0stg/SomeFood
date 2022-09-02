@@ -28,24 +28,30 @@ class RegistrationViewModel(
         router.newRootScreen(Screens().routeToCreatorList())
 
     fun addUser(email: String, password: String, types: UserTypes) {
-        viewModelScope.launch {
-            if (myRepository.checkRegistration(email).isEmpty()) {
-                val newUserId = myRepository.addUser(
-                    UserModel(
-                        eMail = email,
-                        password = encode(password),
-                        types = types
+        if (isEmailValid(email) && password.isNotEmpty()) {
+            viewModelScope.launch {
+                if (myRepository.checkRegistration(email).isEmpty()) {
+                    val newUserId = myRepository.addUser(
+                        UserModel(
+                            eMail = email,
+                            password = encode(password),
+                            types = types
+                        )
                     )
-                )
-                myRepository.saveUserID(newUserId.toInt())
-                when (types) {
-                    UserTypes.USER -> routeToProductList()
-                    UserTypes.CREATOR -> routeToCreatorList()
+                    myRepository.saveUserID(newUserId.toInt())
+                    when (types) {
+                        UserTypes.USER -> routeToProductList()
+                        UserTypes.CREATOR -> routeToCreatorList()
+                    }
+                } else {
+                    _statusRegistration.value = true
+                    _statusRegistration.value = false
                 }
-            } else {
-                _statusRegistration.value = true
-                _statusRegistration.value = false
             }
         }
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

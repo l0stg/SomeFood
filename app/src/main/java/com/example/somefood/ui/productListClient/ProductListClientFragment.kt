@@ -77,7 +77,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
         myAdapter = ProductListClientAdapter {
             when (it) {
-                is OpenDetail -> viewModel.routeToDetail(it.item)
+                is OpenDetail -> viewModel.routeToDetail(it.item.id)
                 is ToFavorite -> {
                     viewModel.addNewFavoriteItem(it.item.id)
                     Snackbar.make(
@@ -90,6 +90,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     CustomBottomSheetDialogFragment.show(
                         it.item.name,
                         it.item.image,
+                        it.item.id,
                         childFragmentManager
                     )
                 }
@@ -110,9 +111,15 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                             id = it.id,
                             name = it.name,
                             description = it.recept,
-                            image = it.image
+                            image = it.image,
+                            favoriteInUser = true,
                         )
                     })
+                    if (it.isNotEmpty()) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
                 }
             }
         }

@@ -21,8 +21,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
 
-    private var myAdapter: FavoriteAdapter? = null
     private val binding: FragmentFavoriteFoodBinding by viewBinding()
+    private var myAdapter: FavoriteAdapter? = null
+
     private val viewModel: FavoriteViewModel by viewModel()
 
     companion object {
@@ -46,6 +47,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                     CustomBottomSheetDialogFragment.show(
                         it.item.name,
                         it.item.image,
+                        it.item.id,
                         childFragmentManager
                     )
                 }
@@ -67,11 +69,18 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                             id = it.id,
                             name = it.name,
                             description = it.recept,
-                            image = it.image
+                            image = it.image,
+                            favoriteInUser = true
                         )
                     })
+                    if (it.isNotEmpty()) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
                 }
             }
         }
     }
 }
+

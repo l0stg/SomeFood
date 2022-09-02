@@ -1,7 +1,10 @@
 package com.example.somefood.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -52,6 +55,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                     false -> {
                         userDescription.isEnabled = true
                         userDescription.requestFocus()
+                        it.showKeyboard(userDescription)
+                        userDescription.setSelection(userDescription.length())
+
                     }
                 }
             }
@@ -62,6 +68,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
                 viewModel.goSwitchType(isChecked)
             }
         }
+    }
+
+    private fun View.showKeyboard(editText: EditText) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onBackPressed(): Boolean {

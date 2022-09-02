@@ -46,6 +46,11 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
+                    if (it.isNotEmpty()) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
                 }
             }
         }

@@ -1,7 +1,6 @@
 package com.example.somefood.data.room.repository
 
 
-import com.example.somefood.R
 import com.example.somefood.data.model.FoodDataModel
 import com.example.somefood.data.room.dao.FoodDao
 import kotlinx.coroutines.flow.Flow
@@ -13,10 +12,13 @@ class RepositoryFood(
         foodDao.addAllElement(PREPOPULATE_DATA)
     }
 
+    suspend fun getElement(foodId: Int): FoodDataModel =
+        foodDao.getElement(foodId)
+
     suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> =
         foodDao.updateFavoriteTable(listID)
 
-    fun updateTable(): Flow<List<FoodDataModel>> = foodDao.updateFoodTable()
+    fun observeTable(): Flow<List<FoodDataModel>> = foodDao.observeFoodTable()
 
     private val recept = "Сварить бульон из говядины на косточке.\n" +
             "Свеклу очистить, нарезать соломкой, посолить и сбрызнуть лимонным соком или лимонной кислотой, положить в кастрюлю. Затем добавить измельченный репчатый лук, растертый со свиным салом, томатную пасту, сахар и тушить массу до полу готовности.\n" +
@@ -27,14 +29,15 @@ class RepositoryFood(
 
     private val foodImg = "https://images.spoonacular.com/file/wximages/316774-312x231.png"
     private val PREPOPULATE_DATA = listOf(
-        FoodDataModel(id = 1, name = "БОРЩ", image = foodImg, recept = recept),
-        FoodDataModel(id = 2, name = "КАРТОШКА", image = foodImg, recept = recept),
-        FoodDataModel(id = 3, name = "ПЛОВ", image = foodImg, recept = recept),
-        FoodDataModel(id = 4, name = "ОКРОШКА", image = foodImg, recept = recept),
-        FoodDataModel(id = 5, name = "МЯСО", image = foodImg, recept = recept),
-        FoodDataModel(id = 6, name = "КУРИЦА", image = foodImg, recept = recept),
-        FoodDataModel(id = 7, name = "ЖАРЕННЫЕ ГВОЗДИ", image = foodImg, recept = recept),
-        FoodDataModel(id = 8, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept)
+        FoodDataModel(id = 0, name = "БОРЩ", image = foodImg, recept = recept),
+        FoodDataModel(id = 1, name = "КАРТОШКА", image = foodImg, recept = recept),
+        FoodDataModel(id = 2, name = "ПЛОВ", image = foodImg, recept = recept),
+        FoodDataModel(id = 3, name = "ОКРОШКА", image = foodImg, recept = recept),
+        FoodDataModel(id = 4, name = "МЯСО", image = foodImg, recept = recept),
+        FoodDataModel(id = 5, name = "КУРИЦА", image = foodImg, recept = recept),
+        FoodDataModel(id = 6, name = "ЖАРЕННЫЕ ГВОЗДИ", image = foodImg, recept = recept),
+        FoodDataModel(id = 7, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept),
+        FoodDataModel(id = 7, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept)
     )
 
 

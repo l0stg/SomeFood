@@ -76,6 +76,11 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
+                    if (it.isNotEmpty()) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
                 }
             }
         }

@@ -44,7 +44,8 @@ class OrderFragmentViewModel(
                     integerBuy = item.integerBuy,
                     status = Status.JOB,
                     image = item.image,
-                    userIdGoToJob = userRepository.getUserID()
+                    userIdGoToJob = userRepository.getUserID(),
+                    foodId = item.foodId
                 )
             )
         }

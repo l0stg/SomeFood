@@ -10,8 +10,8 @@ class RepositoryFavorite(
     suspend fun addToFavorite(newFavoriteModel: FavoriteModel) =
         favoriteDao.addFavoriteFood(newFavoriteModel)
 
-    suspend fun updateFavoriteTable(id: Int): List<Int> =
-        favoriteDao.updateFavoriteTable(id)
+    suspend fun observeFavoriteTable(id: Int): List<Int> =
+        favoriteDao.observeFavoriteTable(id)
 
     suspend fun deleteItem(idFood: Int, userID: Int) =
         favoriteDao.deleteItem(idFood, userID)

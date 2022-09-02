@@ -40,7 +40,8 @@ class OrderByCreatorViewModel(
                     integerBuy = item.integerBuy,
                     status = newStatus,
                     image = item.image,
-                    userIdGoToJob = item.userIdGoToJob
+                    userIdGoToJob = item.userIdGoToJob,
+                    foodId = item.foodId
                 )
             )
         }

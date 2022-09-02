@@ -13,7 +13,7 @@ interface FavoriteDao {
     suspend fun addFavoriteFood(newFavoriteModel: FavoriteModel)
 
     @Query("SELECT foodId FROM foodFavorite_table WHERE userId LIKE :userID")
-    suspend fun updateFavoriteTable(userID: Int): List<Int>
+    suspend fun observeFavoriteTable(userID: Int): List<Int>
 
     @Query("DELETE FROM foodFavorite_table WHERE foodID LIKE :idFood AND userID LIKE :userID ")
     suspend fun deleteItem(idFood: Int, userID: Int)

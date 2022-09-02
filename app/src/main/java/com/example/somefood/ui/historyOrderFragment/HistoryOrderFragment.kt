@@ -31,6 +31,9 @@ class HistoryOrderFragment : Fragment(R.layout.fragment_history_order) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.title = getString(R.string.historyFragment)
+
         myAdapter = HistoryOrderAdapter()
         with(binding) {
             historyOrderRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -41,6 +44,11 @@ class HistoryOrderFragment : Fragment(R.layout.fragment_history_order) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                         myAdapter?.set(it)
+                    if (it.isNotEmpty()) {
+                        binding.emptyView.visibility = View.GONE
+                    } else {
+                        binding.emptyView.visibility = View.VISIBLE
+                    }
                 }
             }
         }
