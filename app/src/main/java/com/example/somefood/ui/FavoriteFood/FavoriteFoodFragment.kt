@@ -64,6 +64,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
+                    if (it.isNotEmpty()) {
                     myAdapter?.set(it.map {
                         ProductListModel(
                             id = it.id,
@@ -72,7 +73,6 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                             image = it.image,
                         )
                     })
-                    if (it.isNotEmpty()) {
                         binding.emptyView.visibility = View.GONE
                     } else {
                         binding.emptyView.visibility = View.VISIBLE

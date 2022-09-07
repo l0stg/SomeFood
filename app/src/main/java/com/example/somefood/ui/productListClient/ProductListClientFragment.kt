@@ -106,8 +106,8 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    myAdapter?.set(it)
                     if (it.isNotEmpty()) {
+                        myAdapter?.set(it)
                         binding.emptyView.visibility = View.GONE
                     } else {
                         binding.emptyView.visibility = View.VISIBLE
