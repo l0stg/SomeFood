@@ -11,7 +11,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.FragmentOrderByCreatorBinding
+import com.example.somefood.ui.ItemInOrderClick
+import com.example.somefood.ui.OpenDetailInfo
 import com.example.somefood.ui.bottomSheetRating.BottomSheetRatingFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,9 +33,20 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
         updateDataInUI()
 
         myAdapter = OrderByCreatorAdapter {
-            viewModel.addInJob(it)
-            if (it.status == Status.JOB){
-                BottomSheetRatingFragment.show(it.userID, it.id, childFragmentManager)
+            when(it) {
+                is ItemInOrderClick -> {
+                    viewModel.addInJob(it.item)
+                    if (it.item.status == Status.JOB) {
+                        BottomSheetRatingFragment.show(
+                            it.item.userID,
+                            it.item.id,
+                            childFragmentManager
+                        )
+                    }
+                }
+                is OpenDetailInfo -> {
+                    viewModel.routeToDetailInfo(it.item.foodId)
+                }
             }
         }
         with(binding) {

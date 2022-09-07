@@ -1,5 +1,6 @@
 package com.example.somefood.ui.detailFood
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -53,6 +54,10 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
                             .centerCrop()
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .into(ivDetail)
+                        if (it.idFavorite != null)
+                            addToFavorite.setBackgroundColor(Color.RED)
+                        else
+                            addToFavorite.setBackgroundColor(Color.GREEN)
                         addToBuy.setOnClickListener {
                             CustomBottomSheetDialogFragment.show(
                                 model.name,

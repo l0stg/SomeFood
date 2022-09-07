@@ -17,7 +17,7 @@
     <string name="doubleRegistr">Пользователь уже зарегистрирован</string>
     <string name="unCorrectPassword">Неверный логин/пароль</string>
     <string name="signOut">Выход из акканута</string>
-    <string name="addToFavorite">добавленно в избранное</string>
+    <string name="addToFavorite">its OK </string>
     <string name="checkToOrder">Уточните заказ</string>
     <string name="createOrder">Сделать заказ</string>
     <string name="timeOrder">Желаемое время выполнения заказа</string>

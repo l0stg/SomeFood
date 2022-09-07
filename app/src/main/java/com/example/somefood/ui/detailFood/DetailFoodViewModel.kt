@@ -20,12 +20,12 @@ class DetailFoodViewModel(
     private val repositoryFood: RepositoryFood,
 ) : ViewModel() {
 
-    private val _model= MutableStateFlow<FoodDataModel?>(null)
-    val model: Flow<FoodDataModel?> = _model
+    private val _model= MutableStateFlow<ProductListModel?>(null)
+    val model: Flow<ProductListModel?> = _model
 
     fun addNewFavoriteItem(idFood: Int) {
         viewModelScope.launch {
-            repositoryFavorite.addToFavorite(
+            repositoryFavorite.addAndDeleteFavorite(
                 FavoriteModel(
                     userId = repositoryUser.getUserID(),
                     foodId = idFood
@@ -36,7 +36,9 @@ class DetailFoodViewModel(
 
     fun getInfo(foodId: Int) {
         viewModelScope.launch {
-            _model.value = repositoryFood.getElement(foodId)
+           repositoryFood.getElement(foodId, repositoryUser.getUserID()).collect{
+               _model.value = it
+           }
         }
     }
 }

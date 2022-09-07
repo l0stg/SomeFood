@@ -2,6 +2,7 @@ package com.example.somefood.data.room.repository
 
 
 import com.example.somefood.data.model.FoodDataModel
+import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.room.dao.FoodDao
 import kotlinx.coroutines.flow.Flow
 
@@ -12,13 +13,13 @@ class RepositoryFood(
         foodDao.addAllElement(PREPOPULATE_DATA)
     }
 
-    suspend fun getElement(foodId: Int): FoodDataModel =
-        foodDao.getElement(foodId)
+    suspend fun getElement(foodId: Int, userId: Int): Flow<ProductListModel> =
+        foodDao.getElement(foodId, userId)
 
     suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> =
         foodDao.updateFavoriteTable(listID)
 
-    fun observeTable(): Flow<List<FoodDataModel>> = foodDao.observeFoodTable()
+    fun observeTableWithFavorite(userId: Int): Flow<List<ProductListModel>> = foodDao.observeFoodTableWithFavorite(userId)
 
     private val recept = "Сварить бульон из говядины на косточке.\n" +
             "Свеклу очистить, нарезать соломкой, посолить и сбрызнуть лимонным соком или лимонной кислотой, положить в кастрюлю. Затем добавить измельченный репчатый лук, растертый со свиным салом, томатную пасту, сахар и тушить массу до полу готовности.\n" +

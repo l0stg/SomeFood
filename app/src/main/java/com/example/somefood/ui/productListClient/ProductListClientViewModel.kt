@@ -22,11 +22,12 @@ class ProductListClientViewModel(
 ) : ViewModel() {
 
     init {
-        updateFoodTable()
+        observeFoodTable()
     }
 
-    private val _list = MutableStateFlow<List<FoodDataModel>>(emptyList())
-    val list: Flow<List<FoodDataModel>> = _list
+    private val _list = MutableStateFlow<List<ProductListModel>>(emptyList())
+    val list: Flow<List<ProductListModel>> = _list
+
 
     fun routeToFavorite() =
         router.navigateTo(Screens().routeToFavorite())
@@ -49,7 +50,7 @@ class ProductListClientViewModel(
 
     fun addNewFavoriteItem(idFood: Int) {
         viewModelScope.launch {
-            repositoryFavorite.addToFavorite(
+            repositoryFavorite.addAndDeleteFavorite(
                 FavoriteModel(
                     userId = repositoryUser.getUserID(),
                     foodId = idFood
@@ -58,12 +59,13 @@ class ProductListClientViewModel(
         }
     }
 
-    // Слежка за данными в таблице
-    private fun updateFoodTable() {
+
+    private fun observeFoodTable() {
         viewModelScope.launch {
-            repositoryFood.observeTable().collect {
+            repositoryFood.observeTableWithFavorite(repositoryUser.getUserID()).collect {
                 _list.value = it
             }
         }
     }
+
 }

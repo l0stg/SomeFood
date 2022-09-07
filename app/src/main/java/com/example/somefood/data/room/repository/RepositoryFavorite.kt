@@ -7,12 +7,16 @@ class RepositoryFavorite(
     private val favoriteDao: FavoriteDao
 ) {
 
-    suspend fun addToFavorite(newFavoriteModel: FavoriteModel) =
-        favoriteDao.addFavoriteFood(newFavoriteModel)
-
     suspend fun observeFavoriteTable(id: Int): List<Int> =
         favoriteDao.observeFavoriteTable(id)
 
     suspend fun deleteItem(idFood: Int, userID: Int) =
         favoriteDao.deleteItem(idFood, userID)
+
+    suspend fun addAndDeleteFavorite(newFavoriteModel: FavoriteModel) {
+        if (favoriteDao.checkingFavoriteTable(newFavoriteModel.foodId, newFavoriteModel.userId) == null)
+            favoriteDao.addFavoriteFood(newFavoriteModel)
+        else
+            favoriteDao.deleteItem(newFavoriteModel.foodId, newFavoriteModel.userId)
+        }
 }

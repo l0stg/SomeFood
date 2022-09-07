@@ -42,7 +42,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_margin="4dp"
-                    android:background="?selectableItemBackgroundBorderless"
+                    android:background="@color/purple_200"
                     android:contentDescription="@string/addToFavorite"
                     android:src="@drawable/ic_favorite" />
 

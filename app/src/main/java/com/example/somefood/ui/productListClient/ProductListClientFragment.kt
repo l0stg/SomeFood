@@ -106,15 +106,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    myAdapter?.set(it.map {
-                        ProductListModel(
-                            id = it.id,
-                            name = it.name,
-                            description = it.recept,
-                            image = it.image,
-                            favoriteInUser = true,
-                        )
-                    })
+                    myAdapter?.set(it)
                     if (it.isNotEmpty()) {
                         binding.emptyView.visibility = View.GONE
                     } else {

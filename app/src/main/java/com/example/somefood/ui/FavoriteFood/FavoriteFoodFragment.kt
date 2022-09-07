@@ -68,9 +68,8 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                         ProductListModel(
                             id = it.id,
                             name = it.name,
-                            description = it.recept,
+                            recept = it.recept,
                             image = it.image,
-                            favoriteInUser = true
                         )
                     })
                     if (it.isNotEmpty()) {
