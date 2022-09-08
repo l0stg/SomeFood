@@ -61,7 +61,8 @@ class NewOrderBottomSheetFragment : BottomSheetDialogFragment() {
                     )
 
                     viewModel.addNewOrder(
-                        time,
+                        timePicker.hour,
+                        timePicker.minute,
                         buyPrice.text.toString(),
                         itemName,
                         itemImage,

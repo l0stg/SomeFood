@@ -16,7 +16,7 @@ class NewOrderBottomSheetViewModel(
     private val orderRating: UserRatingRepositiry,
 ) : ViewModel() {
 
-    fun addNewOrder(time: String, price: String, itemName: String, itemImage: String, foodId: Int) {
+    fun addNewOrder(time: Int, time2: Int, price: String, itemName: String, itemImage: String, foodId: Int) {
         viewModelScope.launch {
             increaseOrders()
             val newOrderId = repositoryOrder.addNewBuy(
