@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.somefood.data.model.FoodDataModel
 import com.example.somefood.data.model.ProductListModel
-import com.example.somefood.data.model.UserProfileModel
 import kotlinx.coroutines.flow.Flow
 
 
@@ -22,11 +21,15 @@ interface FoodDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllElement(newFavorite: List<FoodDataModel>)
 
-    @Query("SELECT id, name, image, recept, idFavorite"  +
-            " FROM food_table LEFT JOIN foodFavorite_table ON id == foodId AND foodFavorite_table.userId LIKE :userId WHERE id LIKE :foodId")
+    @Query(
+        "SELECT id, name, image, recept, idFavorite" +
+                " FROM food_table LEFT JOIN foodFavorite_table ON id == foodId AND foodFavorite_table.userId LIKE :userId WHERE id LIKE :foodId"
+    )
     fun getElement(foodId: Int, userId: Int): Flow<ProductListModel>
 
-    @Query("SELECT id, name, image, recept, idFavorite"  +
-            " FROM food_table LEFT JOIN foodFavorite_table ON id == foodId AND foodFavorite_table.userId LIKE :userId ")
+    @Query(
+        "SELECT id, name, image, recept, idFavorite" +
+                " FROM food_table LEFT JOIN foodFavorite_table ON id == foodId AND foodFavorite_table.userId LIKE :userId "
+    )
     fun observeFoodTableWithFavorite(userId: Int): Flow<List<ProductListModel>>
 }

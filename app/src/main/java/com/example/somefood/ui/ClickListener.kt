@@ -9,5 +9,5 @@ class OpenDetail(val item: ProductListModel) : Click()
 class AddToBuy(val item: ProductListModel) : Click()
 
 sealed class ClickOrder
-class ItemInOrderClick(val item: Order): ClickOrder()
-class OpenDetailInfo(val item: Order): ClickOrder()
+class ItemInOrderClick(val item: Order) : ClickOrder()
+class OpenDetailInfo(val item: Order) : ClickOrder()

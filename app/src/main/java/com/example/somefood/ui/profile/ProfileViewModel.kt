@@ -1,10 +1,10 @@
 package com.example.somefood.ui.profile
 
-import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.*
+import com.example.somefood.data.model.UserProfileModel
+import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
@@ -26,17 +26,18 @@ class ProfileViewModel(
     private fun routeToCreatorList() =
         router.newRootScreen(Screens().routeToCreatorList())
 
-    init{
+    init {
         getUserProfile()
     }
 
-    private fun getUserProfile(){
+    private fun getUserProfile() {
         viewModelScope.launch {
-            userRepository.observeUserByIdFlow(userRepository.getUserID()).collect{
+            userRepository.observeUserByIdFlow(userRepository.getUserID()).collect {
                 _userProfile.value = it
             }
         }
     }
+
     private fun switchTypes(types: UserTypes) {
         viewModelScope.launch {
             userRepository.updateUserType(userRepository.getUserID(), types)
@@ -61,9 +62,10 @@ class ProfileViewModel(
         viewModelScope.launch {
             when (
                 userRepository
-                .observeUserById(
-                    userRepository.getUserID())
-                .types) {
+                    .observeUserById(
+                        userRepository.getUserID()
+                    )
+                    .types) {
                 UserTypes.USER -> routeToProductList()
                 UserTypes.CREATOR -> routeToCreatorList()
             }
@@ -76,7 +78,7 @@ class ProfileViewModel(
         }
     }
 
-    fun savePhoto(newUri: Uri?){
+    fun savePhoto(newUri: Uri?) {
         viewModelScope.launch {
             setPhotoProfile(userRepository.savePhoto(newUri))
         }

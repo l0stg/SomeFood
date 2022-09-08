@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.profile.ProfileFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,10 @@
             android:id="@+id/addNewProfileImageButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@null"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="80dp"
             android:layout_marginTop="110dp"
+            android:background="@null"
             android:contentDescription="@string/editPhotoInProfile"
             android:src="@drawable/ic_baseline_add_a_photo_24"
             android:translationZ="1dp"
@@ -200,11 +200,11 @@
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="@string/editDecriptionInProfile"
                         android:src="@drawable/ic_baseline_create_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/editDecriptionInProfile" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View

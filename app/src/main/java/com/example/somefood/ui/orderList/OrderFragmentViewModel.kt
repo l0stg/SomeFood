@@ -61,7 +61,7 @@ class OrderFragmentViewModel(
     }
 
     fun routeToProfile() {
-        router.navigateTo( Screens().routeToProfile() )
+        router.navigateTo(Screens().routeToProfile())
     }
 
     fun routeToDetailInfo(foodId: Int) {

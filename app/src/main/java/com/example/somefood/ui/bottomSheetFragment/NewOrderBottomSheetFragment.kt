@@ -12,26 +12,26 @@ import com.example.somefood.databinding.FragmentBottomSheetDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class NewOrderBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         private const val TAG = "AddToOrder"
-        private const val KEY = "NAME"
-        private const val IMAGE = "IMAGE"
-        private const val FOODID = "FOODID"
+        private const val ARG_NAME = "NAME"
+        private const val ARG_IMAGE = "IMAGE"
+        private const val ARG_FOODID = "FOODID"
         fun show(name: String, image: String, foodId: Int, fragmentManager: FragmentManager) =
-            CustomBottomSheetDialogFragment().apply {
+            NewOrderBottomSheetFragment().apply {
                 show(fragmentManager, TAG)
                 arguments = Bundle().apply {
-                    putString(KEY, name)
-                    putString(IMAGE, image)
-                    putInt(FOODID, foodId)
+                    putString(ARG_NAME, name)
+                    putString(ARG_IMAGE, image)
+                    putInt(ARG_FOODID, foodId)
                 }
             }
     }
 
     private val binding: FragmentBottomSheetDialogBinding by viewBinding()
-    private val viewModel: DialogViewModel by viewModel()
+    private val viewModel: NewOrderBottomSheetViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,9 +43,9 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val itemName = arguments?.getString(KEY) ?: ""
-        val itemImage = arguments?.getString(IMAGE) ?: ""
-        val foodId = arguments?.getInt(FOODID) ?: 0
+        val itemName = arguments?.getString(ARG_NAME) ?: ""
+        val itemImage = arguments?.getString(ARG_IMAGE) ?: ""
+        val foodId = arguments?.getInt(ARG_FOODID) ?: 0
 
         with(binding) {
             timePicker.setIs24HourView(true)
@@ -53,9 +53,13 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
             timePicker.minute = 0
             buttonAdToBuy.setOnClickListener {
                 if (checkValidation(buyPrice.text.toString()) && (timePicker.hour != 0 || timePicker.minute != 0)) {
+
                     val time = String.format(
-                        resources.getString(R.string.timeHoursMinutesFormatter), timePicker.hour, timePicker.minute
+                        resources.getString(R.string.timeHoursMinutesFormatter),
+                        timePicker.hour,
+                        timePicker.minute
                     )
+
                     viewModel.addNewOrder(
                         time,
                         buyPrice.text.toString(),
@@ -63,6 +67,7 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
                         itemImage,
                         foodId
                     )
+
                     dialog?.dismiss()
                 } else {
                     Toast.makeText(
@@ -76,7 +81,6 @@ class CustomBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    // Вынести во вьюмодел
     private fun checkValidation(buyPrice: String): Boolean {
         return (buyPrice.isNotEmpty() && !buyPrice.startsWith("0") && !buyPrice.startsWith("-"))
     }

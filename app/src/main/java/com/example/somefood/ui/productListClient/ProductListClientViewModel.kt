@@ -3,7 +3,6 @@ package com.example.somefood.ui.productListClient
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.FavoriteModel
-import com.example.somefood.data.model.FoodDataModel
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.room.repository.RepositoryFavorite
 import com.example.somefood.data.room.repository.RepositoryFood
@@ -45,7 +44,7 @@ class ProductListClientViewModel(
     }
 
     fun routeToProfile() {
-        router.navigateTo( Screens().routeToProfile() )
+        router.navigateTo(Screens().routeToProfile())
     }
 
     fun addNewFavoriteItem(idFood: Int) {

@@ -2,6 +2,7 @@ package com.example.somefood.ui.orderBasket
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,7 +35,7 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
         viewModel.checkOrderByClient()
 
         myAdapter = OrderBasketAdapter {
-            when(it){
+            when (it) {
                 is ItemInOrderClick -> {
                     viewModel.pickUpOrder(it.item)
                     Snackbar.make(
@@ -42,7 +43,12 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
                         getString(R.string.goodEat),
                         Snackbar.LENGTH_SHORT
                     ).show()
-                    BottomSheetRatingFragment.show(it.item.userIdGoToJob, it.item.id, childFragmentManager)}
+                    BottomSheetRatingFragment.show(
+                        it.item.userIdGoToJob,
+                        it.item.id,
+                        childFragmentManager
+                    )
+                }
                 is OpenDetailInfo -> {
                     viewModel.routeToDetailInfo(it.item.foodId)
                 }
@@ -58,11 +64,7 @@ class OrderBasketFragment : Fragment(R.layout.fragment_order_basket) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
-                    if (it.isNotEmpty()) {
-                        binding.emptyView.visibility = View.GONE
-                    } else {
-                        binding.emptyView.visibility = View.VISIBLE
-                    }
+                    binding.emptyView.emptyView.isVisible = it.isEmpty()
                 }
             }
         }

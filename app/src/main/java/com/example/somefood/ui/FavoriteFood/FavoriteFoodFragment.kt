@@ -2,6 +2,7 @@ package com.example.somefood.ui.FavoriteFood
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +15,7 @@ import com.example.somefood.databinding.FragmentFavoriteFoodBinding
 import com.example.somefood.ui.AddToBuy
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
-import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
+import com.example.somefood.ui.bottomSheetFragment.NewOrderBottomSheetFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,7 +45,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                 is OpenDetail -> viewModel.routeToFavorite(it.item)
                 is ToFavorite -> viewModel.deleteFood(it.item.id)
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.show(
+                    NewOrderBottomSheetFragment.show(
                         it.item.name,
                         it.item.image,
                         it.item.id,
@@ -64,7 +65,6 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    if (it.isNotEmpty()) {
                     myAdapter?.set(it.map {
                         ProductListModel(
                             id = it.id,
@@ -73,10 +73,7 @@ class FavoriteFoodFragment : Fragment(R.layout.fragment_favorite_food) {
                             image = it.image,
                         )
                     })
-                        binding.emptyView.visibility = View.GONE
-                    } else {
-                        binding.emptyView.visibility = View.VISIBLE
-                    }
+                    binding.emptyView.emptyView.isVisible = it.isEmpty()
                 }
             }
         }

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/goToOrder"
         android:icon="@drawable/ic_money_white"
-        app:showAsAction="always"
-        android:title="@string/goToMyOrder" />
+        android:title="@string/goToMyOrder"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/goToProfile"
         android:icon="@drawable/ic_baseline_person_24"
-        app:showAsAction="always"
-        android:title="@string/goToProfile" />
+        android:title="@string/goToProfile"
+        app:showAsAction="always" />
     <item
         android:id="@+id/logOut"
         android:icon="@drawable/ic_login"
-        app:showAsAction="always"
-        android:title="@string/goToSignOut" />
+        android:title="@string/goToSignOut"
+        app:showAsAction="always" />
 </menu>

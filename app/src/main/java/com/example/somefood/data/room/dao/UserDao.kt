@@ -18,7 +18,7 @@ interface UserDao {
 
     // Для авторизации
     @Query("SELECT * FROM user_table WHERE email LIKE :email  AND password LIKE :password ")
-    suspend fun checkAuth(email: String, password: String): UserModel
+    suspend fun checkAuth(email: String, password: String): UserModel?
 
     // Для проверки при регистрации по емэйлу
     @Query("SELECT * FROM user_table WHERE email LIKE :email ")
@@ -45,9 +45,11 @@ interface UserDao {
     @Query("UPDATE user_table SET ordersAsCreator = ordersAsCreator + 1 WHERE userUID =:userId")
     suspend fun increaseOrderByCreator(userId: Int)
 
-    @Query("SELECT email, types, photoProfile, description," +
-            " ordersAsClient, ordersAsCreator, AVG(starForClient) as starForClient, AVG(starForCreator) as starForCreator" +
-            " FROM user_table LEFT JOIN user_rating ON userUID == userid WHERE userUID == :userId")
+    @Query(
+        "SELECT email, types, photoProfile, description," +
+                " ordersAsClient, ordersAsCreator, AVG(starForClient) as starForClient, AVG(starForCreator) as starForCreator" +
+                " FROM user_table LEFT JOIN user_rating ON userUID == userid WHERE userUID == :userId"
+    )
     fun observeUserByIdFlow(userId: Int): Flow<UserProfileModel>
 
 

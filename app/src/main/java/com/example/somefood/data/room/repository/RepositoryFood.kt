@@ -19,7 +19,8 @@ class RepositoryFood(
     suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> =
         foodDao.updateFavoriteTable(listID)
 
-    fun observeTableWithFavorite(userId: Int): Flow<List<ProductListModel>> = foodDao.observeFoodTableWithFavorite(userId)
+    fun observeTableWithFavorite(userId: Int): Flow<List<ProductListModel>> =
+        foodDao.observeFoodTableWithFavorite(userId)
 
     private val recept = "Сварить бульон из говядины на косточке.\n" +
             "Свеклу очистить, нарезать соломкой, посолить и сбрызнуть лимонным соком или лимонной кислотой, положить в кастрюлю. Затем добавить измельченный репчатый лук, растертый со свиным салом, томатную пасту, сахар и тушить массу до полу готовности.\n" +

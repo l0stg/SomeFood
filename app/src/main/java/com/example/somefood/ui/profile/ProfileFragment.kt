@@ -45,21 +45,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         activity?.title = getString(R.string.profile)
         updateProfileView()
 
-        with(binding){
+        with(binding) {
             buttonEditDescription.setOnClickListener {
-                when(userDescription.isEnabled){
-                    true -> {
-                        viewModel.updateDescription(userDescription.text.toString())
-                        userDescription.isEnabled = false
-                    }
-                    false -> {
-                        userDescription.isEnabled = true
-                        userDescription.requestFocus()
-                        it.showKeyboard(userDescription)
-                        userDescription.setSelection(userDescription.length())
-
-                    }
+                if (userDescription.isEnabled) {
+                    viewModel.updateDescription(userDescription.text.toString())
+                    userDescription.isEnabled = false
+                } else {
+                    userDescription.isEnabled = true
+                    userDescription.requestFocus()
+                    it.showKeyboard(userDescription)
+                    userDescription.setSelection(userDescription.length())
                 }
+
             }
             addNewProfileImageButton.setOnClickListener {
                 photoPicker?.pickPhoto()
@@ -80,7 +77,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         return true
     }
 
-    private fun updateProfileView(){
+    private fun updateProfileView() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.filterNotNull().collect {

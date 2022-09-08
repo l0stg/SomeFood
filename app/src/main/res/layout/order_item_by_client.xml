@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="130dp">
 
@@ -10,12 +9,12 @@
         android:layout_width="100dp"
         android:layout_height="92dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/food"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.421"
-        app:srcCompat="@drawable/img_1"
-        android:contentDescription="@string/food" />
+        app:srcCompat="@drawable/img_1" />
 
     <TextView
         android:id="@+id/timeFoodOrder"
@@ -32,15 +31,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="24dp"
+        android:contentDescription="@string/time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageFoodorder"
-        app:srcCompat="@drawable/ic_time"
-        android:contentDescription="@string/time" />
+        app:srcCompat="@drawable/ic_time" />
 
     <TextView
         android:id="@+id/nameFoodOrder"
-        android:layout_width="108dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:maxLines="1"
@@ -48,9 +47,10 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/priceFoodOrder"
         app:layout_constraintStart_toEndOf="@+id/imageFoodorder"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+ />
 
     <TextView
         android:id="@+id/priceFoodOrder"
@@ -66,10 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/price"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintStart_toEndOf="@+id/imageFoodorder"
-        app:srcCompat="@drawable/ic_money"
-        android:contentDescription="@string/price"/>
+        app:srcCompat="@drawable/ic_money" />
 
     <TextView
         android:id="@+id/statusFoodOrder"
@@ -91,11 +91,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:contentDescription="@string/pickUpOrder"
         android:text="@string/pickUpOrder"
         app:layout_constraintEnd_toEndOf="@+id/statusFoodOrder"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/nameFoodOrder"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/pickUpOrder"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

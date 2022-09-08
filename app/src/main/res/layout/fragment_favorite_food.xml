@@ -16,24 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<LinearLayout
-    android:id="@+id/emptyView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-    <View
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/ic_baseline_local_pizza_24" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nothing_data"/>
-</LinearLayout>
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/nothing_data_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

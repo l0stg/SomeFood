@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somefood.R
 import com.example.somefood.data.model.OrderRating
-import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.HistoryOrderItemBinding
 
-class HistoryOrderAdapter: RecyclerView.Adapter<HistoryOrderAdapter.MyViewHolder>() {
+class HistoryOrderAdapter : RecyclerView.Adapter<HistoryOrderAdapter.MyViewHolder>() {
 
     private val myList: MutableList<OrderRating> = mutableListOf()
 
@@ -19,10 +18,10 @@ class HistoryOrderAdapter: RecyclerView.Adapter<HistoryOrderAdapter.MyViewHolder
         notifyDataSetChanged()
     }
 
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = HistoryOrderItemBinding.bind(view)
         fun bind(orderItem: OrderRating) =
-            with(binding){
+            with(binding) {
                 starForClient.rating = orderItem.starForClient?.toFloat() ?: 0.0F
                 starForCreator.rating = orderItem.starForCreator?.toFloat() ?: 0.0F
                 orderId.text = orderItem.orderId.toString()

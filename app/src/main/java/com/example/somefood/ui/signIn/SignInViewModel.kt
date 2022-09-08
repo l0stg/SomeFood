@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.ui.Crypto.encode
+import com.example.somefood.ui.Event.Event
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
@@ -16,10 +17,8 @@ class SignInViewModel(
     private val myRepository: RepositoryUser,
 ) : ViewModel() {
 
-    private val _status = MutableStateFlow(false)
+    private val _status = MutableStateFlow<Event<Boolean>?>(null)
     val status = _status
-    private val _userID = MutableStateFlow(0)
-    val userID: Flow<Int> = _userID
 
     // Навигация
     private fun routeToProductList() =
@@ -41,8 +40,8 @@ class SignInViewModel(
                     UserTypes.CREATOR -> routeToCreatorList()
                 }
             } else {
-                _status.value = true
-                _status.value = false
+                _status.value = Event(true)
+
             }
         }
     }

@@ -12,7 +12,7 @@ import com.example.somefood.data.room.dao.*
         Order::class,
         UserModel::class,
         OrderRating::class,
-               ],
+    ],
     version = 1
 )
 abstract class SomeFoodDataBase : RoomDatabase() {

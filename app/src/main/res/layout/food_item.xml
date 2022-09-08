@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    xmlns:card_view="http://schemas.android.com/tools">
+    android:layout_height="150dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="186dp"
@@ -39,20 +39,21 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/purple_200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ivFood"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/purple_200">
-            <ImageButton
-                android:id="@+id/buttonFavorite"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="?actionBarItemBackground"
-                android:contentDescription="@string/addToFavorite"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/ic_favorite"
-                app:tint="@color/white" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageButton
+                    android:id="@+id/buttonFavorite"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?actionBarItemBackground"
+                    android:contentDescription="@string/addToFavorite"
+                    android:minHeight="48dp"
+                    app:srcCompat="@drawable/ic_favorite"
+                    app:tint="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,15 +62,15 @@
                 android:background="@color/purple_200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
->
-            <ImageButton
-                android:id="@+id/buttonAddToBuy"
-                android:background="?actionBarItemBackground"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="@string/createOrder"
-                app:srcCompat="@drawable/ic_add" />
+                app:layout_constraintHorizontal_bias="1.0">
+
+                <ImageButton
+                    android:id="@+id/buttonAddToBuy"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="?actionBarItemBackground"
+                    android:contentDescription="@string/createOrder"
+                    app:srcCompat="@drawable/ic_add" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

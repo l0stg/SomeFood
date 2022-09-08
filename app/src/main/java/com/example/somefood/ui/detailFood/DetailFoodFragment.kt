@@ -10,10 +10,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.somefood.R
-import com.example.somefood.data.model.FoodDataModel
-import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentDetailFoodBinding
-import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
+import com.example.somefood.ui.bottomSheetFragment.NewOrderBottomSheetFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -25,10 +23,10 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
     private val viewModel: DetailFoodViewModel by viewModel()
 
     companion object {
-        private const val FOODID = "FOODID"
+        private const val ARG_FOODID = "FOODID"
         fun newInstance(foodId: Int) = DetailFoodFragment().apply {
             arguments = Bundle().apply {
-                putInt(FOODID, foodId)
+                putInt(ARG_FOODID, foodId)
             }
         }
     }
@@ -36,7 +34,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val foodId = arguments?.getInt(FOODID) ?: 0
+        val foodId = arguments?.getInt(ARG_FOODID) ?: 0
 
         viewModel.getInfo(foodId)
 
@@ -59,7 +57,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
                         else
                             addToFavorite.setBackgroundColor(Color.GREEN)
                         addToBuy.setOnClickListener {
-                            CustomBottomSheetDialogFragment.show(
+                            NewOrderBottomSheetFragment.show(
                                 model.name,
                                 model.image,
                                 model.id,

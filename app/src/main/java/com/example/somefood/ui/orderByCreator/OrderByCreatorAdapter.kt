@@ -30,7 +30,7 @@ class OrderByCreatorAdapter(private val clickListener: (click: ClickOrder) -> Un
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val binding = OrderItemBinding.bind(view)
-        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit, ) = with(binding) {
+        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
             timeFoodOrder.text = item.timeToComplete
@@ -56,7 +56,7 @@ class OrderByCreatorAdapter(private val clickListener: (click: ClickOrder) -> Un
                 clickListener(ItemInOrderClick(item))
             }
 
-            root.setOnClickListener{
+            root.setOnClickListener {
                 clickListener(OpenDetailInfo(item))
             }
 

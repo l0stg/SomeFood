@@ -41,10 +41,13 @@ class FavoriteAdapter(private val clickListener: (click: Click) -> Unit) :
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivFood)
+
             buttonFavorite.setBackgroundColor(RED)
+
             buttonFavorite.setOnClickListener {
                 clickListener(ToFavorite(item))
             }
+
             root.setOnClickListener {
                 clickListener(OpenDetail(item))
             }

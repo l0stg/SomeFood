@@ -43,10 +43,11 @@ class ProductListClientAdapter(private val clickListener: (click: Click) -> Unit
                 clickListener(ToFavorite(item))
             }
 
-           if (item.idFavorite != null)
+            if (item.idFavorite != null) {
                 buttonFavorite.setBackgroundColor(Color.RED)
-           else
+            } else {
                 buttonFavorite.setBackgroundColor(Color.GREEN)
+            }
 
             root.setOnClickListener {
                 clickListener(OpenDetail(item))

@@ -10,7 +10,7 @@ import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.data.room.repository.UserRatingRepositiry
 import kotlinx.coroutines.launch
 
-class DialogViewModel(
+class NewOrderBottomSheetViewModel(
     private val repositoryOrder: OrderRepository,
     private val repositoryUser: RepositoryUser,
     private val orderRating: UserRatingRepositiry,
@@ -41,7 +41,7 @@ class DialogViewModel(
         }
     }
 
-    private fun increaseOrders(){
+    private fun increaseOrders() {
         viewModelScope.launch {
             repositoryUser.increaseOrdersByClient(userId = repositoryUser.getUserID())
         }

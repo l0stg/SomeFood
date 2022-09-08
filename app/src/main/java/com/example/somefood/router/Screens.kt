@@ -1,6 +1,5 @@
 package com.example.somefood.ui
 
-import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.ui.FavoriteFood.FavoriteFoodFragment
 import com.example.somefood.ui.Registration.RegistrationFragment
 import com.example.somefood.ui.detailFood.DetailFoodFragment
@@ -22,6 +21,7 @@ class Screens {
     fun routeToProductList() = FragmentScreen { ProductListClientFragment.newInstance() }
     fun routeToDetail(foodId: Int) =
         FragmentScreen { DetailFoodFragment.newInstance(foodId) }
+
     fun routeToFavorite() = FragmentScreen { FavoriteFoodFragment.newInstance() }
     fun routeToCreatorList() = FragmentScreen { CreatorListFragment() }
     fun routeToBascet() = FragmentScreen { OrderBasketFragment.newInstance() }

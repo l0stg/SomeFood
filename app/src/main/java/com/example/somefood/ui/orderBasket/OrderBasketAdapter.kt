@@ -27,7 +27,7 @@ class OrderBasketAdapter(private val clickListener: (click: ClickOrder) -> Unit)
 
     class MyViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemByClientBinding.bind(itemView)
-        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit, ) {
+        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit) {
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
@@ -43,7 +43,7 @@ class OrderBasketAdapter(private val clickListener: (click: ClickOrder) -> Unit)
                         buttonPickUp.visibility = View.INVISIBLE
                         buttonPickUp.isEnabled = false
                         statusFoodOrder.text = itemView.context.getString(R.string.inWait)
-                        when(item.status) {
+                        when (item.status) {
                             Status.WAIT -> statusFoodOrder.setTextColor(Color.GRAY)
                             Status.JOB -> statusFoodOrder.setTextColor(Color.YELLOW)
                             else -> {}
@@ -62,7 +62,7 @@ class OrderBasketAdapter(private val clickListener: (click: ClickOrder) -> Unit)
                     clickListener(ItemInOrderClick(item))
                 }
 
-                root.setOnClickListener{
+                root.setOnClickListener {
                     clickListener(OpenDetailInfo(item))
                 }
             }
