@@ -31,7 +31,11 @@ class OrderBasketAdapter(private val clickListener: (click: ClickOrder) -> Unit)
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
-                timeFoodOrder.text = item.timeToComplete
+                timeFoodOrder.text = String.format(
+                    itemView.context.getString(R.string.timeHoursMinutesFormatter),
+                    item.timeToCompleteHour,
+                    item.timeToCompleteMinutes
+                )
                 when (item.status) {
                     Status.COMPLETE -> {
                         buttonPickUp.visibility = View.VISIBLE

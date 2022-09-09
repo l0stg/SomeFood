@@ -33,7 +33,11 @@ class OrderAdapter(private val clickListener: (click: ClickOrder) -> Unit) :
         fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
-            timeFoodOrder.text = item.timeToComplete
+            timeFoodOrder.text = String.format(
+                view.context.getString(R.string.timeHoursMinutesFormatter),
+                item.timeToCompleteHour,
+                item.timeToCompleteMinutes
+            )
             when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = view.context.getString(R.string.inJob)

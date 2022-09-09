@@ -14,14 +14,12 @@ import com.example.somefood.data.room.repository.UserRatingRepositiry
 import com.example.somefood.ui.Event.Event
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlin.math.min
 
 class NewOrderBottomSheetViewModel(
     private val repositoryOrder: OrderRepository,
     private val repositoryUser: RepositoryUser,
     private val orderRating: UserRatingRepositiry,
-    // Заюзал контекст, что вытащить строку, хотя наверное лучше сохранить значения по отдельности
-    // И уже когда они будут отрисовываться, выводить их так
-    private val androidContext: Context
 ) : ViewModel() {
 
     private val _validOrder = MutableStateFlow<Event<Boolean>?>(null)
@@ -32,16 +30,12 @@ class NewOrderBottomSheetViewModel(
 
             if (checkValidation(price) && (hour != 0 || minute != 0)){
                 increaseOrders()
-                val time = String.format(
-                    androidContext.getString(R.string.timeHoursMinutesFormatter),
-                    hour,
-                    minute
-                )
                 val newOrderId = repositoryOrder.addNewBuy(
                     Order(
                         orderName = itemName,
                         userID = repositoryUser.getUserID(),
-                        timeToComplete = time,
+                        timeToCompleteHour = hour,
+                        timeToCompleteMinutes = minute,
                         integerBuy = price.toInt(),
                         status = Status.WAIT,
                         image = itemImage,

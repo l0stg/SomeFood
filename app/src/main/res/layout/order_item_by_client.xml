@@ -38,19 +38,18 @@
 
     <TextView
         android:id="@+id/nameFoodOrder"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/foodName"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/priceFoodOrder"
-        app:layout_constraintStart_toEndOf="@+id/imageFoodorder"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPickUp"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
- />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/priceFoodOrder"
@@ -94,8 +93,6 @@
         android:contentDescription="@string/pickUpOrder"
         android:text="@string/pickUpOrder"
         app:layout_constraintEnd_toEndOf="@+id/statusFoodOrder"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/nameFoodOrder"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
