@@ -8,7 +8,6 @@ import com.example.somefood.ui.Crypto.encode
 import com.example.somefood.ui.Event.Event
 import com.example.somefood.ui.Screens
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 

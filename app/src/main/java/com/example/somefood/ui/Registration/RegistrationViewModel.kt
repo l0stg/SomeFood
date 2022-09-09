@@ -37,7 +37,7 @@ class RegistrationViewModel(
                             eMail = email,
                             password = encode(password),
                             types = types
-                         )
+                        )
                     )
                     when (types) {
                         UserTypes.USER -> routeToProductList()

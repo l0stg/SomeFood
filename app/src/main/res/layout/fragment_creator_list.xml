@@ -19,6 +19,6 @@
 
     <include
         android:id="@+id/emptyView"
-        layout="@layout/nothing_data_view"/>
+        layout="@layout/nothing_data_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

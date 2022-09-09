@@ -63,6 +63,8 @@
     <string name="starsForCreatorInHistoryOrder">Оценка заказчика</string>
     <string name="historyFragment">Статистика</string>
     <string name="nothing_data">Упс… Данных нет :(</string>
+    <string name="orderRatingText">Как вам заказ?</string>
+    <string name="goRatingtext">Оценить заказ</string>
 
 
 </resources>

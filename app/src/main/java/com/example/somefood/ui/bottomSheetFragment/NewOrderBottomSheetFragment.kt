@@ -12,7 +12,6 @@ import com.example.somefood.R
 import com.example.somefood.databinding.FragmentBottomSheetDialogBinding
 import com.example.somefood.ui.Event.onEachEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
