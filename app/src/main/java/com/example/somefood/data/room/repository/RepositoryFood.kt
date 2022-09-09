@@ -13,7 +13,7 @@ class RepositoryFood(
         foodDao.addAllElement(PREPOPULATE_DATA)
     }
 
-    suspend fun getElement(foodId: Int, userId: Int): Flow<ProductListModel> =
+    fun getElement(foodId: Int, userId: Int): Flow<ProductListModel> =
         foodDao.getElement(foodId, userId)
 
     suspend fun updateFavoriteTable(listID: List<Int>): List<FoodDataModel> =
@@ -38,9 +38,5 @@ class RepositoryFood(
         FoodDataModel(id = 4, name = "МЯСО", image = foodImg, recept = recept),
         FoodDataModel(id = 5, name = "КУРИЦА", image = foodImg, recept = recept),
         FoodDataModel(id = 6, name = "ЖАРЕННЫЕ ГВОЗДИ", image = foodImg, recept = recept),
-        FoodDataModel(id = 7, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept),
-        FoodDataModel(id = 7, name = "ЖАРЕННЫЙ ПЕТУХ", image = foodImg, recept = recept)
     )
-
-
 }

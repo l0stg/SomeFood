@@ -40,9 +40,8 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.model.filterNotNull().collect {
-                    activity?.title = it.name
-                    val model = it
+                viewModel.model.filterNotNull().collect { model ->
+                    activity?.title = model.name
                     with(binding) {
                         tvNameDetail.text = model.name
                         tvDescriptionDetail.text = model.recept
@@ -52,7 +51,7 @@ class DetailFoodFragment : Fragment(R.layout.fragment_detail_food) {
                             .centerCrop()
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .into(ivDetail)
-                        if (it.idFavorite != null)
+                        if (model.idFavorite != null)
                             addToFavorite.setBackgroundColor(Color.RED)
                         else
                             addToFavorite.setBackgroundColor(Color.GREEN)
