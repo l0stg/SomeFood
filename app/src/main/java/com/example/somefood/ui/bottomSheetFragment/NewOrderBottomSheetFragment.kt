@@ -6,10 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentBottomSheetDialogBinding
+import com.example.somefood.ui.Event.onEachEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewOrderBottomSheetFragment : BottomSheetDialogFragment() {
@@ -52,37 +57,30 @@ class NewOrderBottomSheetFragment : BottomSheetDialogFragment() {
             timePicker.hour = 0
             timePicker.minute = 0
             buttonAdToBuy.setOnClickListener {
-                if (checkValidation(buyPrice.text.toString()) && (timePicker.hour != 0 || timePicker.minute != 0)) {
+                viewModel.addNewOrder(
+                    timePicker.hour,
+                    timePicker.minute,
+                    buyPrice.text.toString(),
+                    itemName,
+                    itemImage,
+                    foodId
+                )
+                viewModel.validOrder.filterNotNull().onEachEvent {
+                    if (it) {
+                        Toast.makeText(
+                            activity,
+                            getString(R.string.checkToOrder),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        dialog?.dismiss()
+                    }
 
-                    val time = String.format(
-                        resources.getString(R.string.timeHoursMinutesFormatter),
-                        timePicker.hour,
-                        timePicker.minute
-                    )
-
-                    viewModel.addNewOrder(
-                        timePicker.hour,
-                        timePicker.minute,
-                        buyPrice.text.toString(),
-                        itemName,
-                        itemImage,
-                        foodId
-                    )
-
-                    dialog?.dismiss()
-                } else {
-                    Toast.makeText(
-                        activity,
-                        getString(R.string.checkToOrder),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+                }.launchIn(viewLifecycleOwner.lifecycleScope)
             }
         }
-    }
 
-    private fun checkValidation(buyPrice: String): Boolean {
-        return (buyPrice.isNotEmpty() && !buyPrice.startsWith("0") && !buyPrice.startsWith("-"))
+
     }
 }
+
