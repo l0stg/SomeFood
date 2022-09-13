@@ -18,9 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAdToBuy"
         android:layout_width="match_parent"
+        android:theme="@style/Theme.SomeFood"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/createOrder"

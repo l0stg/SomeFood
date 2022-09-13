@@ -64,6 +64,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
             switchTypesInProfile.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.goSwitchType(isChecked)
             }
+
+            buttonGoAch.setOnClickListener{
+                viewModel.routeToAchevment()
+            }
         }
     }
 
