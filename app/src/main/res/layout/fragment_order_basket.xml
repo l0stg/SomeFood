@@ -15,5 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/order_item_by_client"/>
+        tools:listitem="@layout/order_item_by_client" />
+
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/nothing_data_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

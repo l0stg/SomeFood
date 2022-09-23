@@ -26,12 +26,8 @@ class FavoriteViewModel(
     // Обновляет данные если список изменился
     fun updateUI() {
         viewModelScope.launch {
-            _list.value = repositoryFood.updateFavoriteTable(
-                repositoryFavorite
-                    .updateFavoriteTable(
-                        repositoryUser.getUserID()
-                    )
-            )
+            val newFavoriteTable = repositoryFavorite.getFavoriteTable(repositoryUser.getUserID())
+            _list.value = repositoryFood.updateFavoriteTable(newFavoriteTable)
         }
     }
 
@@ -43,6 +39,6 @@ class FavoriteViewModel(
     }
 
     fun routeToFavorite(item: ProductListModel) {
-        router.navigateTo(Screens().routeToDetail(item))
+        router.navigateTo(Screens().routeToDetail(item.id))
     }
 }

@@ -1,6 +1,5 @@
 package com.example.somefood.data.room.repository
 
-import com.example.somefood.data.model.AverageRating
 import com.example.somefood.data.model.OrderRating
 import com.example.somefood.data.room.dao.OrderRatingDao
 import kotlinx.coroutines.flow.Flow

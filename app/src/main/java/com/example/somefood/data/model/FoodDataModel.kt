@@ -10,7 +10,7 @@ data class FoodDataModel(
     val id: Int = 0,
     @ColumnInfo(name = "name")
     val name: String,
-    @ColumnInfo(name = "description")
+    @ColumnInfo(name = "recept")
     val recept: String,
     @ColumnInfo(name = "image")
     val image: String,

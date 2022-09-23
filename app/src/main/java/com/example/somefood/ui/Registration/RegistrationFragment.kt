@@ -3,15 +3,15 @@ package com.example.somefood.ui.Registration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.databinding.FragmentRegistrationBinding
+import com.example.somefood.ui.Event.onEachEvent
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
@@ -24,23 +24,20 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         activity?.title = getString(R.string.registr)
         var types = UserTypes.USER
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.statusRegistration.collect {
-                    if (it)
-                        Snackbar.make(
-                            binding.root,
-                            getString(R.string.doubleRegistr),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                }
-            }
-        }
+        viewModel.doubleRegistr.filterNotNull().onEachEvent {
+            if (it)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.doubleRegistr),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         binding.switchTypes.setOnCheckedChangeListener { _, isChecked ->
-            when (isChecked) {
-                true -> types = UserTypes.CREATOR
-                false -> types = UserTypes.USER
+            types = if (isChecked) {
+                UserTypes.CREATOR
+            } else {
+                UserTypes.USER
             }
         }
 

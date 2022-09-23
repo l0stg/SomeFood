@@ -1,7 +1,10 @@
 package com.example.somefood.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -42,18 +45,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         activity?.title = getString(R.string.profile)
         updateProfileView()
 
-        with(binding){
+        with(binding) {
             buttonEditDescription.setOnClickListener {
-                when(userDescription.isEnabled){
-                    true -> {
-                        viewModel.updateDescription(userDescription.text.toString())
-                        userDescription.isEnabled = false
-                    }
-                    false -> {
-                        userDescription.isEnabled = true
-                        userDescription.requestFocus()
-                    }
+                if (userDescription.isEnabled) {
+                    viewModel.updateDescription(userDescription.text.toString())
+                    userDescription.isEnabled = false
+                } else {
+                    userDescription.isEnabled = true
+                    userDescription.requestFocus()
+                    it.showKeyboard(userDescription)
+                    userDescription.setSelection(userDescription.length())
                 }
+
             }
             addNewProfileImageButton.setOnClickListener {
                 photoPicker?.pickPhoto()
@@ -61,7 +64,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
             switchTypesInProfile.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.goSwitchType(isChecked)
             }
+
+            buttonGoAch.setOnClickListener{
+                viewModel.routeToAchevment()
+            }
         }
+    }
+
+    private fun View.showKeyboard(editText: EditText) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onBackPressed(): Boolean {
@@ -69,7 +81,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), BackButtonListener 
         return true
     }
 
-    private fun updateProfileView(){
+    private fun updateProfileView() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userProfile.filterNotNull().collect {

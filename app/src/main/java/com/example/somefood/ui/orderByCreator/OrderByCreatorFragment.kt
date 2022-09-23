@@ -2,6 +2,7 @@ package com.example.somefood.ui.orderByCreator
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.FragmentOrderByCreatorBinding
+import com.example.somefood.ui.ItemInOrderClick
+import com.example.somefood.ui.OpenDetailInfo
 import com.example.somefood.ui.bottomSheetRating.BottomSheetRatingFragment
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,9 +33,20 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
         updateDataInUI()
 
         myAdapter = OrderByCreatorAdapter {
-            viewModel.addInJob(it)
-            if (it.status == Status.JOB){
-                BottomSheetRatingFragment.show(it.userID, it.id, childFragmentManager)
+            when (it) {
+                is ItemInOrderClick -> {
+                    viewModel.addInJob(it.item)
+                    if (it.item.status == Status.JOB) {
+                        BottomSheetRatingFragment.show(
+                            it.item.userID,
+                            it.item.id,
+                            childFragmentManager
+                        )
+                    }
+                }
+                is OpenDetailInfo -> {
+                    viewModel.routeToDetailInfo(it.item.foodId)
+                }
             }
         }
         with(binding) {
@@ -46,6 +60,7 @@ class OrderByCreatorFragment : Fragment(R.layout.fragment_order_by_creator) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
+                    binding.emptyView.emptyView.isVisible = it.isEmpty()
                 }
             }
         }

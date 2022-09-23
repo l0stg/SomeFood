@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentCreatorListBinding
+import com.example.somefood.ui.ItemInOrderClick
+import com.example.somefood.ui.OpenDetailInfo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,7 +66,14 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
         updateDataInUI()
 
         myAdapter = OrderAdapter {
-            viewModel.addInJob(it)
+            when (it) {
+                is ItemInOrderClick -> {
+                    viewModel.addInJob(it.item)
+                }
+                is OpenDetailInfo -> {
+                    viewModel.routeToDetailInfo(it.item.foodId)
+                }
+            }
         }
         with(binding) {
             orderRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -76,6 +86,7 @@ class CreatorListFragment : Fragment(R.layout.fragment_creator_list) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
+                    binding.emptyView.emptyView.isVisible = it.isEmpty()
                 }
             }
         }

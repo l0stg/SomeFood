@@ -40,11 +40,13 @@ class OrderFragmentViewModel(
                     id = item.id,
                     orderName = item.orderName,
                     userID = item.userID,
-                    timeToComplete = item.timeToComplete,
+                    timeToCompleteHour = item.timeToCompleteHour,
+                    timeToCompleteMinutes = item.timeToCompleteMinutes,
                     integerBuy = item.integerBuy,
                     status = Status.JOB,
                     image = item.image,
-                    userIdGoToJob = userRepository.getUserID()
+                    userIdGoToJob = userRepository.getUserID(),
+                    foodId = item.foodId
                 )
             )
         }
@@ -60,6 +62,10 @@ class OrderFragmentViewModel(
     }
 
     fun routeToProfile() {
-        router.navigateTo( Screens().routeToProfile() )
+        router.navigateTo(Screens().routeToProfile())
+    }
+
+    fun routeToDetailInfo(foodId: Int) {
+        router.navigateTo(Screens().routeToDetail(foodId))
     }
 }

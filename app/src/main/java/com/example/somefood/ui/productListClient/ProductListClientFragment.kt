@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,12 +15,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
-import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.databinding.FragmentProductListClientBinding
 import com.example.somefood.ui.AddToBuy
 import com.example.somefood.ui.OpenDetail
 import com.example.somefood.ui.ToFavorite
-import com.example.somefood.ui.bottomSheetFragment.CustomBottomSheetDialogFragment
+import com.example.somefood.ui.bottomSheetFragment.NewOrderBottomSheetFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,7 +77,7 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
 
         myAdapter = ProductListClientAdapter {
             when (it) {
-                is OpenDetail -> viewModel.routeToDetail(it.item)
+                is OpenDetail -> viewModel.routeToDetail(it.item.id)
                 is ToFavorite -> {
                     viewModel.addNewFavoriteItem(it.item.id)
                     Snackbar.make(
@@ -87,9 +87,10 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
                     ).show()
                 }
                 is AddToBuy -> {
-                    CustomBottomSheetDialogFragment.show(
+                    NewOrderBottomSheetFragment.show(
                         it.item.name,
                         it.item.image,
+                        it.item.id,
                         childFragmentManager
                     )
                 }
@@ -105,14 +106,8 @@ class ProductListClientFragment : Fragment(R.layout.fragment_product_list_client
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
-                    myAdapter?.set(it.map {
-                        ProductListModel(
-                            id = it.id,
-                            name = it.name,
-                            description = it.recept,
-                            image = it.image
-                        )
-                    })
+                    myAdapter?.set(it)
+                    binding.emptyView.emptyView.isVisible = it.isEmpty()
                 }
             }
         }

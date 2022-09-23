@@ -6,6 +6,8 @@ import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.data.room.repository.OrderRepository
 import com.example.somefood.data.room.repository.RepositoryUser
+import com.example.somefood.ui.Screens
+import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -13,6 +15,7 @@ import kotlinx.coroutines.launch
 class OrderByCreatorViewModel(
     private val orderRepository: OrderRepository,
     private val userRepository: RepositoryUser,
+    private val router: Router,
 ) : ViewModel() {
 
     private val _list = MutableStateFlow<List<Order>>(emptyList())
@@ -36,11 +39,13 @@ class OrderByCreatorViewModel(
                     id = item.id,
                     orderName = item.orderName,
                     userID = item.userID,
-                    timeToComplete = item.timeToComplete,
+                    timeToCompleteHour = item.timeToCompleteHour,
+                    timeToCompleteMinutes = item.timeToCompleteMinutes,
                     integerBuy = item.integerBuy,
                     status = newStatus,
                     image = item.image,
-                    userIdGoToJob = item.userIdGoToJob
+                    userIdGoToJob = item.userIdGoToJob,
+                    foodId = item.foodId
                 )
             )
         }
@@ -54,6 +59,10 @@ class OrderByCreatorViewModel(
                 _list.value = it
             }
         }
+    }
+
+    fun routeToDetailInfo(foodId: Int) {
+        router.navigateTo(Screens().routeToDetail(foodId))
     }
 
 }

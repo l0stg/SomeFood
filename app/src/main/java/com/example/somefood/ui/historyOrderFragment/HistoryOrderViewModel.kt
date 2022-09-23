@@ -21,9 +21,9 @@ class HistoryOrderViewModel(
         observerData()
     }
 
-    private fun observerData(){
+    private fun observerData() {
         viewModelScope.launch {
-            orderRatingRepository.observeRatingOrder(userRepository.getUserID()).collect{
+            orderRatingRepository.observeRatingOrder(userRepository.getUserID()).collect {
                 _list.value = it
             }
         }

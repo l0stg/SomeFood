@@ -2,7 +2,6 @@ package com.example.somefood.ui.bottomSheetRating
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.somefood.data.model.OrderRating
 import com.example.somefood.data.model.UserTypes
 import com.example.somefood.data.room.repository.RepositoryUser
 import com.example.somefood.data.room.repository.UserRatingRepositiry
@@ -13,12 +12,18 @@ class BottomSheetRatingViewModel(
     private val userRepository: RepositoryUser
 ) : ViewModel() {
 
-    fun goRatingUser(userIdToRating: Int?, rating: Double, orderId: Int){
+    fun goRatingUser(userIdToRating: Int?, rating: Double, orderId: Int) {
         viewModelScope.launch {
             val user = userRepository.observeUserById(userIdToRating!!)
-            when (user.types){
-                UserTypes.USER -> userRatingRepositiry.increaseRatingByCreator(orderId = orderId, rating = rating)
-                UserTypes.CREATOR -> userRatingRepositiry.increaseRatingByClient(orderId = orderId, rating = rating)
+            when (user.types) {
+                UserTypes.USER -> userRatingRepositiry.increaseRatingByCreator(
+                    orderId = orderId,
+                    rating = rating
+                )
+                UserTypes.CREATOR -> userRatingRepositiry.increaseRatingByClient(
+                    orderId = orderId,
+                    rating = rating
+                )
             }
         }
     }

@@ -10,8 +10,11 @@ import com.example.somefood.R
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.OrderItemBinding
+import com.example.somefood.ui.ClickOrder
+import com.example.somefood.ui.ItemInOrderClick
+import com.example.somefood.ui.OpenDetailInfo
 
-class OrderByCreatorAdapter(private val itemInOrderClick: (item: Order) -> Unit) :
+class OrderByCreatorAdapter(private val clickListener: (click: ClickOrder) -> Unit) :
     RecyclerView.Adapter<OrderByCreatorAdapter.MyViewHolder>() {
 
     // Приватный и неизменяемый, для большего контроля деействий в адаптере
@@ -27,10 +30,14 @@ class OrderByCreatorAdapter(private val itemInOrderClick: (item: Order) -> Unit)
     // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val binding = OrderItemBinding.bind(view)
-        fun bind(item: Order, itemInOrderClick: (item: Order) -> Unit) = with(binding) {
+        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit) = with(binding) {
             nameFoodOrder.text = item.orderName
             priceFoodOrder.text = item.integerBuy.toString()
-            timeFoodOrder.text = item.timeToComplete
+            timeFoodOrder.text = String.format(
+                view.context.getString(R.string.timeHoursMinutesFormatter),
+                item.timeToCompleteHour,
+                item.timeToCompleteMinutes
+            )
             when (item.status) {
                 Status.WAIT -> {
                     buttonStatus.text = view.context.getString(R.string.inJob)
@@ -50,7 +57,11 @@ class OrderByCreatorAdapter(private val itemInOrderClick: (item: Order) -> Unit)
                 }
             }
             buttonStatus.setOnClickListener {
-                itemInOrderClick(item)
+                clickListener(ItemInOrderClick(item))
+            }
+
+            root.setOnClickListener {
+                clickListener(OpenDetailInfo(item))
             }
 
             Glide
@@ -70,7 +81,7 @@ class OrderByCreatorAdapter(private val itemInOrderClick: (item: Order) -> Unit)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position], itemInOrderClick)
+        holder.bind(myList[position], clickListener)
     }
 
     override fun getItemCount(): Int =

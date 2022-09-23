@@ -3,14 +3,14 @@ package com.example.somefood.ui.signIn
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.somefood.R
 import com.example.somefood.databinding.FragmentSignInBinding
+import com.example.somefood.ui.Event.onEachEvent
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
@@ -22,19 +22,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = getString(R.string.auth)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.status.collect {
-                    if (it) {
-                        Snackbar.make(
-                            binding.root,
-                            getString(R.string.unCorrectPassword),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
+        viewModel.status.filterNotNull().onEachEvent {
+            if (it)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.doubleRegistr),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         binding.buttonSignInAccounts.setOnClickListener {
             signInButton()

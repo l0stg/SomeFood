@@ -1,10 +1,6 @@
 package com.example.somefood.ui.mainActivite
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -47,7 +43,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.containerScreen)
         if (fragment != null && fragment is BackButtonListener
-            && (fragment as BackButtonListener).onBackPressed()) {
+            && (fragment as BackButtonListener).onBackPressed()
+        ) {
             return
         } else {
             super.onBackPressed()

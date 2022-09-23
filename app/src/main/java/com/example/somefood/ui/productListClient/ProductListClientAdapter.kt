@@ -1,5 +1,6 @@
 package com.example.somefood.ui.productListClient
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,12 @@ class ProductListClientAdapter(private val clickListener: (click: Click) -> Unit
 
             buttonFavorite.setOnClickListener {
                 clickListener(ToFavorite(item))
+            }
+
+            if (item.idFavorite != null) {
+                buttonFavorite.setBackgroundColor(Color.RED)
+            } else {
+                buttonFavorite.setBackgroundColor(Color.GREEN)
             }
 
             root.setOnClickListener {

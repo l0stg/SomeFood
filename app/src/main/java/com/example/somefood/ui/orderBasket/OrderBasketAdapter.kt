@@ -10,8 +10,11 @@ import com.example.somefood.R
 import com.example.somefood.data.model.Order
 import com.example.somefood.data.model.Status
 import com.example.somefood.databinding.OrderItemByClientBinding
+import com.example.somefood.ui.ClickOrder
+import com.example.somefood.ui.ItemInOrderClick
+import com.example.somefood.ui.OpenDetailInfo
 
-class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
+class OrderBasketAdapter(private val clickListener: (click: ClickOrder) -> Unit) :
     RecyclerView.Adapter<OrderBasketAdapter.MyViewHolder>() {
 
     private val myList: MutableList<Order> = mutableListOf()
@@ -24,11 +27,15 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
 
     class MyViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = OrderItemByClientBinding.bind(itemView)
-        fun bind(item: Order, buttonPickUpOrder: (item: Order) -> Unit) {
+        fun bind(item: Order, clickListener: (click: ClickOrder) -> Unit) {
             with(binding) {
                 nameFoodOrder.text = item.orderName
                 priceFoodOrder.text = item.integerBuy.toString()
-                timeFoodOrder.text = item.timeToComplete
+                timeFoodOrder.text = String.format(
+                    itemView.context.getString(R.string.timeHoursMinutesFormatter),
+                    item.timeToCompleteHour,
+                    item.timeToCompleteMinutes
+                )
                 when (item.status) {
                     Status.COMPLETE -> {
                         buttonPickUp.visibility = View.VISIBLE
@@ -40,7 +47,7 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
                         buttonPickUp.visibility = View.INVISIBLE
                         buttonPickUp.isEnabled = false
                         statusFoodOrder.text = itemView.context.getString(R.string.inWait)
-                        when(item.status) {
+                        when (item.status) {
                             Status.WAIT -> statusFoodOrder.setTextColor(Color.GRAY)
                             Status.JOB -> statusFoodOrder.setTextColor(Color.YELLOW)
                             else -> {}
@@ -56,7 +63,11 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
                     .into(imageFoodorder)
 
                 buttonPickUp.setOnClickListener {
-                    buttonPickUpOrder(item)
+                    clickListener(ItemInOrderClick(item))
+                }
+
+                root.setOnClickListener {
+                    clickListener(OpenDetailInfo(item))
                 }
             }
         }
@@ -69,7 +80,7 @@ class OrderBasketAdapter(private val buttonPickUpOrder: (item: Order) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position], buttonPickUpOrder)
+        holder.bind(myList[position], clickListener)
     }
 
     override fun getItemCount(): Int =

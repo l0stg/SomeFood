@@ -16,4 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/order_item" />
+
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/nothing_data_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

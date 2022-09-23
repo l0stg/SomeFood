@@ -3,7 +3,6 @@ package com.example.somefood.ui.productListClient
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.somefood.data.model.FavoriteModel
-import com.example.somefood.data.model.FoodDataModel
 import com.example.somefood.data.model.ProductListModel
 import com.example.somefood.data.room.repository.RepositoryFavorite
 import com.example.somefood.data.room.repository.RepositoryFood
@@ -22,17 +21,18 @@ class ProductListClientViewModel(
 ) : ViewModel() {
 
     init {
-        updateFoodTable()
+        observeFoodTable()
     }
 
-    private val _list = MutableStateFlow<List<FoodDataModel>>(emptyList())
-    val list: Flow<List<FoodDataModel>> = _list
+    private val _list = MutableStateFlow<List<ProductListModel>>(emptyList())
+    val list: Flow<List<ProductListModel>> = _list
+
 
     fun routeToFavorite() =
         router.navigateTo(Screens().routeToFavorite())
 
-    fun routeToDetail(model: ProductListModel) =
-        router.navigateTo(Screens().routeToDetail(model))
+    fun routeToDetail(foodId: Int) =
+        router.navigateTo(Screens().routeToDetail(foodId))
 
 
     fun routeToBascet() =
@@ -44,12 +44,12 @@ class ProductListClientViewModel(
     }
 
     fun routeToProfile() {
-        router.navigateTo( Screens().routeToProfile() )
+        router.navigateTo(Screens().routeToProfile())
     }
 
     fun addNewFavoriteItem(idFood: Int) {
         viewModelScope.launch {
-            repositoryFavorite.addToFavorite(
+            repositoryFavorite.addAndDeleteFavorite(
                 FavoriteModel(
                     userId = repositoryUser.getUserID(),
                     foodId = idFood
@@ -58,12 +58,13 @@ class ProductListClientViewModel(
         }
     }
 
-    // Слежка за данными в таблице
-    private fun updateFoodTable() {
+
+    private fun observeFoodTable() {
         viewModelScope.launch {
-            repositoryFood.updateTable().collect {
+            repositoryFood.observeTableWithFavorite(repositoryUser.getUserID()).collect {
                 _list.value = it
             }
         }
     }
+
 }
